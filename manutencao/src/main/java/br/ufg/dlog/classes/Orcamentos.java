@@ -30,18 +30,20 @@ public class Orcamentos implements Serializable {
 	private Long responsavel_orcamento;
 	private String orcador;
 	@Column(length = 1)
-	private String verificado;
+	private String orc_atribuido;
 	
 	
 	
 	
 	
 	
-	public String getVerificado() {
-		return verificado;
+	
+	
+	public String getOrc_atribuido() {
+		return orc_atribuido;
 	}
-	public void setVerificado(String verificado) {
-		this.verificado = verificado;
+	public void setOrc_atribuido(String orc_atribuido) {
+		this.orc_atribuido = orc_atribuido;
 	}
 	public Long getId_orcamento() {
 		return id_orcamento;

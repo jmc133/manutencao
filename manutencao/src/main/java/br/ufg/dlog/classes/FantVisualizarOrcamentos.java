@@ -15,9 +15,30 @@ public class FantVisualizarOrcamentos {
 	private Double valor_unitario;
 	private Double valor_total;
 	private String placa_atual;
+	private Long id_orc;
+	private Long atribuido;
+	private String orc_atribuido;
 	
 	
 	
+	public String getOrc_atribuido() {
+		return orc_atribuido;
+	}
+	public void setOrc_atribuido(String orc_atribuido) {
+		this.orc_atribuido = orc_atribuido;
+	}
+	public Long getAtribuido() {
+		return atribuido;
+	}
+	public void setAtribuido(Long atribuido) {
+		this.atribuido = atribuido;
+	}
+	public Long getId_orc() {
+		return id_orc;
+	}
+	public void setId_orc(Long id_orc) {
+		this.id_orc = id_orc;
+	}
 	public Long getPj() {
 		return pj;
 	}

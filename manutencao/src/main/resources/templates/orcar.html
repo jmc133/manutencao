@@ -21,47 +21,56 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
      height="100"> </a> 
      <h2>Formulário para orçar serviços e peças</h2>  
  </div>
- <fieldset style="background-color: #FFFACD;margin-left: 4%; margin-right: 5%">
- <b><legend>Escolha uma ordem para orçar</legend></b>
- <table id="titem" class="striped">
-         <thead>
-         <tr>
-          <th>Id</th>          
-         </tr>         
-         </thead>
-       <tr th:each= "os:${osaberta}" >
-         <!--  <td th:if="${os!=null}" style ="color:Blue; font-size: 20px; " th:text="${os}"></td> -->
-          
-         <td><a th:if="${os!=null}" th:href="@{/selecionarordem/{id_ordem}(id_ordem=${os})}" style="color:Blue;" th:text="${os}"></a></td>          
-         </tr>                 
-        </table>          
-   </fieldset>
+ <div class = "container" >
+   <div class = "row" > 
+        <div class = "input-field col s4" >
+          <fieldset style="background-color: #FFFACD;margin-left: 4%; margin-right: 5%">
+          <b><legend>Click no Nº e escolha uma OS orçar</legend></b>
+           <table id="titem" class="striped">
+           <thead>
+            <tr>
+             <th>Id</th>          
+            </tr>         
+           </thead>
+            <tr th:each= "os:${osaberta}" >
+            <!--  <td th:if="${os!=null}" style ="color:Blue; font-size: 20px; " th:text="${os}"></td> -->          
+            <td><a th:if="${os!=null}" th:href="@{/selecionarordem/{id_ordem}(id_ordem=${os})}" style="color:Blue;" th:text="${os}"></a></td>          
+            </tr>                 
+           </table>          
+          </fieldset>
+        </div>
+        <div class = "input-field col s8" >
+        <form action="/orcar" th:object="${ordem}">
+         <fieldset style="background-color: #F0FFF0; margin-left: 4%; margin-right: 5%">
+          <b><legend>Descrição do veiculo</legend></b>
+          <div class="row">
+		   <div class="input-field col s2">
+		    <label for="id_ordem" class="active">Id</label> 
+		    <input name="id_ordem" th:field="*{id_ordem}" id="id_ordem" readonly="readonly"class="validate">
+		   </div>
+		   <div class="input-field col s3">
+		    <label for="veiculo" class="active">Placa e tipo do veículo</label>
+		    <select class="browser-default" th:field="*{veiculo}" id="veiculo" name="veiculo" >
+		    <option th:each = "v : ${veiculos}" th:value="${v.patrimonio}" th:text="${v.placa_atual+' - '+v.tipo}">
+		    </select> 
+		   </div>
+		   <div class="input-field col s3">
+		    <label for="data_emissao" class="active">Data Emissão</label> 
+		    <input name="data_emissao" th:field="*{data_emissao}" id="data_emissao" type="date" oninput="maisculo(event)" class="validate">
+		   </div>		 		 
+	      </div>	
+         </fieldset> 
+        </form>
+        </div>
+   </div>
+ </div>        
+ 
    
    <div th:each = "m : ${msg}" style="font-size: 15px; color: red;" align="center">
     <b><span th:text="${m}"></span></b>
    </div>
  
- <form action="/orcar" th:object="${ordem}">
- <fieldset style="background-color: #F0FFF0; margin-left: 4%; margin-right: 5%">
- <b><legend>Descrição do veiculo</legend></b>
-   <div class="row">
-		 <div class="input-field col s2">
-		  <label for="id_ordem" class="active">Id</label> 
-		  <input name="id_ordem" th:field="*{id_ordem}" id="id_ordem" readonly="readonly"class="validate">
-		 </div>
-		 <div class="input-field col s3">
-		  <label for="veiculo" class="active">Placa e tipo do veículo</label>
-		  <select class="browser-default" th:field="*{veiculo}" id="veiculo" name="veiculo" >
-		   <option th:each = "v : ${veiculos}" th:value="${v.patrimonio}" th:text="${v.placa_atual+' - '+v.tipo}">
-		  </select> 
-		 </div>
-		 <div class="input-field col s3">
-		  <label for="data_emissao" class="active">Data Emissão</label> 
-		  <input name="data_emissao" th:field="*{data_emissao}" id="data_emissao" type="date" oninput="maisculo(event)" class="validate">
-		 </div>		 		 
-	   </div>	
- </fieldset> 
- </form>
+ 
  <fieldset style="background-color:#FFFACD;margin-left: 4%; margin-right: 5%">
     <b><legend>Serviços/Peças</legend></b>
         <table class="striped">
@@ -70,7 +79,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
           <th>Id</th>
           <th>Serviço/Peça</th> 
           <th>Qtd</th>                   
-          <th>Editar</th>
+          <th>Escolha o item</th>
           
          </tr>         
          </thead>
@@ -78,7 +87,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
           <td th:text="${i.IdDefeitos}"></td>
           <td th:text="${i.descricao}">
           <td th:text="${i.QtdRelatado}"></td>               
-          <td><a th:if="${i.IdDefeitos !=null}" th:href="@{/editaritensordem/{id_defeitos}(id_defeitos=${i.IdDefeitos})}">Editar</a></td>
+          <td><a th:if="${i.IdDefeitos !=null}" th:href="@{/editaritensordem/{id_defeitos}(id_defeitos=${i.IdDefeitos})}">Orçar</a></td>
          <!--  <td> <a th:if="${fant.id !=null && fant.lancado==null}" th:href="@{/deletaragenda/{idagenda}(idagenda=${fant.id})}" style="color:red;">Excluir</a></td> -->
          </tr> 
          Para orçar escolha o item e clique em editar          
@@ -87,27 +96,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
    <form action="/salvarorcamento" th:object="${orcamentos}">
     <fieldset style="background-color: #F0FFF0; margin-left: 4%; margin-right: 5%">
      <b><legend>Inserção de Propostas</legend></b>
-       <div class="row">
-		 <div class="input-field col s2">
-		  <label for="id_orcamento" class="active">Id</label> 
-		  <input name="id_orcamento" th:field="*{id_orcamento}" id="id_orcamento" readonly="readonly"class="validate">
-		 </div>
-		 <div class="input-field col s2">
-		  <label for="fk_ordem_servico" class="active">Fk Ordem</label> 
-		  <input name="fk_ordem_servico" th:field="*{fk_ordem_servico}" id="fk_ordem_servico" readonly="readonly"class="validate">
-		 </div>
-		 <div class="input-field col s3">
-		  <label for="data_orcamento" class="active">Data orçamento</label> 
-		  <input name="data_orcamento" th:field="*{data_orcamento}" id="data_orcamento" type="date" oninput="maisculo(event)" class="validate">
-		 </div>
+       <div class="row">		 		 
 		 <div class="input-field col s3">
 		  <label for="fk_pessoa_juridica" class="active">Empresa</label>
 		  <select class="browser-default" th:field="*{fk_pessoa_juridica}" id="fk_pessoa_juridica" name="fk_pessoa_juridica" readonly="readonly">
 		   <option th:each = "p : ${pj}" th:value="${p.cd_pessoa_jur}" th:text="${p.nm_fantasia}">
 		  </select> 
-		 </div>
-	 </div> 
-		<div class="row"> 
+		 </div>	
 		 <div class="input-field col s3">
 		  <label for="fk_defeitos_relatados" class="active">Serviço ou peça</label>
 		  <select class="browser-default" th:field="*{fk_defeitos_relatados}" id="fk_defeitos_relatados" name="fk_defeitos_relatados" readonly="readonly">
@@ -119,14 +114,17 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		  <input name="qtd" th:field="${qtd}" th:value="${qtd}" id="qtd" th:text="${qtd}" class="validate" type="number">
 		 </div>
 		<div class="input-field col s2">
-		  <label for="valor_unitario" class="active">Valor Unitário</label> 
+		<div>
+		   <h6 style="color: Blue;">Insira aqui o seu valor ofertado e click em Orçar</h6>
+		   <label for="valor_unitario" class="active">Valor Unitário</label> 
+		</div>  
 		  <input onchange="multiplyBy()" name="valor_unitario" th:field="*{valor_unitario}" id="valor_unitario" class="validate" type="number">
 		 </div>
-		 <div class="input-field col s2">
+		 <div class="input-field col s1">
 		  <label for="valor_total" class="active">Valor Total</label> 
 		  <input name="valor_total" th:field="*{valor_total}"  id="valor_total" readonly="readonly" class="validate" type="number">
 		 </div> 
-		 <div class="input-field col s4" th:if="${editar!=null}">
+		 <div class="input-field col s2" th:if="${editar!=null}">
 		  <button type="submit">Orçar</button>
 		 </div>
 		 		 		 

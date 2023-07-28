@@ -49,37 +49,41 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
              <table class="striped">
                   <thead>
                   <tr>
-                   <th>Id</th>
-                   <th>Id PJ</th>
+                   <th>Linha</th>
+                   <th>Id Orc</th>
                    <th>Empresa</th>
                    <th>Cidade</th>
                    <th>Orçador</th>
                    <th>Desscrição</th>
                    <th>Unitário</th>
                    <th>Total</th>
-                   <th>Placa</th>                    
+                   <th>Placa</th> 
+                   <th>Escolhido</th>                   
                   </tr>         <!--  th:href="@{/produtos/listar?page=${i}&nome=${nome}}"-->
                   </thead>
                 <tr th:each="so:${servicoorcados}" >
-                 <td><a th:if="${so.linha!=null}" th:text="${so.linha}" style="font-size: 15px;"th:href="@{/atribuir/(pj=${so.pj})&(fk_defeitos=${so.fk_defeitos})}"></a></td> <!-- @{/atribuir/{fk_defeitos}(fk_defeitos=${so.fk_defeitos})} -->
-                 <td th:if="${so.linha!=null}" th:text="${so.pj}" style="font-size: 10px;"></td>
+                 <b></b><td><a th:if="${so.linha!=null}" th:text="${so.linha}" style="font-size: 15px; color: Chocolate;"th:href="@{/atribuir/{id_orc}(id_orc=${so.id_orc})}"></a></td></b>
+                 <td th:if="${so.linha!=null}" th:text="${so.id_orc}" style="font-size: 10px;"></td>
                  <td th:if="${so.nm_fantasia!=null}" th:text="${so.nm_fantasia}" style="font-size: 10px;"></td>
                  <td th:if="${so.cidade!=null}" th:text="${so.cidade}" style="font-size: 15px;"></td>
                  <td th:if="${so.linha!=null}" th:text="${so.orcador}" style="font-size: 10px;"></td>
-                 <td th:if="${so.linha!=null}" th:text="${so.descricao}" style="font-size: 12px;"></td>
-                 <td th:if="${so.linha!=null}" th:text="${#numbers.formatCurrency(so.valor_unitario)}" style="font-size: 15px;"></td>
-                 <td th:if="${so.linha!=null}" th:text="${#numbers.formatCurrency(so.valor_total)}" style="font-size: 15px;"></td>
-                 <td th:if="${so.linha!=null}" th:text="${so.placa_atual}" style="font-size: 10px;"></td>
-                                                 
+                 <td th:if="${so.linha!=null}" th:text="${so.descricao}" style="font-size: 10px;"></td>
+                 <td th:if="${so.orc_atribuido=='S'}" th:text="${#numbers.formatCurrency(so.valor_unitario)}" style="font-size: 14px; color:LimeGreen; "></td>
+                 <td th:if="${so.orc_atribuido!='S'}" th:text="${#numbers.formatCurrency(so.valor_unitario)}" style="font-size: 14px; color:Chocolate; "></td>
+                 <td th:if="${so.orc_atribuido=='S'}" th:text="${#numbers.formatCurrency(so.valor_total)}" style="font-size: 14px;color:LimeGreen;"></td>
+                 <td th:if="${so.orc_atribuido!='S'}" th:text="${#numbers.formatCurrency(so.valor_total)}" style="font-size: 14px;color:Chocolate;"></td>
+                 <td th:if="${so.orc_atribuido=='S'}" th:text="${so.placa_atual}" style="font-size: 10px;color:LimeGreen;"></td>
+                 <td th:if="${so.orc_atribuido!='S'}" th:text="${so.placa_atual}" style="font-size: 10px;color:Chocolate;"></td>
+                 <td th:if="${so.orc_atribuido=='S'}" style="color:LimeGreen;">&#10039;</td>                                
+                 <td th:if="${so.orc_atribuido!='S'}" style="color:Chocolate;">---</td>
                 </tr> 
                <tfoot>
                 <tr>
                 <td colspan="2">Totalizador</td>
                 <tr th:each="t:${totalizador}">
-                <!--   <td> <a th:if="${t.nm_fantasia!=null&&atribuicao==null}" th:text="${t.nm_fantasia}" style="font-size: 10px; color: Blue;" th:href="@{/atribuir/{pj}(pj=${t.pj})}"></a></td>-->
-                 <td th:if="${t.nm_fantasia!=null} " th:text="${t.nm_fantasia}" style="font-size: 10px; color: Red" ></td>
-                 <td th:if="${t.nm_fantasia!=null}" th:text="${t.nm_fantasia}" style="font-size: 10px; color: Blue;" ></td>
-                 <td th:if="${t.linha!=null}" th:text="${#numbers.formatCurrency(t.total)}">R$ ,00</td>
+                <!--   <td> <a th:if="${t.nm_fantasia!=null&&atribuicao==null}" th:text="${t.nm_fantasia}" style="font-size: 10px; color: Blue;" th:href="@{/atribuir/{pj}(pj=${t.pj})}"></a></td>-->                
+                 <td th:if="${t.nm_fantasia!=null}" th:text="${t.nm_fantasia}" style="font-size: 13px; color: Blue;" ></td>
+                 <td th:if="${t.linha!=null}" th:text="${#numbers.formatCurrency(t.total)}" style="font-size: 16;">R$ ,00</td>
                 </tr>  
                 </tr>
                </tfoot>

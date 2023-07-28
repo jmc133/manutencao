@@ -18,9 +18,14 @@ public interface OrcamentosRepository extends JpaRepository<Orcamentos, Long> {
 	@Query(value = "select * from orcamentos where fk_pessoa_juridica=?1 and fk_ordem_servico=?2 and fk_defeitos_relatados=?3", nativeQuery = true)
 	Orcamentos verificaSeJaFoiOrcado(Long pj,Long os, Long defeitos);
 	
-	@Query(value = "select count(id_orcamento) from orcamentos where verificado is null", nativeQuery = true)
+	@Query(value = "select count(id_orcamento) from orcamentos where orc_atribuido is null", nativeQuery = true)
 	int qtdOrcamentosAbertos();
 	
+	@Query(value = "select * from orcamentos where id_orcamento=?1", nativeQuery = true)
+	Orcamentos selecionaOrcamentoPorId(Long id);
+	
+	@Query(value = "update orcamentos set orc_atribuido='N' where fk_defeitos_relatados=?1", nativeQuery = true)
+	Long UpdateOrcamentosDesfaz (Long defeitos_relatados);
 	
 	
 	

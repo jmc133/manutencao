@@ -80,21 +80,7 @@ public class IndexController {
 		return mv;
 	
 	}
-	@RequestMapping("/orcar")
-	public ModelAndView Orcar() {
-		ModelAndView mv = new ModelAndView("orcar.html");
-		mv.addObject("veiculos", fantasmaVeiculoRepository.buscaPlacaPtrimonio());
-		mv.addObject("ordem", new OrdemServico());
-		mv.addObject("osaberta", ordemServicoRepository.ordemServicoAbertas());
-		mv.addObject("itens", new DefeitosRelatados());
-		mv.addObject("pj", pessoaJuridicaRerpository.findAll());
-		mv.addObject("orcamentos", new Orcamentos());
-		mv.addObject("item", new DefeitosRelatados());
-		mv.addObject("msg","Bem vindo ao formulário de orçamentos");
-		mv.addObject("editar", null);
-		mv.addObject("orcados", null);
-		return mv;
-	}
+	
 	
 	@RequestMapping("/index")
 	public ModelAndView redireciona() {

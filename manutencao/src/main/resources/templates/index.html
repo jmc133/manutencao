@@ -62,6 +62,8 @@ font: CASTELLAR;
          <input type="button"value="principal"></a> 
          <a th:if="${r.nome_role=='ROLE_ADMIN'||r.nome_role=='ROLE_SECRETARIO'}" href="/verorcamentos">
          <input type="button"value="Verificar orçamentos"></a>
+         <a th:if="${r.nome_role=='ROLE_PUBLIC'||r.nome_role=='ROLE_EMPRESA'}" href="/orcar">
+         <input type="button"value="Orçar"></a>
           <a  href="/logout"><!-- */redireciona para o login*/ -->
           <input type="button"value="Sair"></a>
           <a  href="/ajuda"><input type="button"value="Ajuda"></a>       

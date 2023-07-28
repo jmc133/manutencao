@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   <!-- Adicionando JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>  
+<!-- Script para calendario -->     
+<script type="text/javascript" src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"></script>  
+<link href="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.css" rel="stylesheet"type="text/css"/>               
+            
+<meta charset="UTF-8">
+<a href="/index2"><h5>Voltar ao Index</h5></a> 
+<a th:href="@{/mostraritensagenda}"><h5>Voltar a Agenda</h5></a> 
+<style type="text/css">
+table.striped>tbody>tr:nth-child(odd){background-color: rgba(158,154,154,0.5); }
+form input[type=submit]{ color:white;}
+table{
+width: 96%;
+}
+table{ font-size: 12px}
+div{font-size: 9px;}
+table td, table th{
+border: 1px solid grey;
+}
+fieldset{
+margin-left: 4%; margin-right: 4%;
+}
+form{
+margin-left: 4%; margin-right: 4%}
+table th{
+background: #eee;
+ }
+</style>
+<title>Agenda de veiculos</title>
+</head>
+<body>
+<div align="center">
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+      
+     > 
+<img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">
+<h5>Lista de agendamento de veiculos </h5><br>
+</div>
+
+   <fieldset>
+    <legend>Agendamentos</legend>
+        <table class="striped">
+         <thead>
+         <tr>
+          <th>Data</th>
+          <th>Placa</th>
+          <th>Unidade</th>
+          <th>Solicitante</th>
+          <th>Destino</th>
+          <th>Horario</th>
+          <th>Contato</th>
+          <th>Requisicao</th>
+          <th>Id</th>
+         </tr>         
+         </thead>
+         <tr th:each= "v:${veic}">
+        
+          <td th:text="${#dates.format(v.dataagenda,'dd/MM/yyyy')}"></td>
+          <td th:text="${v.PLACA_ATUAL}">
+          <td th:text="${v.sg_orgao}">
+          <td th:text="${v.solicitante_a}"></td>
+          <td th:text="${v.destino_a}"></td>
+          <td th:text="${v.horario_string}"></td>
+          <td th:text="${v.contatos}"></td>   
+          <td th:text="${v.requisicao}"></td>
+          <td th:text="${v.id}"></td>  
+         </tr> 
+
+         
+        </table>  
+        
+   
+   </fieldset>
+</body>
+</html>

@@ -1,0 +1,382 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.coom/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8"
+    crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<a href="/index2"><h5>Voltar ao Index</h5></a> 
+<title>Formulario de veiculos</title>
+<style type="text/css">
+div{font-size: 11px;}
+select {font-size: 10px;}
+fieldset{
+	margin-left: 4%; margin-right: 4%;
+	}
+	form{
+	margin-left: 4%; margin-right: 4%; font-size: 11px;
+	}
+select{font-size: 11px;}	
+</style>
+<div align="center">
+
+</div>
+
+</head>
+<body>
+<div align="center">
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+      
+     > 
+<img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">
+<h2>Formulário de cadastro de veículos</h2>
+</div>
+<div id="importarpagina"></div>
+<div class="row">
+<div th:each = "m : ${msg}" style="font-size: 15px; color: red;">
+ <span th:text="${m}"></span>
+</div>
+  <form action="salvarveiculo" th:object="${veic}" class="col-12" method="post" enctype="multipart/form-data">
+   <fieldset>
+     <legend><h5>Formulário para edição </h5></legend>
+			<div class="row">
+                <div class="input-field col s1">
+				<label for="placa_atual" class="active">Placa Atual</label> 
+				<input name="placa_atual" th:field="*{placa_atual}" id="placa_atual" class="validate" autofocus="autofocus">
+				</div>
+				<div class="input-field col s1">
+					<label for="placa_anterior" class="active">Placa_anterior</label>
+					 <input id="placa_anterior"	name="placa_anterior" th:field="*{placa_anterior}"class="validate">	
+				</div>	 		
+				<div class="input-field col s2">
+					<label for="patrimonio" class="active">Patrimonio</label> <input name="patrimonio" readonly="readonly"
+						th:field="*{patrimonio}" id="patrimonio" class="validate">
+				</div>
+				<div class="input-field col s2">
+					<label for="chassi" class="active">Chassi</label> <input id="chassi" readonly="readonly"
+						name="chassi" th:field="*{chassi}"class="validate">
+				</div>
+				<div class="input-field col s2">
+					<label for="codigo_renavam" class="active">Renavm</label> <input id="codigo_renavam" readonly="readonly"
+						name="codigo_renavam" th:field="*{codigo_renavam}" class="validate">
+				</div>				
+
+				<div class="input-field col s2">
+					<label for="ano_modelo" class="active">Ano modelo</label>
+					 <input id="ano_modelo" name="ano_modelo" th:field="*{ano_modelo}"class="validate" type="number">
+				</div>
+
+				<div class="input-field col s2">
+					<label for="ano_vei" class="active">Ano veiculo</label>
+					<input id="ano_vei" name="ano_vei" th:field="*{ano_vei}"class="validate" type="number">
+				</div>		
+				<div class="input-field col s2">
+					<label for="ano_aqui" class="active">ano aquisicao</label>
+					<input id="ano_aqui" name="ano_aqui" th:field="*{ano_aqui}"class="validate" type="number">
+				</div>	
+				
+				
+				<div class="input-field col s2">
+					<label for="valor" class="active">Valor</label> <input id="valor"
+						name="valor" th:field="*{valor}" class="validate" type="number">
+				</div>				
+
+				<div class="input-field col s2">
+					<label for="hp" class="active">HP</label>
+					 <input id="hp" name="hp" th:field="*{hp}"class="validate" type="number">
+				</div>
+
+				<div class="input-field col s2">
+					<label for="tanque" class="active">Tanque</label>
+					<input id="tanque" name="tanque" th:field="*{tanque}"class="validate" type="number">
+				</div>		
+				<div class="input-field col s2">
+					<label for="tx_licenciamento" class="active">Licenciamento</label>
+					<input id="tx_licenciamento" name="tx_licenciamento" th:field="*{tx_licenciamento}"class="validate" type="number">
+				</div>	
+                <div class="input-field col s2">
+					<label for="depreciacao" class="active">Depreciação</label>
+					<input id="depreciacao" name="depreciacao" th:field="*{depreciacao}"class="validate" type="text">
+				</div>				
+			 	<div class="input-field col s3">
+					<label for="municipio_atual" class="active" style="color: Black">Municipio atual</label>
+					<select class="browser-default" th:field="*{municipio_atual}" id="municipio_atual" name="municipio_atual" >
+					 <option th:each = "c : ${cid}" th:value="${c.cd_cidade}" th:text="${c.nm_cidade}">
+					</select>
+				</div>														
+			 	<div class="input-field col s2">
+					<label for="municipio_anterior" class="active" style="color: Black">Municipio anterior</label>
+					<select class="browser-default" th:field="*{municipio_anterior}" id="municipio_anterior" name="municipio_anterior" >
+					 <option th:each = "c : ${cid}" th:value="${c.cd_cidade}" th:text="${c.nm_cidade}">
+					</select>
+				</div>	
+				 
+			 	<div class="input-field col s2">
+					<label for="adquirido" class="active" style="color: Black">Aquisição</label>
+					<select class="browser-default" th:field="*{adquirido}" id="adquirido" name="adquirido" >
+					 <option th:each = "a : ${aquisicao}" th:value="${a.cod_aqui}" th:text="${a.adquirido_a}">
+					</select>
+				</div>	 								
+			 	<div class="input-field col s2">
+					<label for="marca" class="active" style="color: Black">Marca</label>
+					<select class="browser-default" th:field="*{marca}" id="marca" name="marca" >
+					 <option th:each = "m : ${marca}" th:value="${m.cod_marca}" th:text="${m.marca}">
+					</select>
+				</div>	
+			 	<div class="input-field col s2">
+					<label for="modelo" class="active" style="color: Black">Modelo</label>
+					<select class="browser-default" th:field="*{modelo}" id="modelo" name="modelo" >
+					 <option th:each = "m : ${modelo}" th:value="${m.cod_mod}" th:text="${m.t_modelo}">
+					</select>
+				</div>	
+			 	<div class="input-field col s2">
+					<label for="tipo" class="active" style="color: Black">Tipo</label>
+					<select class="browser-default" th:field="*{tipo}" id="tipo" name="tipo" >
+					 <option th:each = "t : ${tipo}" th:value="${t.cod_tipo}" th:text="${t.tipo}">
+					</select>
+				</div>								
+			 	<div class="input-field col s2">
+					<label for="grupo" class="active" style="color: Black">Grupo</label>
+					<select class="browser-default" th:field="*{grupo}" id="grupo" name="grupo" >
+					 <option th:each = "g : ${grupo}" th:value="${g.cod_grupo}" th:text="${g.grupo}">
+					</select>
+				</div>	
+			 	<div class="input-field col s2">
+					<label for="cor_v" class="active" style="color: Black">Cor</label>
+					<select class="browser-default" th:field="*{cor_v}" id="cor_v" name="cor_v" >
+					 <option th:each = "c : ${cor}" th:value="${c.cod_cor}" th:text="${c.cor}">
+					</select>
+				</div>		
+			 	<div class="input-field col s2">
+					<label for="situacao" class="active" style="color: Black">Situação</label>
+					<select class="browser-default" th:field="*{situacao}" id="situacao" name="situacao" >
+					 <option th:each = "s : ${situacao}" th:value="${s.cd_situacao}" th:text="${s.situacao}">
+					</select>
+				</div>		
+			 	<div class="input-field col s2">
+					<label for="combustivel_v" class="active" style="color: Black">Combustível</label>
+					<select class="browser-default" th:field="*{combustivel_v}" id="combustivel_v" name="combustivel_v">
+					 <option th:each = "c : ${combustivel}" th:value="${c.cd_comb}" th:text="${c.combustivel}">
+					</select>
+				</div>			
+			 	<div class="input-field col s2">
+					<label for="lotacao_v" class="active" style="color: Black">Lotação</label>
+					<select class="browser-default" th:field="*{lotacao_v}" id="lotacao_v" name="lotacao_v" >
+					 <option th:each = "l : ${lotacao}" th:value="${l.CD_LOTACAO}" th:text="${l.NM_LOTACAO}">
+					</select>
+				</div>	
+			 	<div class="input-field col s3">
+					<label for="especie" class="active" style="color: Black">Espécie</label>
+					<select class="browser-default" th:field="*{especie}" id="especie" name="especie" >
+					 <option th:each = "e : ${especie}" th:value="${e.cd_especie}" th:text="${e.especie}">
+					</select>
+				</div>		
+			 	<div class="input-field col s3">
+					<label for="impedimento" class="active" style="color: Black">Impedimentos</label>
+					<select class="browser-default" th:field="*{impedimento}" id="impedimento" name="impedimento" >
+					 <option th:each = "i : ${impedimento}" th:value="${i.cdImpedimento}" th:text="${i.impedimento}">
+					</select>
+				</div>																				
+			 <div class="input-field col s2">
+		 	 <td><input class="waves-effect waves-light btn" type="submit"	value="Salvar"></td>	 
+			 </div>	
+			 <div class="input-field col s2">	 
+			
+             </div>
+			<!-- <button class="waves-effect waves-light btn" onclick="document.getElementById('formpessoa').reset();">Novo</button> -->		
+			 </div>		
+			 
+			</div>
+   </fieldset>
+  
+  
+  </form>
+</div> 
+<div class="row">
+  <form action="umveiculo" th:object="${veic}" class="col-13">
+   <fieldset>
+   <legend><h5>Escolha o veículo aqui </h5></legend>
+     <tr>
+       <td>Veiculos</td>
+        <td> <select class="browser-default" id="pesquisa" name="pesquisa" >
+					 <option th:each="s:${selecao}" th:value="${s.patrimonio}" th:text="${s.placa_atual}">
+			 </select></td>
+       <button class="waves-effect waves-light btn" type="submit">Verifica</button>
+   </fieldset>
+  </form>
+ </div>  
+<div th:each = "m : ${msg}" style="font-size: 15px; color: red;" align="center">
+ <span th:text="${m}"></span>
+</div>
+  <form action="novosalvar" th:object="${insercaoVeic}" class="col-13" method="post" enctype="multipart/form-data">
+   <fieldset>
+     <legend><h5>Formulário para inserir novo veículo </h5></legend>
+			<div class="row">
+                <div class="input-field col s2">
+				<label for="placa_atual" class="active">Placa Atual</label> 
+				<input name="placa_atual" th:field="*{placa_atual}" id="placa_atual" class="validate" autofocus="autofocus">
+				</div>
+				<div class="input-field col s1">
+					<label for="placa_anterior" class="active">Placa_anterior</label>
+					 <input id="placa_anterior"	name="placa_anterior" th:field="*{placa_anterior}"class="validate">	
+				</div>	 		
+				<div class="input-field col s2">
+					<label for="patrimonio" class="active">Patrimonio</label> <input name="patrimonio" 
+						th:field="*{patrimonio}" id="patrimonio" class="validate">
+				</div>
+				<div class="input-field col s2">
+					<label for="chassi" class="active">Chassi</label> <input id="chassi" 
+						name="chassi" th:field="*{chassi}"class="validate">
+				</div>
+				<div class="input-field col s2">
+					<label for="codigo_renavam" class="active">Renavm</label> <input id="codigo_renavam"
+						name="codigo_renavam" th:field="*{codigo_renavam}" class="validate">
+				</div>				
+
+				<div class="input-field col s1">
+					<label for="ano_modelo" class="active">Ano modelo</label>
+					 <input id="ano_modelo" name="ano_modelo" th:field="*{ano_modelo}"class="validate" type="number">
+				</div>
+
+				<div class="input-field col s1">
+					<label for="ano_vei" class="active">Ano veiculo</label>
+					<input id="ano_vei" name="ano_vei" th:field="*{ano_vei}"class="validate" type="number">
+				</div>		
+				<div class="input-field col s1">
+					<label for="ano_aqui" class="active">ano aquisição</label>
+					<input id="ano_aqui" name="ano_aqui" th:field="*{ano_aqui}"class="validate" type="number">
+				</div>	
+				
+				
+				<div class="input-field col s2">
+					<label for="valor" class="active">Valor</label> <input id="valor"
+						name="valor" th:field="*{valor}" class="validate" type="number">
+				</div>				
+
+				<div class="input-field col s2">
+					<label for="hp" class="active">HP</label>
+					 <input id="hp" name="hp" th:field="*{hp}"class="validate" type="number">
+				</div>
+
+				<div class="input-field col s2">
+					<label for="tanque" class="active">Tanque</label>
+					<input id="tanque" name="tanque" th:field="*{tanque}"class="validate" type="number">
+				</div>		
+				<div class="input-field col s2">
+					<label for="tx_licenciamento" class="active">Licenciamento</label>
+					<input id="tx_licenciamento" name="tx_licenciamento" th:field="*{tx_licenciamento}"class="validate" type="number">
+				</div>	
+                <div class="input-field col s2">
+					<label for="depreciacao" class="active">Depreciação</label>
+					<input id="depreciacao" name="depreciacao" th:field="*{depreciacao}"class="validate" type="text">
+				</div>				
+			 	<div class="input-field col s3">
+					<label for="municipio_atual" class="active" style="color: Black">Municipio atual</label>
+					<select class="browser-default" th:field="*{municipio_atual}" id="municipio_atual" name="municipio_atual" >
+					 <option th:each = "c : ${cid}" th:value="${c.cd_cidade}" th:text="${c.nm_cidade}">
+					</select>
+				</div>														
+			 	<div class="input-field col s3">
+					<label for="municipio_anterior" class="active" style="color: Black">Municipio anterior</label>
+					<select class="browser-default" th:field="*{municipio_anterior}" id="municipio_anterior" name="municipio_anterior" >
+					 <option th:each = "c : ${cid}" th:value="${c.cd_cidade}" th:text="${c.nm_cidade}">
+					</select>
+				</div>	
+				 
+			 	<div class="input-field col s2">
+					<label for="adquirido" class="active" style="color: Black">Aquisição</label>
+					<select class="browser-default" th:field="*{adquirido}" id="adquirido" name="adquirido" >
+					 <option th:each = "a : ${aquisicao}" th:value="${a.cod_aqui}" th:text="${a.adquirido_a}">
+					</select>
+				</div>	 								
+			 	<div class="input-field col s2">
+					<label for="marca" class="active" style="color: Black">Marca</label>
+					<select class="browser-default" th:field="*{marca}" id="marca" name="marca" >
+					 <option th:each = "m : ${marca}" th:value="${m.cod_marca}" th:text="${m.marca}">
+					</select>
+				</div>	
+			 	<div class="input-field col s2">
+					<label for="modelo" class="active" style="color: Black">Modelo</label>
+					<select class="browser-default" th:field="*{modelo}" id="modelo" name="modelo" >
+					 <option th:each = "m : ${modelo}" th:value="${m.cod_mod}" th:text="${m.t_modelo}">
+					</select>
+				</div>	
+			 	<div class="input-field col s2">
+					<label for="tipo" class="active" style="color: Black">Tipo</label>
+					<select class="browser-default" th:field="*{tipo}" id="tipo" name="tipo" >
+					 <option th:each = "t : ${tipo}" th:value="${t.cod_tipo}" th:text="${t.tipo}">
+					</select>
+				</div>								
+			 	<div class="input-field col s2">
+					<label for="grupo" class="active" style="color: Black">Grupo</label>
+					<select class="browser-default" th:field="*{grupo}" id="grupo" name="grupo" >
+					 <option th:each = "g : ${grupo}" th:value="${g.cod_grupo}" th:text="${g.grupo}">
+					</select>
+				</div>	
+			 	<div class="input-field col s2">
+					<label for="cor_v" class="active" style="color: Black">Cor</label>
+					<select class="browser-default" th:field="*{cor_v}" id="cor_v" name="cor_v" >
+					 <option th:each = "c : ${cor}" th:value="${c.cod_cor}" th:text="${c.cor}">
+					</select>
+				</div>		
+			 	<div class="input-field col s2">
+					<label for="situacao" class="active" style="color: Black">Situação</label>
+					<select class="browser-default" th:field="*{situacao}" id="situacao" name="situacao" >
+					 <option th:each = "s : ${situacao}" th:value="${s.cd_situacao}" th:text="${s.situacao}">
+					</select>
+				</div>		
+			 	<div class="input-field col s2">
+					<label for="combustivel_v" class="active" style="color: Black">Combustivel</label>
+					<select class="browser-default" th:field="*{combustivel_v}" id="combustivel_v" name="combustivel_v">
+					 <option th:each = "c : ${combustivel}" th:value="${c.cd_comb}" th:text="${c.combustivel}">
+					</select>
+				</div>			
+			 	<div class="input-field col s2">
+					<label for="lotacao_v" class="active" style="color: Black">Lotação</label>
+					<select class="browser-default" th:field="*{lotacao_v}" id="lotacao_v" name="lotacao_v" >
+					 <option th:each = "l : ${lotacao}" th:value="${l.CD_LOTACAO}" th:text="${l.NM_LOTACAO}">
+					</select>
+				</div>	
+			 	<div class="input-field col s3">
+					<label for="especie" class="active" style="color: Black">Espécie</label>
+					<select class="browser-default" th:field="*{especie}" id="especie" name="especie" >
+					 <option th:each = "e : ${especie}" th:value="${e.cd_especie}" th:text="${e.especie}">
+					</select>
+				</div>	
+			 	<div class="input-field col s2">
+					<label for="impedimento" class="active" style="color: Black">Impedimentos</label>
+					<select class="browser-default" th:field="*{impedimento}" id="impedimento" name="impedimento" >
+					 <option th:each = "i : ${impedimento}" th:value="${i.cdImpedimento}" th:text="${i.impedimento}">
+					</select>
+				</div>																				
+			 <div class="input-field col s2">
+		 	 <td><input th:if="${btnsalvar==1}" class="waves-effect waves-light btn" type="submit"	value="Salvar"></td>
+		 	 <td><a class="waves-effect waves-light btn" th:href="@{/novoveiculo}">Novo</a></td>		 
+			 </div>	
+			 <div class="input-field col s2">	 
+			
+             </div>
+			<!-- <button class="waves-effect waves-light btn" onclick="document.getElementById('formpessoa').reset();">Novo</button> -->		
+			 </div>		
+			 
+			</div>
+   </fieldset>
+  
+  
+  </form>
+</div> 
+
+
+</body>
+</html>

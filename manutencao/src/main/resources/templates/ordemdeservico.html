@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   <!-- Adicionando JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>  
+<!-- Script para calendario -->     
+<script type="text/javascript" src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"></script>  
+<link href="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.css" rel="stylesheet"type="text/css"/>               
+            
+<meta charset="UTF-8">
+<style type="text/css">
+form {
+	margin-left: 5%; margin-right: 5%;
+}
+</style>
+<title>Orderm de Serviço</title>
+</head>
+<body>
+   <div style="margin-left: 10%; color: blue;" >
+     <a href="/index2"><h5>Voltar ao Index</h5></a>
+     <a href="/principal"><h5>Voltar ao Principal</h5></a>
+   </div>
+   <div align="center">
+     <img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+      
+     > 
+     <img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">
+    
+<h5>Formulario de inserção de ordem de serviço</h5><br>
+<div th:each = "m : ${msg}" style="font-size: 15px; color: red;margin-left: 5%;">
+      <b><span th:text="${m}"></span></b>
+    </div>
+</div>
+ <form action="salvarordem" method="post" th:object="${osid}" class="col s10" style="background-color: Wheat;"enctype="multipart/form-data" >
+  <fieldset style="background-color: Beige;">
+   <b><legend style="color: Blue;">OS</legend></b>
+     	<div class="row">
+          <div class="input-field col s3">
+          <label for="id_ordem" class="active" style="color: DarkGreen">OS</label>
+          <input th:if="*{id_ordem!=null}" name="id_ordem" th:field="*{id_ordem}" id="id_ordem" class="validate" readonly="readonly" >
+         </div> 
+		 <div class="input-field col s3">
+		  <label for="veiculo" class="active" style="color: DarkGreen">Veiculo</label>
+		  <select class="browser-default" th:field="*{veiculo}" id="veiculo" name="veiculo" style="background-color:#DCDCDC;">
+		   <option th:each = "v : ${veiculos}" th:value="${v.patrimonio}" th:text="${v.placa_atual}">
+		  </select> 
+		 </div>	
+		 
+		 <input class="waves-effect waves-light btn" type="submit" value="Salvar">
+		 
+		</div> 
+  </fieldset>
+ </form>
+ <form action="pesquisaros" method="get" class="col s10" enctype="multipart/form-data">
+    <fieldset>
+    <b><legend style="color: Blue;">Pesquisar OS</legend></b>
+      <div class="row">
+        <div class="input-field col s5">
+		  <label for="id_ordem" class="active" style="color: DarkGreen">Nº OS</label>
+		  <select class="browser-default"  id="id_ordem" name="id_ordem" style="background-color:#DCDCDC;">
+		   <option th:each = "o : ${os}" th:value="${o.id_ordem}" th:text="${o.id_ordem}"></option>
+		  </select> 
+		 </div>
+		 <div class="input-field col s5">		  
+		   <input class="waves-effect waves-light btn" type="submit" value="Pesquisar">
+		 </div>
+		 
+      </div>
+    </fieldset>
+  </form>
+ <form action="salvaritens" method="post" th:object="${item}" class="col s10" style="background-color: Wheat;"enctype="multipart/form-data" >
+  <fieldset style="background-color: Beige;">
+  <b> <legend style="color: Blue;">Inserção da descrição de serviços e peças</legend></b>
+     	<div class="row">
+		 <div class="input-field col s1">
+		  <label for="IdDefeitos" class="active">Id</label> 
+		  <input name="IdDefeitos" th:field="*{IdDefeitos}" id="IdDefeitos" readonly="readonly"class="validate" >
+		 </div>
+		 <div class="input-field col s2">
+		  <label for="QtdRelatado" class="active">Quantidade</label> 
+		  <input name="QtdRelatado" th:field="*{QtdRelatado}" id="QtdRelatado" class="validate" >
+		 </div>
+		 <div class="input-field col s5">
+		  <label for="descricao" class="active">Descrição</label> 
+		  <input name="descricao" th:field="*{descricao}" id="descricao" class="validate" >
+		 </div >		
+		 <input class="waves-effect waves-light btn" type="submit" value="Incluir descrição">
+		</div> 
+  </fieldset>
+   
+ </form>
+ <fieldset style="margin-left: 5%; margin-right: 5%">
+  <legend>Descrição dos servicos</legend>
+   <table class="striped">
+    <thead>
+    <tr>
+     <th>Id</th>  
+     <th>FK</th>
+     <th>Qtd</th>
+     <th>Descrição</th>
+     <th>Editar</th>
+     <th>Excluir</th>
+     </tr>
+    </thead>
+     <tr th:each="i:${itens}">
+     <td th:text="${i.IdDefeitos}"></td>
+     <td th:text="${i.fkOrdemServico}"></td>
+     <td th:text="${i.QtdRelatado}"></td>
+     <td th:text="${i.descricao}"></td>  
+     <td><a th:if="${i.IdDefeitos!=null}" >Editar</a></td> 
+     <!--th:href="@{/editarpessoa/{cd_pessoa_func}(cd_pessoa_func=${pessoa.cd_pessoa_func})}"-->  
+     </tr>
+   </table> 
+ </fieldset>
+</body>
+</html>

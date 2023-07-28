@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+xmlns:p="http://primefaces.org/ui">
+<head>
+<meta charset="UTF-8">
+<title>Grafico agenda</title>
+</head>
+<body>
+ <form action="graficoagenda">
+   <p:chart type="line" model="#{agendaEspecie}" style="heigth:300px" />
+ </form>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   <!-- Adicionando JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>  
+<!-- Script para calendario -->     
+<script type="text/javascript" src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"></script>  
+<link href="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.css" rel="stylesheet"type="text/css"/>               
+            
+<meta charset="UTF-8">
+<title>Movimentos especificos</title>
+<a href="/index2"><h5>Voltar ao Index</h5></a>
+<a th:href="@{/retornarelatoriomov}"><h5>Voltar a página anterior</h5></a>
+<div align="center" >
+
+
+	<div class="input-field col s6" style="font-size: 18px; color: Red">
+	  <b> <span th:text="${msg}"></span></b>
+	</div>	
+</div>	
+<style type="text/css">
+table.striped>tbody>tr:nth-child(odd){background-color: rgba(158,154,154,0.5); }
+form input[type=submit]{ color:PowderBlue;}
+table{
+width: 96%;
+}
+table{ font-size: 12px}
+div{font-size: 9px;}
+table td, table th{
+border: 1px solid grey;
+}
+fieldset{
+margin-left: 4%; margin-right: 4%;
+}
+form{
+margin-left: 4%; margin-right: 4%}
+table th{
+background: #eee;
+ }
+</style>
+</head>
+<body>
+<div align="center">
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+      
+     > 
+<img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">
+<h5>Relatorios de movimentações</h5><br>
+</div>
+<fieldset>
+  <table class="striped">
+        <thead>
+         <tr>
+          <th>Saida</th>
+          <th>Retorno</th>
+          <th>Unidade</th>
+          <th>Evento</th>
+          <th>Requisição</th>
+          <th>Destino</th>
+          <th>Veículo</th>
+          <th>Km rodado</th>
+          <th>Condutor</th>
+          <th>Solicitante</th>
+         </tr>         
+        </thead>
+         <tr th:each= "mu:${movuni}" th:if="${mu.data_s!=null}">
+        
+          <td th:text="${mu.data_s}"></td>
+          <td th:text="${mu.data_r}">
+          <td th:text="${mu.sg_orgao}"> 
+          <td th:text="${mu.evento}">
+          <td th:text="${mu.requisicao}"></td>
+          <td th:text="${mu.s_destino}"></td>
+          <td th:text="${mu.placa_atual}"></td>
+          <td th:text="${mu.km_ro}"></td>   
+          <td th:text="${mu.nm_pessoa_func}"></td>
+          <td th:text="${mu.s_solicitante}"></td>  
+         </tr>   
+         <tr th:each= "me:${movespecie}" th:if="${me.data_s!=null}">
+        
+          <td th:text="${me.data_s}"></td>
+          <td th:text="${me.data_r}">
+          <td th:text="${me.sg_orgao}">
+          <td th:text="${me.evento}">
+          <td th:text="${me.requisicao}"></td>
+          <td th:text="${me.s_destino}"></td>
+          <td th:text="${me.placa_atual}"></td>
+          <td th:text="${me.km_ro}"></td>   
+          <td th:text="${me.nm_pessoa_func}"></td>
+          <td th:text="${me.s_solicitante}"></td>  
+         </tr> 
+         <tr th:each= "mp:${movplaca}" th:if="${mp.data_s!=null}">
+        
+          <td th:text="${mp.data_s}"></td>
+          <td th:text="${mp.data_r}">
+          <td th:text="${mp.sg_orgao}">
+          <td th:text="${mp.evento}">
+          <td th:text="${mp.requisicao}"></td>
+          <td th:text="${mp.s_destino}"></td>
+          <td th:text="${mp.placa_atual}"></td>
+          <td th:text="${mp.km_ro}"></td>   
+          <td th:text="${mp.nm_pessoa_func}"></td>
+          <td th:text="${mp.s_solicitante}"></td>  
+         </tr>  
+         <tr th:each= "c:${cargo}" th:if="${c.data_s!=null}">
+        
+          <td th:text="${c.data_s}"></td>
+          <td th:text="${c.data_r}">
+          <td th:text="${c.sg_orgao}">
+          <td th:text="${c.evento}">
+          <td th:text="${c.requisicao}"></td>
+          <td th:text="${c.s_destino}"></td>
+          <td th:text="${c.placa_atual}"></td>
+          <td th:text="${c.km_ro}"></td>   
+          <td th:text="${c.nm_pessoa_func}"></td>
+          <td th:text="${c.s_solicitante}"></td>  
+         </tr>                                     
+    
+  </table>
+</fieldset>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
+<meta charset="UTF-8">
+<style type="text/css">
+form input[type=submit]{
+color: white;
+}
+fieldset{margin-left: 30%;margin-right: 30% ;}
+form{
+margin-left:35%; margin-top:10%;
+}
+.col.row{ margin-right:0rem;
+}
+input:-internal-autofill-select{ background-color: blue;
+}
+input[type="text"], textarea {
+  background-color : #FFFACD; 
+}
+</style>
+<title>Login</title>
+ 
+</head>
+<body marginheight="10%" marginwidth="10%" >
+<div align="center">
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+     border="50%"  
+     > 
+ <img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">    
+ </div>     
+<fieldset style="background: Beige">
+ <div align="center">
+   <legend><h5>LOGIN </h5></legend>
+ </div>
+   <form th:action="@{/login}" method="post" class="col s12">
+     <div class="row">
+      <div class="input-field col s6">
+       <label>Login</label><br>
+       <input type="text" name="username" style="border-bottom:none;" >
+      </div>
+     </div>
+     <div class="row">
+      <div class="input-field col s6">
+       <label>Senha</label><br>
+       <input type="password" name="password" style="border-bottom:none;">
+      </div>
+     </div>
+     <div class="row">
+      <div class="input-field col s6">      
+       <input type="submit" name="logar" value="Logar"
+       class="waves-effect waves-ligth btn">
+      </div>
+     </div>
+   </form>
+</fieldset>
+       <div class="row" align="center">
+       <a  href="/ajuda">Ajuda</a>
+      </div>
+      <div class="row" align="center">
+       <a class="waves-effect waves-light btn" href="/logincadastro">Cadastrar</a>
+      </div>  
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   <!-- Adicionando JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>  
+<!-- Script para calendario -->     
+<script type="text/javascript" src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"></script>  
+<link href="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.css" rel="stylesheet"type="text/css"/>               
+            
+<meta charset="UTF-8">
+<title>Escala de viagens</title>
+
+<style type="text/css">
+fildset{margin-left: 8%; margin-right: 8%;}
+table{
+width: 96%;
+}
+label{ color: Black; }
+table{ font-size: 10px; margin-left: 2%; margin-right: 2%}
+div{font-size: 9px; margin-left: 5%}
+table td, table th{
+border: 1px solid grey;
+}
+fieldset{
+	margin-left: 4%; margin-right: 4%;
+	}
+	form{
+	margin-left: 4%; margin-right: 4%}
+table th{
+background: #eee;
+ }
+</style> 
+<a href="/index2"><h5>Voltar ao Index</h5></a> 
+</head>
+<body>
+<div align="center">
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+      
+     > 
+<img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">
+<h5>Escala de viagens</h5><br>
+</div>
+
+<br>
+        <table id="titem" class="striped">
+         <thead>
+         <tr>
+          <th>Id</th>
+          <th>Condutor</th>
+          <th>Data Inicio</th>
+          <th>Data Final</th>
+          <th>Unidade</th>
+          <th>Veiculo</th>
+          <th>Destino</th>
+          <th>Nº diarias</th>
+
+         </tr>         
+         </thead>
+       <tr th:each= "f:${escala}" >
+          <td style ="color:MidnightBlue; " th:text="${f.id}"></td>
+          <td style ="color:MidnightBlue; " th:text="${f.nm_pessoa_func}">
+          <td style ="color:MidnightBlue;" th:text="${f.data_inicio}">
+          <td style ="color:MidnightBlue;" th:text="${f.data_final}">
+          <td style ="color:MidnightBlue;" th:text="${f.sg_orgao}">
+          <td style ="color:MidnightBlue;" th:text="${f.placa_atual}">
+          <td style ="color:MidnightBlue;" th:text="${f.destino}">
+          <td style ="color:MidnightBlue;" th:text="${f.diarias}">
+        </tr>
+       </table>   
+
+</body>
+</html>

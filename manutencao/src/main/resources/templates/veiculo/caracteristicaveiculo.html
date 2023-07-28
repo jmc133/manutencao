@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.coom/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8"
+    crossorigin="anonymous"></script>
+<style type="text/css">
+div{font-size: 11px;}
+select {font-size: 10px;}
+</style>
+<style type="text/css">
+table.striped>tbody>tr:nth-child(odd){background-color: rgba(158,154,154,0.5); }
+form input[type=submit]{ color:white;}
+table{
+width: 97%;
+}
+table td, table th{
+border: 1px solid grey; font-size:12px;
+}
+fieldset{
+	margin-left: 4%; margin-right: 4%;
+	}
+	form{
+	margin-left: 4%; margin-right: 4%}
+table th{
+background: #eee;
+ }
+
+
+</style>
+<a href="/index2"><h5>Voltar ao Index</h5></a> 
+<div align="center">
+
+<div th:each = "m : ${msg}" style="font-size: 15px; color: red;">
+ <span th:text="${m}"></span>
+</div>
+</div>
+<title>Caracteristica dos veiculos</title>
+
+</head>
+<body>
+<div align="center">
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+      
+     > 
+<img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">
+<h2>Cadastro de caracteristicas dos veiculos</h2>
+</div>
+<div class="row">
+<fieldset>
+<legend><h5>Lista de tipos</h5></legend>
+<td><a class="waves-effect waves-light btn" th:href="@{/listatipos}">Listar Tipos</a></td>
+<td><a class="waves-effect waves-light btn" th:href="@{/caracteristicaveiculo}">Limpar</a></td>
+  <table class="striped">
+   <thead>
+    <tr>
+     <th><h6>Id</h6></th>
+     <th><h6>Tipo</h6></th>
+     </tr>
+     </thead>   
+    
+    <tr th:each="tipos:${tipolista}">
+     <td th:text="${tipos.cod_tipo}"><h6></h6></td>
+     <td th:text="${tipos.tipo}"><h6></h6></td>
+    </tr>
+  </table>   
+  </fieldset>  
+   <form action="salvartipo" th:object="${tipo}" class="col-13" method="post" enctype="multipart/form-data">
+     <fieldset>
+      <legend><h5>Cadastro de tipos </h5></legend>
+                <div class="input-field col s2">
+		         <label for="cod_tipo" class="active">Codigo</label> 
+		         <input name="cod_tipo" th:field="*{cod_tipo}" id="cod_tipo" class="validate" readonly="readonly" >
+		        </div>	
+                <div class="input-field col s3">
+			       <label for="tipo" class="active">Tipo</label> 
+				   <input name="tipo" th:field="*{tipo}" id="tipo" class="validate" autofocus="autofocus">
+				</div>	
+			
+			 <div class="input-field col s2">
+		 	  <td><input class="waves-effect waves-light btn" type="submit"	value="Salvar"></td>	 
+			 </div>								
+     </fieldset>
+   
+   </form>
+
+ </div> 
+ <div class="row">
+  <fieldset>
+<legend><h5>Lista de Marcas</h5></legend>
+<td><a class="waves-effect waves-light btn" th:href="@{/listamarcas}">Listar Marcas</a></td>
+<td><a class="waves-effect waves-light btn" th:href="@{/caracteristicaveiculo}">Limpar</a></td>
+  <table class="striped">
+   <thead>
+    <tr>
+     <th><h6>Id</h6></th>
+     <th><h6>Marca</h6></th>
+     </tr>
+     </thead>   
+    
+    <tr th:each="marcas:${marcalista}">
+     <td th:text="${marcas.cod_marca}"><h6></h6></td>
+     <td th:text="${marcas.marca}"><h6></h6></td>
+    </tr>
+  </table>   
+  </fieldset>    
+   <form action="salvarmarca" th:object="${marca}" class="col-13" method="post" enctype="multipart/form-data">
+     <fieldset>
+      <legend><h5>Cadastro de Marcas </h5></legend>
+                <div class="input-field col s2">
+			       <label for="cod_marca" class="active">Codigo</label> 
+				   <input name="cod_marca" th:field="*{cod_marca}" id="cod_marca" class="validate" readonly="readonly">
+				</div>
+                <div class="input-field col s3">
+			       <label for="marca" class="active">Marcas</label> 
+				   <input name="marca" th:field="*{marca}" id="marca" class="validate" autofocus="autofocus">
+				</div>	
+			 <div class="input-field col s2">
+		 	   <td><input class="waves-effect waves-light btn" type="submit"	value="Salvar"></td>	 
+			 </div>								
+     </fieldset>
+   
+   </form>   
+
+</div>
+<div class="row">
+ <fieldset>
+<legend><h5>Lista de Modelos</h5></legend>
+<td><a class="waves-effect waves-light btn" th:href="@{/listamodelos}">Listar Modelos</a></td>
+<td><a class="waves-effect waves-light btn" th:href="@{/caracteristicaveiculo}">Limpar</a></td>
+  <table class="striped">
+   <thead>
+    <tr>
+     <th><h6>Id</h6></th>
+     <th><h6>Modelo</h6></th>
+     </tr>
+     </thead>   
+    
+    <tr th:each="modelos:${modelolista}">
+     <td th:text="${modelos.cod_mod}"><h6></h6></td>
+     <td th:text="${modelos.t_modelo}"><h6></h6></td>
+    </tr>
+  </table>   
+  </fieldset>  
+   <form action="salvarmodelo" th:object="${modelo}" class="col-13" method="post" enctype="multipart/form-data">
+     <fieldset>
+      <legend><h5>Cadastro de modelo </h5></legend>
+                <div class="input-field col s2">
+		         <label for="cod_mod" class="active">Codigo</label> 
+		         <input name="cod_mod" th:field="*{cod_mod}" id="cod_mod" class="validate" readonly="readonly" >
+		        </div>	
+                <div class="input-field col s3">
+			       <label for="t_modelo" class="active">Modelo</label> 
+				   <input name="t_modelo" th:field="*{t_modelo}" id="t_modelo" class="validate" autofocus="autofocus">
+				</div>	
+			
+			 <div class="input-field col s2">
+		 	  <td><input class="waves-effect waves-light btn" type="submit"	value="Salvar"></td>	 
+			 </div>								
+     </fieldset>
+   
+   </form>
+
+ </div>
+ <div class="row">   
+  <fieldset>
+<legend><h5>Lista de Especies</h5></legend>
+<td><a class="waves-effect waves-light btn" th:href="@{/listaespecie}">Listar Especies</a></td>
+<td><a class="waves-effect waves-light btn" th:href="@{/caracteristicaveiculo}">Limpar</a></td>
+  <table class="striped">
+   <thead>
+    <tr>
+     <th><h6>Id</h6></th>
+     <th><h6>Especies</h6></th>
+     </tr>
+     </thead>   
+    
+    <tr th:each="especies:${especielista}">
+     <td th:text="${especies.cd_especie}"><h6></h6></td>
+     <td th:text="${especies.especie}"><h6></h6></td>
+    </tr>
+  </table>   
+  </fieldset>  
+   <form action="salvaespecie" th:object="${especie}" class="col-13" method="post" enctype="multipart/form-data">
+     <fieldset>
+      <legend><h5>Cadastro de Especies </h5></legend>
+                <div class="input-field col s2">
+			       <label for="cd_especie" class="active">Codigo</label> 
+				   <input name="cd_especie" th:field="*{cd_especie}" id="cd_especie" class="validate" readonly="readonly">
+				</div>
+                <div class="input-field col s3">
+			       <label for="especie" class="active">Especie</label> 
+				   <input name="especie" th:field="*{especie}" id="especie" class="validate" autofocus="autofocus">
+				</div>	
+			 <div class="input-field col s2">
+		 	   <td><input class="waves-effect waves-light btn" type="submit"	value="Salvar"></td>	 
+			 </div>								
+     </fieldset>
+   
+   </form>  
+    
+</div>
+<div class="row">
+    <fieldset>
+<legend><h5>Lista de Combustiveis</h5></legend>
+<td><a class="waves-effect waves-light btn" th:href="@{/listacombustiveis}">Listar Combustiveis</a></td>
+<td><a class="waves-effect waves-light btn" th:href="@{/caracteristicaveiculo}">Limpar</a></td>
+  <table class="striped">
+   <thead>
+    <tr>
+     <th><h6>Id</h6></th>
+     <th><h6>Combustivel</h6></th>
+     </tr>
+     </thead>   
+    
+    <tr th:each="comb:${combustivellista}">
+     <td th:text="${comb.cd_comb}"><h6></h6></td>
+     <td th:text="${comb.combustivel}"><h6></h6></td>
+    </tr>
+  </table>   
+  </fieldset>  
+   <form action="salvacombustivel" th:object="${combustivel}" class="col-13" method="post" enctype="multipart/form-data">
+     <fieldset>
+      <legend><h5>Cadastro de Combustivel </h5></legend>
+                <div class="input-field col s2">
+		         <label for="cd_comb" class="active">Codigo</label> 
+		         <input name="cd_comb" th:field="*{cd_comb}" id="cd_comb" class="validate" readonly="readonly" >
+		        </div>	
+                <div class="input-field col s3">
+			       <label for="combustivel" class="active">Combustivel</label> 
+				   <input name="combustivel" th:field="*{combustivel}" id="combustivel" class="validate" autofocus="autofocus">
+				</div>	
+			
+			 <div class="input-field col s2">
+		 	  <td><input class="waves-effect waves-light btn" type="submit"	value="Salvar"></td>	 
+			 </div>								
+     </fieldset>
+   
+   </form>
+   
+
+ </div>
+ <div class="row">   
+   <fieldset>
+   <legend><h5>Lista de Cores</h5></legend>
+    <td><a class="waves-effect waves-light btn" th:href="@{/listacores}">Listar Cores</a></td>
+    <td><a class="waves-effect waves-light btn" th:href="@{/caracteristicaveiculo}">Limpar</a></td>
+     <table class="striped">
+       <thead>
+        <tr>
+        <th><h6>Id</h6></th>
+        <th><h6>Cores</h6></th>
+        </tr>
+       </thead>   
+    
+       <tr th:each="cor:${corlista}">
+        <td th:text="${cor.cod_cor}"><h6></h6></td>
+        <td th:text="${cor.cor}"><h6></h6></td>
+       </tr>
+     </table>   
+  </fieldset>  
+   <form action="salvacores" th:object="${cor}" class="col-13" method="post" enctype="multipart/form-data">
+     <fieldset>
+      <legend><h5>Cadastro de Cores </h5></legend>
+                <div class="input-field col s2">
+			       <label for="cod_cor" class="active">Codigo</label> 
+				   <input name="cod_cor" th:field="*{cod_cor}" id="cod_cor" class="validate" readonly="readonly">
+				</div>
+                <div class="input-field col s3">
+			       <label for="cor" class="active">Cor</label> 
+				   <input name="cor" th:field="*{cor}" id="cor" class="validate" autofocus="autofocus">
+				</div>	
+			 <div class="input-field col s2">
+		 	   <td><input class="waves-effect waves-light btn" type="submit"	value="Salvar"></td>	 
+			 </div>								
+     </fieldset>
+   
+   </form>   
+   
+</div>
+<div class="row">
+   <fieldset>
+   <legend><h5>Lista de Lotacao</h5></legend>
+    <td><a class="waves-effect waves-light btn" th:href="@{/listalotacao}">Listar Lotacao</a></td>
+    <td><a class="waves-effect waves-light btn" th:href="@{/caracteristicaveiculo}">Limpar</a></td>
+     <table class="striped">
+       <thead>
+        <tr>
+        <th><h6>Id</h6></th>
+        <th><h6>Lotacao</h6></th>
+        </tr>
+       </thead>   
+    
+       <tr th:each="lotacao:${lotacaolista}">
+        <td th:text="${lotacao.CD_LOTACAO}"><h6></h6></td>
+        <td th:text="${lotacao.NM_LOTACAO}"><h6></h6></td>
+       </tr>
+     </table>   
+  </fieldset>   
+   <form action="salvalotacao" th:object="${lotacao}" class="col-13" method="post" enctype="multipart/form-data">
+     <fieldset>
+      <legend><h5>Cadastro de Lotacao </h5></legend>
+                <div class="input-field col s2">
+		         <label for="CD_LOTACAO" class="active">Codigo</label> 
+		         <input name="CD_LOTACAO" th:field="*{CD_LOTACAO}" id="CD_LOTACAO" class="validate" readonly="readonly" >
+		        </div>	
+                <div class="input-field col s3">
+			       <label for="NM_LOTACAO" class="active">Nome da lotacao</label> 
+				   <input name="NM_LOTACAO" th:field="*{NM_LOTACAO}" id="NM_LOTACAO" class="validate" autofocus="autofocus">
+				</div>	
+                <div class="input-field col s2">
+                <label for="CD_UNI" class="active">Orgao vinculando</label> 
+                 <select class="browser-default" th:field="*{CD_UNI}" id="CD_UNI" name="CD_UNI" >
+                     <option value=""></option>
+					 <option th:each = "u : ${uni}" th:value="${u.cd_orgao}" th:text="${u.sg_orgao}">
+				</select>
+                </div>				
+			
+			 <div class="input-field col s2">
+		 	  <td><input class="waves-effect waves-light btn" type="submit"	value="Salvar"></td>	 
+			 </div>								
+     </fieldset>
+   
+   </form>
+  
+ </div>  
+ <div class="row">
+   <fieldset>
+   <legend><h5>Lista de Aquisicao</h5></legend>
+    <td><a class="waves-effect waves-light btn" th:href="@{/listaaquisicao}">Listar aquisicao</a></td>
+    <td><a class="waves-effect waves-light btn" th:href="@{/caracteristicaveiculo}">Limpar</a></td>
+     <table class="striped">
+       <thead>
+        <tr>
+        <th><h6>Id</h6></th>
+        <th><h6>Aquisicao</h6></th>
+        <th><h6>Forma de aquisicao</h6></th>
+        </tr>
+       </thead>   
+    
+       <tr th:each="aqui:${aquisicaolista}">
+        <td th:text="${aqui.cod_aqui}"><h6></h6></td>
+        <td th:text="${aqui.adquirido_a}"><h6></h6></td>
+        <td th:text="${aqui.forma_aqui}"><h6></h6></td>
+       </tr>
+     </table>   
+  </fieldset>  
+   <form action="salvaaquisicao" th:object="${aquisicao}" class="col-13" method="post" enctype="multipart/form-data">
+     <fieldset>
+      <legend><h5>Cadastro de Aquisicao </h5></legend>
+                <div class="input-field col s2">
+			       <label for="cod_aqui" class="active">Codigo</label> 
+				   <input name="cod_aqui" th:field="*{cod_aqui}" id="cod_aqui" class="validate" readonly="readonly">
+				</div>
+                <div class="input-field col s3">
+			       <label for="adquirido_a" class="active">Adquirido por?</label> 
+				   <input name="adquirido_a" th:field="*{adquirido_a}" id="adquirido_a" class="validate" autofocus="autofocus">
+				</div>	
+                <div class="input-field col s3">
+			       <label for="forma_aqui" class="active">Forma de aquisicao</label> 
+				   <input name="forma_aqui" th:field="*{forma_aqui}" id="forma_aqui" class="validate">
+				</div>					
+			 <div class="input-field col s2">
+		 	   <td><input class="waves-effect waves-light btn" type="submit"	value="Salvar"></td>	 
+			 </div>								
+     </fieldset>
+   
+   </form>  
+  
+  </div> 
+   <div class="row">
+      <fieldset>
+   <legend><h5>Lista de Grupos</h5></legend>
+    <td><a class="waves-effect waves-light btn" th:href="@{/listagrupo}">Listar grupos</a></td>
+    <td><a class="waves-effect waves-light btn" th:href="@{/caracteristicaveiculo}">Limpar</a></td>
+     <table class="striped">
+       <thead>
+        <tr>
+        <th><h6>Id</h6></th>
+        <th><h6>Grupo</h6></th>
+        </tr>
+       </thead>   
+    
+       <tr th:each="grupo:${grupolista}">
+        <td th:text="${grupo.cod_grupo}"><h6></h6></td>
+        <td th:text="${grupo.grupo}"><h6></h6></td>
+
+       </tr>
+     </table>   
+  </fieldset>  
+   <form action="salvargrupo" th:object="${grupo}" class="col-13" method="post" enctype="multipart/form-data">
+     <fieldset>
+      <legend><h5>Cadastro de grupos </h5></legend>
+                <div class="input-field col s2">
+			       <label for="cod_grupo" class="active">Codigo</label> 
+				   <input name="cod_grupo" th:field="*{cod_grupo}" id="cod_grupo" class="validate" readonly="readonly">
+				</div>
+                <div class="input-field col s3">
+			       <label for="grupo" class="active">Grupo</label> 
+				   <input name="grupo" th:field="*{grupo}" id="grupo" class="validate" autofocus="autofocus">
+				</div>	
+  			
+			 <div class="input-field col s2">
+		 	   <td><input class="waves-effect waves-light btn" type="submit"	value="Salvar"></td>	 
+			 </div>								
+     </fieldset>
+   
+   </form>   
+   
+ 
+</div>
+</body>
+</html>

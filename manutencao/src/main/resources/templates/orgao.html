@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   <!-- Adicionando JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>  
+<!-- Script para calendario -->     
+<script type="text/javascript" src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"></script>  
+<link href="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.css" rel="stylesheet"type="text/css"/>               
+            
+<meta charset="UTF-8">
+<title>Unidades</title>
+<style type="text/css">
+fildset{margin-left: 8%; margin-right: 8%;}
+table{
+width: 96%;
+}
+label{ color: Black; }
+table{ font-size: 10px; margin-left: 2%; margin-right: 2%}
+div{font-size: 9px; margin-left: 5%}
+table td, table th{
+border: 1px solid grey;
+}
+fieldset{
+	margin-left: 4%; margin-right: 4%;
+	}
+	form{
+	margin-left: 4%; margin-right: 4%}
+table th{
+background: #eee;
+ }
+</style> 
+<a href="/index2"><h5>Voltar ao Index</h5></a>  
+</head>
+<body>
+<div align="center">
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+      
+     > 
+<img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">
+<h5>Formulario de unidades</h5><br>
+</div>
+
+<div th:each = "m : ${msg}" style="font-size: 15px; color: red;">
+ <span th:text="${m}"></span>
+</div>
+ <form action="salvarorgaos" method="post" th:object="${orgao}" class="col s10" style="background-color: Wheat;">
+  <fieldset style="background-color: Beige;">
+   <legend>Unidades</legend>
+     	<div class="row">
+		 <div class="input-field col s2">
+		  <label for="cd_orgao" class="active">Codigo</label> 
+		  <input name="cd_orgao" th:field="*{cd_orgao}" id="cd_orgao" readonly="readonly"class="validate">
+		 </div>
+		 <div class="input-field col s3">
+		  <label for="sg_orgao" class="active">Sigla Unidade</label> 
+		  <input name="sg_orgao" th:field="*{sg_orgao}" id="sg_orgao" oninput="maisculo(event)" class="validate">
+		 </div>
+		 <div class="input-field col s10">
+		  <label for="nm_orgao" class="active">Nome Unidade</label> 
+		  <input name="nm_orgao" th:field="*{nm_orgao}" id="nm_orgao" oninput="maisculo(event)" class="validate">
+		 </div>		 		 
+	   </div>	 
+	   <td><a class="waves-effect waves-light btn" th:href="@{/listaorgaos}">Listar Unidades</a></td>
+	   <div><input class="waves-effect waves-light btn" type="submit" value="Salvar"></div>
+  </fieldset>
+   
+ </form>
+ <br>
+   <fieldset>
+ <legend>Campos de pesquisa</legend>
+	<div class="row">
+		<form action="orgaopornome" method="post" class="col s12" id="pesquisarorgao">
+			<div class="row">
+				<div class="input-field col s6">
+					<label for="nomepesquisa" class="active">Pesquisa por nome</label>
+					<input name="nomepesquisa" id="nomepesquisa" class="validate"
+					th=value="${nomepesquisa}">
+				</div>
+				
+					<input type="submit" value="Buscar" class="waves-effect waves-light btn">
+					
+				</div>
+			</div>
+		</form>
+	</div>
+	</fieldset>
+	<br>
+	<div th:each = "m : ${msg}" style="font-size: 15px; color: red;">
+    <span th:text="${m}"></span>
+    </div>
+ 
+ <fieldset>
+ <legend>Lista Unidades</legend>
+           <table class="striped">
+         <thead>
+         <tr>
+          <th>Id</th>
+          <th>Sigla</th>
+          <th>Nome</th>
+         <th>Editar</th>  
+         </tr>         
+         </thead>
+           <tr th:each="o:${lista}" >
+            <td th:text="${o.cd_orgao}" ></td>
+            <td th:text="${o.sg_orgao}" oninput="maisculo(event)"></td>
+            <td th:text="${o.nm_orgao}" oninput="maisculo(event)"></td>  
+            <td><a th:if="${o.cd_orgao!=null}" th:href="@{/editarorgao/{id}(id=${o.cd_orgao})}" style="color:Blue;">Editar</a></td>                
+           </tr>
+       </table>  
+ </fieldset>
+ <br>
+ </script>
+<script>
+function maisculo(e){
+	var ss = e.target.selectionStart;
+	var se = e.target.selectionEnd;
+	e.target.value = e.target.value.toUpperCase();
+	e.target.selectionStart = ss;
+	e.target.selectionEnd = se;
+}
+</script>
+
+</body>
+</html>

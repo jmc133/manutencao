@@ -1,0 +1,85 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Exemplo  charts</title>
+<script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">    
+
+<a href="/index2"><h5>Voltar ao Index</h5></a>
+<a th:href="@{/retornarelatoriomov}"><h5>Voltar a pagina relatorio</h5></a>
+
+    
+</head>
+<body>
+<div align="center">
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+      
+     > 
+<img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">
+
+</div>
+ <div class="container">
+  <div align="center">
+  <b> <span  th:text="${texto}" /></b>
+  </div>
+  <div id="container" style="width: 550;height: 400"></div>
+  </div>
+ 
+ <script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <script src="https://code.highcharts.com/highcharts.js"></script>
+ <script src="https://code.highcharts.com/modules/exporting.js"></script>
+ <script th:inline="javascript">
+ $(function(){
+	 Highcharts.chart('container',{
+		 chart:{
+			type:'column' 
+		 },
+		 title:{
+			 text:[[${titulo}]]
+		 }, subtitle:{
+			 text:[[${periodo}]]
+		 }, xAxis:{
+			 categories:[[${graphespecie}]],
+			 crosshair: true
+		 }, yAxis:{
+			 min:0,
+			 max:150,
+			 title:{
+				 text:[[${tipodedados}]]
+			 }
+		 },
+		 tolltip:{
+			 headerFormat:'<span style="font-size:10px">{point.key}</span><table>',
+			 pointFormat:'<tr><td style="color:{series.color};padding:0">{series.name}:></td>'+
+			 '<td style="padding:0"><b>{point.y:.1f}k</b></td></tr>',
+			 footerFormat:'</table>',
+			 shared:true,
+			 useHTML:true
+		 },
+		 plotOptions:{
+			 column:{
+				 pointPadding:0.2,
+				 borderWidth:0
+			 }
+		 }, series:[{
+			 name:[[${nome}]],
+			 data:[[${graphporcent}]]
+		 }]
+	 });
+ });
+ </script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   <!-- Adicionando JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>  
+<!-- Script para calendario -->     
+<script type="text/javascript" src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"></script>  
+<link href="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.css" rel="stylesheet"type="text/css"/>               
+            
+<meta charset="UTF-8">
+<style type="text/css">
+form {
+	margin-left: 5%; margin-right: 5%;
+}
+</style>
+
+<title>Manutenção principal</title>
+</head>
+<body>
+<div style="margin-left: 10%; color: blue;" >
+<a href="/index2"><h5>Voltar ao Index</h5></a>
+</div>
+<div align="center">
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+      
+     > 
+<img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">
+<h5>Formulario principal</h5><br>
+</div>
+<form action="" class="col s12">
+<div class = "container" >
+  <div class = "row" > 
+        <div class = "input-field col s6" style = " background-color: SkyBlue " > 
+              <h3>Oficinas Parceiras</h3>              
+               <fieldset>
+                <legend>Oficinas</legend>
+               <table class="striped">
+                  <thead>
+                  <tr>
+                   <th>Nome</th>
+                   <th>Telefone</th>                    
+                  </tr>         
+                  </thead>
+                <tr th:each="s:${servicos}" >
+                 <td th:text="${s.nm_fantasia}" style="font-size: 15px; color: blue;"></td>
+                 <td th:text="${s.num_telefone}" oninput="maisculo(event)" style="font-size: 15px; color: blue;"></td>                                 
+                </tr> 
+               </table>                 
+              </fieldset>   
+              <fieldset>
+                <legend>Oficinas e fornecedora de peças</legend>
+               <table class="striped">
+                  <thead>
+                  <tr>
+                   <th>Nome</th>
+                   <th>Telefone</th>                    
+                  </tr>         
+                  </thead>
+                <tr  th:each="sp : ${pecasservicos}" >
+                <td th:text="${sp.nm_fantasia}" style="font-size: 15px; color: blue;"></td>
+                 <td th:text="${sp.num_telefone}" oninput="maisculo(event)" style="font-size: 15px; color: blue;"></td> 
+                </tr>  
+               </table>                 
+              </fieldset>   
+        </div> 
+        <div class = "input-field col s6" style = " background-color:Beige; " >          
+            <h3>Distribuidores de peças</h3>
+            <fieldset>
+                <legend>Forncedores de peças</legend>
+               <table class="striped">
+                  <thead>
+                  <tr>
+                   <th>Nome</th>
+                   <th>Telefone</th>                    
+                  </tr>         
+                  </thead>
+                <tr th:each="p:${pecas}" >
+                 <td th:text="${p.nm_fantasia}" style="font-size: 15px; color: blue;"></td>
+                 <td th:text="${p.num_telefone}" oninput="maisculo(event)" style="font-size: 15px; color: blue;"></td>                                 
+                </tr> 
+               </table>                 
+              </fieldset>   
+              <fieldset>
+                <legend>Oficinas e fornecedora de peças</legend>
+               <table class="striped">
+                  <thead>
+                  <tr>
+                   <th>Nome</th>
+                   <th>Telefone</th>                    
+                  </tr>         
+                  </thead>
+                <tr  th:each="sp : ${pecasservicos}" >
+                <td th:text="${sp.nm_fantasia}" style="font-size: 15px; color: blue;"></td>
+                 <td th:text="${sp.num_telefone}" oninput="maisculo(event)" style="font-size: 15px; color: blue;"></td> 
+                </tr>  
+               </table>                 
+              </fieldset>
+        </div> 
+   </div> 
+   <div class = "row" >    
+        <div class = "input-field col s6" style = " background-color : #D2B48C" >          
+            <h3>Veículos na oficina</h3>
+            <fieldset>
+                <legend>Placa dos veículos em reparo</legend>
+               <table class="striped">
+                  <thead>
+                  <tr>
+                   <th>Placa</th>
+                                     
+                  </tr>         
+                  </thead>
+                <tr  th:each="v: ${veiculosoficina}" >
+                <td><a th:text="${v}" style="font-size: 15px; color: blue;" th:if="${v!=null}" th:href="@{/osvpesquisa/{v}(v=${v})}"></a></td>
+                                 
+                </tr>  
+               </table>                 
+              </fieldset>
+        </div>
+        <div class = "input-field col s6" style = " background-color : PaleGreen " >          
+            <h3>Ordens de serviços</h3>
+             <a  href="/ordermservico">
+             <input type="button"value="Nova Ordem" ></a> 
+            <fieldset>
+                <legend>Ordens de serviços ativas</legend>
+               <table class="striped">
+                  <thead>
+                  <tr>
+                   <th>Ordens de serviços</th>  
+                   <th>Ver orçamentos</th>                                  
+                  </tr>         
+                  </thead>
+                <tr  th:each="id_ordem: ${os}" >
+                <!-- <td><a th:text="${id_ordem}" style="font-size: 15px; color: blue;" th:if="${id_ordem!=null}"></a></td>-->
+                   <td><a th:text="${id_ordem}" style="font-size: 15px; color: blue;" th:if="${id_ordem!=null}" th:href="@{/ordermservico}"></a></td>
+                 <td> <a th:if="${id_ordem!=null}" th:text="${id_ordem}" th:href="@{/orcamentoporordem/{fk_ordem_servico}(fk_ordem_servico=${id_ordem})}" style="font-size: 15px; color: blue;"></a></td>               
+                </tr>  
+               </table>  
+               
+		               
+              </fieldset>
+        </div>       
+        </div>
+    </div>
+ 
+</form>
+</body>
+</html>

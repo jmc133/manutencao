@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   <!-- Adicionando JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>  
+<!-- Script para calendario -->     
+<script type="text/javascript" src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"></script>  
+<link href="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.css" rel="stylesheet"type="text/css"/>               
+            
+<meta charset="UTF-8">
+<title>Formulario de movimentacao</title>
+
+<style type="text/css">
+table.striped>tbody>tr:nth-child(odd){background-color: rgba(158,154,154,0.5); }
+form input[type=submit]{ color:white;}
+table{
+width: 96%;
+}
+table{ font-size: 12px}
+div{font-size: 9px;}
+table td, table th{
+border: 1px solid grey;
+}
+fieldset{
+	margin-left: 4%; margin-right: 4%;
+	}
+	form{
+	margin-left: 4%; margin-right: 4%}
+table th{
+background: #eee;
+ }
+</style>
+</head>
+<body>
+<div align="center">
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+      
+     > 
+<img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">
+
+</div>
+<a  href="/index2"><h5 style="margin-left: 8%;">Voltar ao Index</h5></a> 
+<a th:if="${botaovoltar==null}" th:href="@{/mostraritensreserva}"><h5>Voltar a Reserva</h5></a> 
+
+<fieldset>
+<legend>Lista de movimentos</legend>
+
+        <table class="striped">
+         <thead>
+         <tr>
+          <th>Id</th>
+          <th>Requisicao</th>
+          <th>Data estipulada</th>
+          <th>Data Saida</th>
+          <th>Data Retorno</th>
+          <th>Veiculo</th>
+          <th>Unidade</th>
+          <th>Destino</th>
+          <th>Evento</th>
+          <th>Km Saida</th>
+          <th>Km retorno</th>
+          <th>Km rodado</th>
+          <th>Solicitante</th>
+          <th>Servico</th>
+          <th>Condutor</th>          
+         </tr>         
+         </thead>
+           <tr th:each="m:${mov}" >
+            <td th:text="${m.cd_saida1}"></td>
+            <td th:text="${m.requisicao}"></td>
+            <td th:if="${m.data_est!=null}" th:text="${#dates.format(m.data_est, 'dd/MM/yy HH:mm')}"></td>
+            <td th:text="${m.data_s}"></td>
+            <td th:text="${m.data_r}"></td>
+            <td th:text="${m.placa_atual}"></td>
+            <td th:text="${m.sg_orgao}"></td>
+            <td th:text="${m.s_destino}"></td>
+            <td th:text="${m.evento}"></td>
+            <td th:text="${m.km_s}"></td>
+            <td th:text="${m.km_r}"></td>
+            <td th:text="${m.km_ro}"></td>
+            <td th:text="${m.s_solicitante}"></td>
+            <td th:text="${m.s_executado}"></td>
+            <td th:text="${m.nm_pessoa_func}"></td>
+         
+           </tr>
+       </table>  
+</fieldset>
+
+
+</body>
+</html>

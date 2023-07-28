@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   <!-- Adicionando JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>  
+<!-- Script para calendario -->     
+<script type="text/javascript" src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"></script>  
+<link href="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.css" rel="stylesheet"type="text/css"/>               
+            
+<meta charset="UTF-8">
+<title>Reservas por pessoas</title>
+
+<style type="text/css">
+fildset{margin-left: 8%; margin-right: 8%;}
+table{
+width: 96%;
+}
+label{ color: Black; }
+table{ font-size: 10px; margin-left: 2%; margin-right: 2%}
+div{font-size: 9px; margin-left: 5%}
+table td, table th{
+border: 1px solid grey;
+}
+fieldset{
+	margin-left: 4%; margin-right: 4%;
+	}
+	form{
+	margin-left: 4%; margin-right: 4%}
+table th{
+background: #eee;
+ }
+</style> 
+</head>
+<body>
+<a href="/index2"><h5>Ir ao Index</h5></a> 
+<a th:href="@{/mostraritensreserva}"><h5>Voltar a Reserva</h5></a> 
+<div align="center">
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+      
+     > 
+<img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">
+
+</div>
+
+<fieldset>
+<legend>Lista de reservas por pessoa</legend>
+
+        <table class="striped">
+         <thead>
+         <tr>
+          <th>Ref</th>
+          <th>Data</th>
+          <th>Requisicao</th>
+          <th>Pessoa</th>
+          <th>Veiculo</th>
+          <th>Unidade</th>
+          <th>Destino</th>
+          <th>Sequencia</th>
+          <th>Qtd</th>
+        
+         </tr>         
+         </thead>
+           <tr th:each="p:${pessoaitem}" >
+            <td th:text="${p.cd_reserva_ref}"></td>
+            <td th:text="${p.data_r}"></td>
+            <td th:text="${p.requisicao}"></td>
+            <td th:text="${p.nm_pessoa_func}"></td>
+            <td th:text="${p.placa_atual}"></td>
+            <td th:text="${p.sg_orgao}"></td>
+            <td th:text="${p.destino_r}"></td>
+            <td th:text="${p.sequencia}"></td>
+            <td th:text="${p.qtdsequencia}"></td>
+         
+           </tr>
+       </table>  
+</fieldset>
+
+</body>
+</html>

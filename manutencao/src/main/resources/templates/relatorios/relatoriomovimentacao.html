@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   <!-- Adicionando JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>  
+<!-- Script para calendario -->     
+<script type="text/javascript" src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"></script>  
+<link href="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.css" rel="stylesheet"type="text/css"/>               
+            
+<meta charset="UTF-8">
+<title>Relatorio de movimentação</title>
+<a href="/index2"><h5>Voltar ao Index</h5></a>
+<div align="center" >
+
+	<div class="input-field col s6" style="font-size: 14px; color: Blue">
+	  <b> <span th:text="${geral}"></span></b>
+	</div>	
+</div>		
+<style type="text/css">
+table.striped>tbody>tr:nth-child(odd){background-color: rgba(158,154,154,0.5); }
+form input[type=submit]{ color:PowderBlue;}
+table{
+width: 96%;
+}
+table{ font-size: 12px}
+div{font-size: 9px;}
+table td, table th{
+border: 1px solid grey;
+}
+fieldset{
+margin-left: 4%; margin-right: 4%;
+}
+form{
+margin-left: 4%; margin-right: 4%}
+table th{
+background: #eee;
+ }
+</style>
+
+</head>
+<body>
+<div align="center">
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+      
+     > 
+<img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">
+<h5>Relatorios de movimentações</h5><br>
+</div>
+<fieldset>
+<form action="iniciarelatorio" method="get" class="col s12" id="iniciarelatorio">
+<legend>Relatorios</legend>
+<div class="row">
+		<div class="input-field col s3">
+		 <label for="i" class="active">Data Inicial</label><br>
+		 <input id="i" name="i" th:value="${i}"  class="validate" type="date">
+		</div>    
+		<div class="input-field col s3">
+		 <label for="f" class="active">Data Final</label><br>
+		 <input id="f" name="f" th:value="${f}" class="validate" type="date">
+		</div> 
+		<div class="input-field col s3">
+		 <td ><input  class="waves-effect waves-light btn" type="submit"	value="Pesquisar"></td>
+		</div>
+		<div class="input-field col s3">
+		 <td><a  class="waves-effect waves-light btn" th:href="@{/relatoriomov}">Limpar</a></td>	
+	   </div>
+   
+
+</div>
+</fieldset>
+
+</form>
+<fieldset th:if="${geralmes!=null}">
+	<div class="input-field col s6" style="font-size: 14px; color: Blue; " align="center">
+	  <b> <span th:if="${mesmes!=null}" th:text="${mesmes}" /></b>
+	</div>
+        <table th:if="${geralmes!=null}" class="striped">
+       <tr >
+         <p th:each= "g:${geralmes}" >
+          <td th:if="${geralmes!=null}" th:text="${g}"/>
+         </p>
+       </tr>
+       <tr>  
+         <p th:each= "c:${conta}" >  
+          <td th:text="${c}"/>
+         </p>  
+       </tr>         
+      </table>  
+</fieldset>    
+	<div class="input-field col s3" style="margin-left: 5%;">
+		 <td><a  class="waves-effect waves-light btn"th:each= "i:${ini}" th:if="${i!=''}" th:href="@{/motoristasgraf}">Graficos Motoristas</a></td>	
+	</div>   
+	<div class="input-field col s6" style="font-size: 14px; color: Blue; " align="center">
+	  <b> <span th:text="${unidades}" /></b>
+	</div>
+<fieldset th:if="${unidades!=null}">
+        <table class="striped">
+       <tr >
+        <th>Mês</th>
+        <th>Contagem</th>
+        <th>Km</th>
+        <th>Unidade</th>
+       </tr>
+       <tbody>
+        <tr th:each="o:${orgaos}">
+         <td th:text="${o.mes_s}"/>
+         <td th:text="${o.conta}"/>
+         <td th:text="${o.km}"/>
+         <td> <a th:href="@{/movunidade/{sg_orgao}(sg_orgao=${o.sg_orgao})}"><b><span th:text="${o.sg_orgao}"></span></b></a></td> 
+        </tr>
+       </tbody>  
+
+      </table> 
+	<div class="input-field col s3">
+		 <td><a  class="waves-effect waves-light btn"th:each= "i:${ini}" th:if="${i!=''}" th:href="@{/orgaosgraf}">Graficos Orgaos</a></td>	
+	</div>                          
+</fieldset>
+	<div class="input-field col s6" style="font-size: 14px; color: Blue; " align="center">
+	  <b> <span th:text="${requisicoes}" /></b>
+	</div>
+<fieldset th:if="${reqMes!=null}">
+       <table class="striped">
+       <tr >
+         <p th:each= "rm:${reqMes}" >
+          <td th:text="${rm}"/>
+         </p>
+       </tr>
+       <tr >
+         <p th:each= "rr:${reqReq}" >
+         <td> <a th:href="@{/movunidade/{sg_orgao}(sg_orgao=${rr})}"><b><span th:text="${rr}"></span></b></a></td>
+         </p>
+       </tr>
+       <tr >
+         <p th:each= "rc:${reqCont}" >
+          <td th:text="${rc}"/>
+         </p>
+       </tr>              
+
+      </table> 
+</fieldset>
+	<div class="input-field col s6" style="font-size: 14px; color: Blue; " align="center">
+	  <b> <span th:text="${contaespecie}" /></b>
+	</div>
+<fieldset th:if="${contaespecie!=null}">
+<legend>Contagem pôr especie</legend>
+		<div class="input-field col s3">
+		 <td><a  class="waves-effect waves-light btn"th:each= "i:${ini}" th:if="${i!=''}" th:href="@{/especiegraf}">Graficos</a></td>	
+	   </div>	
+       <table class="striped">
+       
+       <tr >
+        <th>Mês</th>
+        <th>Contagem</th>
+        <th>Km</th>
+        <th>Especie</th>
+       </tr>
+       <tbody>
+        <tr th:each="ec:${especiecont}">
+         <td th:text="${ec.mes_s}"/>
+         <td th:text="${ec.conta}"/>
+         <td th:text="${ec.km}"/>
+         <td> <a th:href="@{/movespecie/{especie}(especie=${ec.especie})}"><b><span th:text="${ec.especie}"></span></b></a></td> 
+        </tr>
+       </tbody>  
+      <tfoot>
+      <tr>
+      <td colspan="2">Total atendido</td>
+      <td th:text="${#aggregates.sum(especiecont.![conta])}"/>
+      </tr>
+      </tfoot>                 
+
+      </table> 
+</fieldset>
+	<div class="input-field col s6" style="font-size: 14px; color: Blue; " align="center">
+	  <b> <span th:text="${contaveiculos}" /></b>
+	</div>
+<fieldset th:if="${contaespecie!=null}">
+<legend>Contagem pôr veículos</legend>
+       <table class="striped">
+       <tr >
+        <th>Mês</th>
+        <th>Contagem</th>
+        <th>Km</th>
+        <th>Placa</th>
+       </tr>
+       <tbody>
+        <tr th:each="vc:${veicKm}">
+         <td th:text="${vc.mes_s}"/>
+         <td th:text="${vc.conta}"/>
+         <td th:text="${vc.km}"/>
+         <td> <a th:href="@{/movplaca/{placa}(placa=${vc.placa_atual})}"><b><span th:text="${vc.placa_atual}"></span></b></a></td>
+         
+        </tr>
+       </tbody>                        
+     <tfoot>
+      <tr>
+      <td colspan="2">Total km</td>
+      <td th:text="${#aggregates.sum(veicKm.![km])}"/>
+      </tr>
+      </tfoot>
+      </table> 
+</fieldset>
+	<div class="input-field col s6" style="font-size: 14px; color: Blue; " align="center">
+	  <b> <span th:text="${qtdevento}" /></b>
+	</div>
+<fieldset th:if="${contaespecie!=null}">
+  <legend>Contagem pôr eventos</legend>
+       <table class="striped">
+ <tr >
+        <th>Mês</th>
+        <th>Contagem</th>
+        <th>Km</th>
+        <th>Evento</th>
+       </tr>
+       <tbody>
+        <tr th:each="ce:${contEvento}">
+         <td th:text="${ce.mes_s}"/>
+         <td th:text="${ce.conta}"/>
+         <td th:text="${ce.km}"/>
+         <td> <a th:href="@{/movevento/{evento}(evento=${ce.evento})}"><b><span th:text="${ce.evento}"></span></b></a></td>
+        </tr>
+       </tbody>                        
+     <tfoot>
+      <tr>
+      <td colspan="2">Total km</td>
+      <td th:text="${#aggregates.sum(contEvento.![km])}"/>
+      </tr>
+      </tfoot>     
+      </table> 
+</fieldset>
+<fieldset th:if="${contaespecie!=null}">
+  <legend>Contagem pôr cargos</legend>
+       <table class="striped">
+       <tr >
+        <th>Mês</th>
+        <th>Contagem</th>
+        <th>Cargo</th>
+        
+       </tr>
+       <tbody>
+        <tr th:each="c:${cargo}">
+         <td th:text="${c.mes_s}"/>
+         <td th:text="${c.conta}"/>         
+        <td> <a th:href="@{/movcargo/{cargo}(cargo=${c.cargo_f})}"><b><span  th:text="${c.cargo_f}"></span></b></a></td>         
+         
+        </tr>
+       </tbody>
+     <tfoot>
+      <tr>
+      <td colspan="2">Quantidade Total </td>
+      <td th:text="${#aggregates.sum(cargo.![conta])}"/>
+      </tr>
+      </tfoot>
+     
+      </table> 
+</fieldset>
+
+</body>
+</html>

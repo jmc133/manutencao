@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<meta charset="UTF-8" />
+<title>Verificar orçamentos</title>
+</head>
+<body>
+<div style="margin-left: 10%; color: blue;" >
+<a href="/index2"><h5>Voltar ao Index</h5></a>
+<a href="/principal"><h5>Voltar ao Principal</h5></a>
+</div>
+<div align="center">
+  <img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+     border="50%"  
+     > 
+ <a href="https://ufg.br/"><img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100"> </a> 
+     <h2>Verificar Orçamentos Enviados</h2>  
+ </div>
+ <form action="" class="col s12">
+   <div class = "container" >
+    <div class = "row" >     
+      <div class = "input-field col s2"  >
+        <fieldset style = " background-color: SkyBlue ">
+               <table class="striped">
+                  <thead>
+                  <tr>
+                   <th>Id</th>
+                   <th>Qtd</th>                    
+                  </tr>         
+                  </thead>
+                <tr th:each="i:${idorcados}" >
+                 <td> <a th:if="${i.fk_ordem_servico!=null}" th:text="${i.fk_ordem_servico}" th:href="@{/orcamentoporordem/{fk_ordem_servico}(fk_ordem_servico=${i.fk_ordem_servico})}" style="font-size: 15px; color: blue;"></a></td>
+                 <td th:if="${i.cont!=null}" th:text="${i.cont}" oninput="maisculo(event)" style="font-size: 15px; color: blue;"></td>                                 
+                </tr> 
+               </table>
+        </fieldset> 
+      </div>  
+      <div class = "input-field col s10"  >
+        <fieldset style = " background-color:LightYellow ">
+             <table class="striped">
+                  <thead>
+                  <tr>
+                   <th>Id</th>
+                   <th>Id PJ</th>
+                   <th>Empresa</th>
+                   <th>Cidade</th>
+                   <th>Orçador</th>
+                   <th>Desscrição</th>
+                   <th>Unitário</th>
+                   <th>Total</th>
+                   <th>Placa</th>                    
+                  </tr>         <!--  th:href="@{/produtos/listar?page=${i}&nome=${nome}}"-->
+                  </thead>
+                <tr th:each="so:${servicoorcados}" >
+                 <td><a th:if="${so.linha!=null}" th:text="${so.linha}" style="font-size: 15px;"th:href="@{/atribuir/(pj=${so.pj})&(fk_defeitos=${so.fk_defeitos})}"></a></td> <!-- @{/atribuir/{fk_defeitos}(fk_defeitos=${so.fk_defeitos})} -->
+                 <td th:if="${so.linha!=null}" th:text="${so.pj}" style="font-size: 10px;"></td>
+                 <td th:if="${so.nm_fantasia!=null}" th:text="${so.nm_fantasia}" style="font-size: 10px;"></td>
+                 <td th:if="${so.cidade!=null}" th:text="${so.cidade}" style="font-size: 15px;"></td>
+                 <td th:if="${so.linha!=null}" th:text="${so.orcador}" style="font-size: 10px;"></td>
+                 <td th:if="${so.linha!=null}" th:text="${so.descricao}" style="font-size: 12px;"></td>
+                 <td th:if="${so.linha!=null}" th:text="${#numbers.formatCurrency(so.valor_unitario)}" style="font-size: 15px;"></td>
+                 <td th:if="${so.linha!=null}" th:text="${#numbers.formatCurrency(so.valor_total)}" style="font-size: 15px;"></td>
+                 <td th:if="${so.linha!=null}" th:text="${so.placa_atual}" style="font-size: 10px;"></td>
+                                                 
+                </tr> 
+               <tfoot>
+                <tr>
+                <td colspan="2">Totalizador</td>
+                <tr th:each="t:${totalizador}">
+                <!--   <td> <a th:if="${t.nm_fantasia!=null&&atribuicao==null}" th:text="${t.nm_fantasia}" style="font-size: 10px; color: Blue;" th:href="@{/atribuir/{pj}(pj=${t.pj})}"></a></td>-->
+                 <td th:if="${t.nm_fantasia!=null} " th:text="${t.nm_fantasia}" style="font-size: 10px; color: Red" ></td>
+                 <td th:if="${t.nm_fantasia!=null}" th:text="${t.nm_fantasia}" style="font-size: 10px; color: Blue;" ></td>
+                 <td th:if="${t.linha!=null}" th:text="${#numbers.formatCurrency(t.total)}">R$ ,00</td>
+                </tr>  
+                </tr>
+               </tfoot>
+               </table>
+        </fieldset> 
+      </div>     
+    </div>
+   </div>
+ </form>
+
+</body>
+</html>

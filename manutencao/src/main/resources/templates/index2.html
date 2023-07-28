@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<style type="text/css">
+html{margin-left: 5%;
+margin-right: 5%;
+margin-top:3%; 
+ }
+ form{font-size: 20px;background: LightBlue}
+</style>
+
+<title>Index administrador</title>
+<style type="text/css">
+input{height: 50px; width: 250px;color: White;font-size: 20px;background-color: DarkBlue; cursor: pointer;
+font: CASTELLAR;
+
+}
+</style>
+  
+</head>
+<body>
+<div align="center">
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+      
+     > 
+<img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">
+
+<h3>DIRETORIA DE LOGISTICA</h3>
+<h3>Index administrativo</h3>
+</div>
+
+
+<fieldset style="background: RoyalBlue;">
+ 
+  <form action="index2" method="get" class="col s10" >
+
+    <div class="row" style="margin-left: 3%" th:each= "r : ${regra}" >
+     <div class="col s5">       
+      <p> <a th:if="${r.nome_role=='ROLE_ADMIN'||r.nome_role=='ROLE_SECRETARIO'}" href="/solicitcao">
+       <input type="button"value="Solicitacao" >
+       </a>
+       <a th:if="${r.nome_role=='ROLE_ADMIN'||r.nome_role=='ROLE_SECRETARIO'}"  href="/agenda">
+       <input type="button"value="Agenda" ></a>
+       <a th:if="${r.nome_role=='ROLE_ADMIN'||r.nome_role=='ROLE_SECRETARIO'}"  href="/reservas">
+       <input type="button"value="Reservas" ></a>
+       <a  href="/escla">
+       <input type="button"value="Escala de viagens" ></a>
+       </p>
+
+    </div>
+
+
+     <div class="col s5">
+      <p> <a th:if="${r.nome_role=='ROLE_ADMIN'||r.nome_role=='ROLE_SECRETARIO'||r.nome_role=='ROLE_MOTORISTA'}" href="/tabelamovimento">
+       <input type="button"value="Lista Movimentos" ></a>
+
+       <a th:if="${r.nome_role=='ROLE_ADMIN'||r.nome_role=='ROLE_SECRETARIO'}" href="/movimentodiario">
+       <input type="button"value="Movimentos diários"></a>
+
+       <a th:if="${r.nome_role=='ROLE_ADMIN'||r.nome_role=='ROLE_SECRETARIO'}" href="/veiculo">
+       <input type="button"value="Veiculos"></a>
+       <a th:if="${r.nome_role=='ROLE_ADMIN'||r.nome_role=='ROLE_SECRETARIO'}" href="/caracteristicaveiculo">
+       <input type="button"value="Caracteristicas do veiculo"></a></p>
+      </div>     
+      <div class="col s5">
+       <p><a th:if="${r.nome_role=='ROLE_ADMIN'}" href="/pessoas">
+       <input type="button"value="Cadastro de Pessoas"></a>
+
+       <a th:if="${r.nome_role=='ROLE_ADMIN'}" href="/usuarios">
+       <input type="button"value="Cadastro de Usuarios"></a>
+
+       <a th:if="${r.nome_role=='ROLE_ADMIN'}" href="/orgaos">
+       <input type="button"value="Formulario de Unidades"></a>
+
+       <a th:if="${r.nome_role=='ROLE_MOTORISTA'||r.nome_role=='ROLE_ADMIN'}" href="/iniciamovimento">
+       <input type="button"value="Inicia Movimento"></a></p>
+     </div>  
+     <div class="col s5">
+       <p><a th:if="${r.nome_role=='ROLE_ADMIN'}"  href="/relatoriomov">
+       <input type="button"value="Relatorio movimentação"></a>
+       <a th:if="${r.nome_role=='ROLE_ADMIN'||r.nome_role=='ROLE_SECRETARIO'}"  href="/formmovimento">
+       <input type="button"value="Inserir alterar movimento"></a>       
+       <a  href="/logout">
+       <input type="button"value="Sair"></a>
+       <a  href="/ajuda"><input type="button"value="Ajuda"></a>
+       </p>
+     </div>  
+     <div class="col s5">
+        <a th:if="${r.nome_role=='ROLE_ADMIN'||r.nome_role=='ROLE_SECRETARIO'}"  href="/disponibilidademotoristas">
+         <input type="button"value="Lista disponibilidade"></a>   
+     </div> 
+
+      <div class="row" >
+       
+      </div>           
+   </div>
+  </form>
+
+</fieldset>
+created by Jose Marcos
+</body>
+</html>

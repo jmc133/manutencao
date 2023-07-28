@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
+<meta charset="UTF-8">
+<style type="text/css">
+form input[type=submit]{
+color: white;
+}
+fieldset{margin-left: 25%;margin-right: 25% ;}
+form{
+margin-left:35%; margin-top:10%;
+}
+.col.row{ margin-right:0rem;
+}
+input:-internal-autofill-select{ background-color: blue;
+}
+input[type="text"], textarea {
+  background-color : #FFFACD; 
+}
+</style>
+<title>Login</title>
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+     border="50%"  
+     >
+     <div th:each = "m : ${msg}" style="font-size: 15px; color: red; " align="center">
+       <b><span th:text="${m}"></span></b>
+    </div>  
+</head>
+<body marginheight="10%" marginwidth="10%" >
+
+     <div class="container">
+      <form class="form-signin" method="post" action="/logar">
+        <h2 class="form-signin-heading">Insira os dados de Login</h2>
+        <p>
+          <label for="username" class="sr-only">Usuario</label>
+          <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+        </p>
+        <p>
+          <label for="password" class="sr-only">Senha</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        </p>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Verificar</button>
+      </form>
+</div>
+
+</body>
+</html>

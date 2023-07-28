@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<style type="text/css">
+html{margin-left: 5%;
+margin-right: 5%;
+margin-top:3%; 
+ }
+ form{font-size: 20px;background: LightBlue}
+</style>
+
+<title>Index administrador</title>
+<style type="text/css">
+input{height: 50px; width: 250px;color: White;font-size: 20px;background-color: DarkBlue; cursor: pointer;
+font: CASTELLAR;
+
+}
+</style>
+</head>
+<body>
+
+<div align="center">
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+      
+     > 
+<img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">
+
+<h3>DIRETORIA DE LOGISTICA</h3>
+<h3>Index administrativo</h3>
+</div>
+
+
+<fieldset style="background: RoyalBlue;">
+ 
+  <form action="index2" method="get" class="col s12" >
+
+    <div class="row" style="margin-left: 3%" th:each= "r : ${regra}" >
+
+     <div class="col s6">
+     
+       <a th:if="${r.nome_role=='ROLE_ADMIN'||r.nome_role=='ROLE_SECRETARIO'}" href="/veiculo">
+       <input type="button"value="Veiculos"></a>
+       <a th:if="${r.nome_role=='ROLE_ADMIN'||r.nome_role=='ROLE_SECRETARIO'}" href="/caracteristicaveiculo">
+       <input type="button"value="Caracteristicas do veiculo"></a>
+       <a th:if="${r.nome_role=='ROLE_ADMIN'}" href="/pessoas">
+       <input type="button"value="Cadastro de Pessoas"></a>
+       <a th:if="${r.nome_role=='ROLE_ADMIN'}" href="/usuarios">
+       <input type="button"value="Cadastro de Usuarios"></a>
+      </div>     
+      <div class="col s6">
+       <a th:if="${r.nome_role=='ROLE_ADMIN'||r.nome_role=='ROLE_SECRETARIO'}"  href="/disponibilidademotoristas">
+         <input type="button"value="Lista disponibilidade"></a> 
+         <a th:if="${r.nome_role=='ROLE_ADMIN'||r.nome_role=='ROLE_SECRETARIO'}"  href="/principal">
+         <input type="button"value="principal"></a> 
+         <a th:if="${r.nome_role=='ROLE_ADMIN'||r.nome_role=='ROLE_SECRETARIO'}" href="/verorcamentos">
+         <input type="button"value="Verificar orçamentos"></a>
+          <a  href="/logout"><!-- */redireciona para o login*/ -->
+          <input type="button"value="Sair"></a>
+          <a  href="/ajuda"><input type="button"value="Ajuda"></a>       
+                    
+     </div>  
+  
+            
+   </div>
+  </form>
+
+</fieldset>
+created by Jose Marcos
+
+<script type="text/javascript">
+
+
+</script>
+
+</body>
+</html>

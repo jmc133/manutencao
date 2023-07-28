@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Ajuda SISDLOG</title>
+<style type="text/css">
+table.striped>tbody>tr:nth-child(odd){background-color: rgba(158,154,154,0.5); }
+form input[type=submit]{ color:PowderBlue;}
+table{
+width: 96%;
+}
+table{ font-size: 12px}
+div{font-size: 13px;}
+table td, table th{
+border: 1px solid grey;
+}
+table th{
+background: #eee;
+ }
+ fieldset{margin-left: 7%;margin-right: 7%;margin-top: 8%; }
+</style>
+<div class="row"> 
+<a href="/index2" style="font-size: 18px;color: Blue;" >Voltar ao Index</a>
+</div>
+</head>
+<body>
+<div align="center">
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+      
+     > 
+<img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">
+
+</div>
+<div class="row" style="margin-left: 5%" >
+<fieldset style="margin-left: 7%;margin-right: 7%;margin-top: 8%">
+<label style="color: Red; font-size: 15px;">Formulário de cadastro de pessoas</label>
+
+<b>
+Este formulário é importante no sentido que sem seu preenchimento não é possível inserir usuários e para acessar o sistema é necessário ser usuário.
+Ao entrar ele estará em branco e poderá ser inserido uma nova pessoa bastando apenas preencher todos os campos, sendo que vários deles são obrigatórios, porém se o usuário já utilizou o transporte de alguma forma ele poderá já estar salvo, por isso verifique antes de inserir um novo, para evitar duplicidade.
+Caso o formulário esteja apresentando dados e queira inserir um novo basta clicar em <label style="color: Blue; font-size: 15px;">Limpar</label>.
+Para verificar a existência do usuário vá em campos de pesquisa e digite o nome ou apenas parte do nome e clique em <label style="color: Blue; font-size: 15px;">BUSCAR</label>. Se houver, aparecerá na listagem abaixo, onde poderá escolher <label style="color: Blue; font-size: 15px;">Editar</label> ou deixar como está.
+Para editar basta clicar em <label style="color: Blue; font-size: 15px;">Editar</label> em azul do lado direito é importante lembrar que a pesquisa é sensitiva, então faz diferença maiúsculo ou minúsculo e acentos. Após clicar ela estará a disposição no primeiro formulário da página acima.
+O campo <label style="color: Blue; font-size: 15px;">CPF</label>, verifica a veracidade do número informado que deverá conter dois pontos e um traço neste formato <label style="color: Blue; font-size: 15px;">‘000.000.000-00’</label>, mas não avisa no momento do preenchimento, somente após tentar salvar.
+O campo <label style="color: Blue; font-size: 15px;">CEP</label> verifica junto aos correios em tempo real e já devolve a rua o Bairro a cidade e o estado já preenchido se estiver correto, se não ele emite um aviso e retorna ao campo de preenchimento. Detalhe o sistema se estiver dentro da rede da UFG funciona sem ligação com a internet global ou nacional mas a verificação dos correios não funcionam sem a internet nacional.
+É na edição do fomulário de pessoas que pode-se passar o servidor de ativo para inativo, bastando para isso mudar o campo ativo para <label style="color: Blue; font-size: 15px;">‘Não’</label> e salvar. Ao mudar para <label style="color: Blue; font-size: 15px;">‘Não’</label> a situação de ativo, automaticamente esta pessoa é excluída de usuário, se houver necessidade de voltar a mesma pessoa para situação de ativo, deve se editar para ativo <label style="color: Blue; font-size: 15px;">‘Sim’</label> e inseri-la novamente como usuário.
+Preencha corretamente e sempre terá em suas mãos dados que poderão ser uteis no futuro.</b>
+</fieldset>
+<fieldset>
+<label style="color: Red; font-size: 15px;">Formulário de cadastro de usuários</label>
+
+<b>
+No formulário de usuários vá em <label style="color: Blue; font-size: 15px;">campos de pesquisa</label> e digite qualquer parte do nome para pesquisar a pessoa a ser incluída como usuário, lembre-se que é sensitivo para maiúsculo, minúsculo e acentos, depois vá na <label style="color: Blue; font-size: 15px;">listagem</label> abaixo e escolha a pessoa a ser incluída clicando em <label style="color: Blue; font-size: 15px;">‘Editar’</label> em azul a direita.
+Após clicar ele será enviado para o primeiro formulário <label style="color: Blue; font-size: 15px;">“Escolha de pessoa para novo usuário”</label> onde deverá constar o código, apelido/usuário, senha e as regras de acesso. Você deverá pedir a pessoa que digite uma senha escolhida que deverá ser o menos fácil possível, onde deverá advertir que o uso indevido do usuário gerado por essa pessoa é de inteira responsabilidade dela. Após ela digitar a senha, você deverá escolher a regra de acesso, verifique bem as informações e clique em <label style="color: Blue; font-size: 15px;">“SALVAR”</label>, caso seja necessário poderá ser editado quantas vezes necessário, para isso repita a operação como citado acima.
+Sobre as regras de acesso estão assim:</b>
+<div class="col s5">
+<b></b><label style="color: Teal; font-size: 15px;">índex (ADMIN, USER, MOTORISTA, SECRETÁRIO);</label></b>
+</div>
+<div class="col s5">
+<b><label style="color: Teal; font-size: 15px;">movimentos específicos(ADMIN);</label></b>
+</div>
+<div class="col s5">
+<b><label style="color: Teal; font-size: 15px;">relatório movimentação(ADMIN);</label></b>
+</div>
+<div class="col s5">
+<b></b><label style="color: Teal; font-size: 15px;">agenda (ADMIN, SECRETARIO);</label></b>
+</div>
+<div class="col s5">
+<b><label style="color: Teal; font-size: 15px;">relatório agenda(ADMIN, SECRETARIO);</label></b>
+</div>
+<div class="col s5">
+<b></b><label style="color: Teal; font-size: 15px;">solicitação (ADMIN, SECRETARIO);</label></b>
+</div>
+<div class="col s5">
+<b><label style="color: Teal; font-size: 15px;">reserva (ADMIN, SECRETARIO);</label></b>
+</div>
+<div class="col s5">
+<b></b><label style="color: Teal; font-size: 15px;">movimento ( ADMIN, SECRETARIO, MOTORISTA);</label></b>
+</div>
+<div class="col s5">
+<b><label style="color: Teal; font-size: 15px;">reservas pessoas(ADMIN, SECRETARIO);</label></b>
+</div>
+<div class="col s5">
+<b></b><label style="color: Teal; font-size: 15px;">movimento diario (ADMIN, SECRETARIO);</label></b>
+</div>
+<div class="col s5">
+<b><label style="color: Teal; font-size: 15px;">pessoas (ADMIN);</label></b>
+</div>
+<div class="col s5">
+<b></b><label style="color: Teal; font-size: 15px;">usuários(ADMIN);</label></b>
+</div>
+<div class="col s5">
+<b><label style="color: Teal; font-size: 15px;">órgãos (ADMIN);</label></b>
+</div>
+<div class="col s5">
+<b></b><label style="color: Teal; font-size: 15px;">escala(ADMIN, USER, MOTORISTA, SECRETÁRIO);</label></b>
+</div>
+<div class="col s5">
+<b><label style="color: Teal; font-size: 15px;">inicia movimento(ADMIN, MOTORISTA);</label></b>
+</div>
+<div class="col s5">
+<b></b><label style="color: Teal; font-size: 15px;">veículo(ADMIN);</label></b>
+</div>
+<div class="col s5">
+<b></b><label style="color: Teal; font-size: 15px;">característica veículos (ADMIN);</label></b>
+</div>
+<div class="col s5">
+<b><label style="color: Teal; font-size: 15px;">Login e Ajuda (Permitido a Todos sem restrição);</label></b>
+</div>
+
+Fique atento no momento de definir a regra de acesso que concederá!
+</fieldset>
+<fieldset>
+<b>
+<label style="color: Red; font-size: 15px;">Formulário de cadastro de veículos</label>
+
+
+O formulário de veículo possui três campos sendo o primeiro <label style="color: Blue; font-size: 15px;">“Formulário de edição”</label>, o segundo para escolha do veículo para edição o terceiro para inserir um novo veículo. Não é comum a edição de veículos, por isso deve se ficar bem atento no momento de inserção e este formulário só estará ativo para Administradores.
+Para edição deverá ser escolhido um veículo em <label style="color: Blue; font-size: 15px;">“Escolha o veículo aqui”</label> na listagem do camboBox, clique em <label style="color: Blue; font-size: 15px;">“VERIFICA”</label> e ele será inserido no formulário acima de edição onde o mais comum é para torná-lo inativo, mas poderá ser feitas outras alterações como, por exemplo, nova placa, onde a placa atual deverá ser inserida em placa anterior e só então digitada a nova.
+Antes de inserir um novo veículo vá no <label style="color: Blue; font-size: 15px;">formulário de características do veículo</label> e pesquise se todas as caraterísticas estão presentes na lista, se não estiver cadastre-as primeiro antes de começar a inserção.
+Para inserir um novo veículo clique em <label style="color: Blue; font-size: 15px;">“NOVO”</label> dentro do <label style="color: Blue; font-size: 15px;">“formulário para inserir novo veículo”</label> e então preencha todos os campos e <label style="color: Blue; font-size: 15px;">SALVE</label>.</b>
+</fieldset>
+<fieldset>
+<b>
+<label style="color: Red;font-size: 15px;">Formulário de características de veículos</label>
+
+
+Nessa página estão todas as características para cadastro de veículos com a seguinte ordem:
+<div class="col s5">
+<label style="color: Blue; font-size: 15px;">Lista de tipos</label> (pesquise na listagem se o tipo do novo veículo está incluso na lista).
+</div>
+<div class="col s5">
+<label style="color: Blue; font-size: 15px;">Cadastro de tipos</label>(Se não houver escreva o nome do novo tipo e clique em “SALVAR”).
+</div>
+<div class="col s5">
+<label style="color: Blue; font-size: 15px;">Lista de Marcas</label>(Pesquise na listagem se a marca está inclusa na lista).
+</div>
+<div class="col s5">
+<label style="color: Blue; font-size: 15px;">Cadastro de marcas</label> (Se não estiver na lista, escreva o nome da marca e clique em “SALVAR”).
+</div>
+<div class="col s5">
+<label style="color: Blue; font-size: 15px;">Lista de modelos</label> (Pesquise na listagem se o modelo está incluso na lista).
+</div>
+<div class="col s5">
+<label style="color: Blue; font-size: 15px;">Cadastro de modelo</label> (Se não estiver na lista digite o nome do modelo e clique em “SALVAR”).
+</div>
+<div class="col s5">
+<label style="color: Blue; font-size: 15px;">Lista de espécies</label> (Pesquise na lista se o novo veículo se enquadra na lista).
+</div>
+<div class="col s5">
+<label style="color: Blue; font-size: 15px;">Cadastro de espécies</label> (Se não se enquadrar digite a nova espécie e clique em “SALVAR”).
+</div>
+<div class="col s5">
+<label style="color: Blue; font-size: 15px;">Lista de combustíveis</label> (Pesquise na lista se o combustível ou forma de energia usada está inclusa).
+</div>
+<div class="col s5">
+<label style="color: Blue; font-size: 15px;">Cadastro de combustível</label> (Se não estiver na lista, escreva o nome do combustível ou forma de energia e clique em “SALVAR”).
+</div>
+<div class="col s5">
+<label style="color: Blue; font-size: 15px;">Lista de cores</label> (Pesquisa a lista de cores salva para verificar se a cor está inclusa).
+</div>
+<div class="col s5">
+<label style="color: Blue; font-size: 15px;">Cadastro de cores</label> (Se não estiver escreva o nome da nova cor e clique em “SALVAR”).
+</div>
+<div class="col s5">
+<label style="color: Blue; font-size: 15px;">Lista de lotação</label>( Pesquise se a lotação do  veículo está inclusa).
+</div>
+<div class="col s5">
+<label style="color: Blue; font-size: 15px;">Cadastro de lotação</label> (Se não estiver cadastre a nova lotação, nesse caso deve-se incluir o órgão vinculado que deve já estar salvo, se não estiver vá em órgãos e cadastre-o primeiro).
+</div>
+<div class="col s5">
+<label style="color: Blue; font-size: 15px;">Lista aquisição</label> (Pesquise na lista se a aquisição se aplica a forma como veículo foi adquirido).
+</div>
+<div class="col s5">
+<label style="color: Blue; font-size: 15px;">Cadastro de aquisição</label> (Se não, cadastra a forma da aquisição e clique em “SALVAR”).
+</div>
+<div class="col s5">
+<label style="color: Blue; font-size: 15px;">Lista de grupos</label> ( Essa é uma lista do governo federal, se houver alteração cadastre as novas formas)
+</div>
+<div class="col s5">
+<label style="color: Blue; font-size: 15px;">Cadastro de grupos</label> (Como citado acima esse é uma lista do governo federal, havendo alterações deve se cadastrar novos grupos e realizar alteração no cadastro de veículos).
+</div>
+<div class="col s5">
+Os botões <label style="color: Blue; font-size: 15px;">“Limpar”</label> limpam a lista e reduz o tamanho da página, facilitando o trabalho, então após cada pesquisa, aconselha-se limpar a lista
+</b></div>
+</fieldset>
+<fieldset>
+<b>
+<label style="color: Red;font-size: 15px;">Formulário de Unidades</label>
+
+
+O primeiro formulário é <label style="color: Blue; font-size: 15px;">“unidades”</label>, nele é possível inserir uma nova unidade ou após pesquisa editar uma unidade existente, para listar todas as unidades cadastradas é só clicar no botão <label style="color: Blue; font-size: 15px;">“LISTAR UNIDADES”</label>, para salvar seja inserção ou edição clique no botão <label style="color: Blue; font-size: 15px;">“SALVAR”</label>. 
+O segundo e <label style="color: Blue; font-size: 15px;">“campos de pesquisa”</label> onde se pode pesquisar a unidade pelo nome ou parte do nome.
+O terceiro é a tabela de <label style="color: Blue; font-size: 15px;">“Lista unidades”</label>, nela será mostrada a sua pesquisa, seja por listagem geral seja por pesquisa por nome, para editar deve se clicar em <label style="color: Blue; font-size: 15px;">“Editar”</label> em azul do lado direito da tabela, os dados serão enviados para o primeiro formulário <label style="color: Blue; font-size: 15px;">“unidades”</label>, onde poderá manipular.
+</b>
+</fieldset>
+<fieldset>
+<b>
+<label style="color: Red;font-size: 15px;">Formulário de solicitações</label>
+
+
+Neste formulário você só poderá definir se aceita ou não a solicitação de reserva.
+O primeiro é o <label style="color: Blue; font-size: 15px;">“formulário de solicitação”</label> que ao abrir a página estará vazio, abaixo dele se houver, estarão as <label style="color: Blue; font-size: 15px;">“solicitações”</label> você deverá escolher uma clicar no <label style="color: Blue; font-size: 15px;">“Editar”</label> em azul do lado direito da tabela e ela será enviada para o <label style="color: Blue; font-size: 15px;">“formulário de solicitação”</label> onde poderá aceitar a solicitação clicando no combobox <label style="color: Blue; font-size: 15px;">“aceite”</label> escolhendo <label style="color: Blue; font-size: 15px;">“Sim”</label> ou rejeitar escolhendo </label> escolhendo <label style="color: Blue; font-size: 15px;">“Não”</label>, caso a escolha seja por não é aconselhável que se preencha o campo <label style="color: Blue; font-size: 15px;">“Observação”</label> citando os motivos, após isso clique no botão <label style="color: Blue; font-size: 15px;">“SALVAR”</label> e se houver mais continue até que não haja mais solicitações.
+Não esqueça de lançar na agenda, talvez realizar isso logo após o aceite. Mas se isso não for feito clique em <label style="color: Blue; font-size: 15px;">“TUDO”</label> que irá ser mostrada todas as solicitações do dia em diante, aí você poderá verificar o que não foi lançado na agenda ainda. Mas ainda atentando para observação de fazer isso rápido, pois há mais pessoas trabalhando e se não houver lançamento na agenda outra pessoa pode achar que está disponível.
+</b>
+</fieldset>
+<fieldset>
+<b>
+
+<label style="color: Red;font-size: 15px;">Formulário de agenda</label>
+
+Neste formulário a primeira parte é o de consulta do dia, ela abre em branco, sendo necessário clicar em <label style="color: Blue; font-size: 15px;">“Calendario”</label> digitar ou escolher uma data, então clicar em <label style="color: Blue; font-size: 15px;">“AGENDA”</label> clicando direto sem escolher uma data ela inserirá a data do dia, após isso clique em <label style="color: Blue; font-size: 15px;">“MOSTRAR”</label> e será listada em tabela abaixo os agendamentos do dia pesquisado ou iniciado, nesta tabela há a opção de escolher <label style="color: Blue; font-size: 15px;">“Editar”</label> clicando na penúltima coluna a direita em azul ou <label style="color: Blue; font-size: 15px;">“Excluir”</label> clicando na última coluna a direita em vermelho, onde poderá deletar o agendamento. Cuidado para não excluir sem querer.
+Se clicar em <label style="color: Blue; font-size: 15px;">Editar</label> os dados daquela linha será enviado para segunda parte da página <label style="color: Blue; font-size: 15px;">“Editar agenda”</label> onde poderá alterar ou inserir campos que não estejam preenchidos, muita atenção no campo <label style="color: Blue; font-size: 15px;">“Sequência”</label> pois se for sim deverá escolher a quantidade <label style="color: Blue; font-size: 15px;">“Qtd dias”</label> e quando salvar este agendamento será inserido para o dia e mais a quantidade de dias  -1. Este formulário é de inserção também bastando para isso clicar em <label style="color: Blue; font-size: 15px;">“NOVO”</label>  preencher e salvar, lembrando que para solicitações sequenciais para optar por <label style="color: Blue; font-size: 15px;">Sequência sim</label>,  digitar o tempo em <label style="color: Blue; font-size: 15px;">Qtd dias</label> que ele salvará todos os dias sem necessidade de digitar dia a dia.
+
+Na primeira parte da página está o botão <label style="color: Blue; font-size: 15px;">“ENVIAR PARA RESERVA”</label> onde a qualquer momento poderá ser enviado dados da agenda para o formulário de reservas, após enviado não é mais possível alterar ou editar ele neste formulário, mas poderá fazer isso no outro formulário. 
+As linhas sequenciais só irão para a reserva na primeira vez que enviar, mas fique atento ao fazer isso pois agendamentos sequenciais que não foram enviados serão enviados e podem estar no meio, então ele enviará daquele dia em diante e não aparecerá mais para a reserva. Para ser mais específico ele não verifica para trás, só do dia em questão em diante.
+
+Na lista de agendamentos as <label style="color: Blue; font-size: 15px;">placas dos veículos</label> apareceram em azul e clicando nelas poderá ser visto todos os agendamentos daquela data em diante do veículo escolhido. Para voltar a mesma lista basta clicar em <label style="color: Blue; font-size: 15px;">“Voltar a Agenda”</label> se quiser também poderá escolher <label style="color: Blue; font-size: 15px;">“Voltar ao Index”</label> que enviará para a página de Índex.
+</b>
+</fieldset>
+<fieldset>
+<b>
+<label style="color: Red;font-size: 15px;">Formulário de Reservas</label>
+
+Aqui nesta página o primeiro campo é o <label style="color: Blue; font-size: 15px;">Data Reservas</label> que é onde escolherá o dia da reserva para verificação, inserção e alteração, assim como na página de agendamento se clicar em <label style="color: Blue; font-size: 15px;">“BUSCAR RESERVA”</label> sem escolher uma data será enviado para a dia atual, após estar já com uma data inserida o ideal para buscar um novo dia é clicar em <label style="color: Blue; font-size: 15px;">“LIMPAR”</label> e só então escolher uma data em <label style="color: Blue; font-size: 15px;">“Calendário”</label> depois clicar em <label style="color: Blue; font-size: 15px;">“BUSCAR RESERVA”</label>  ou se quiser o dia vigente clicar direto em <label style="color: Blue; font-size: 15px;">“BUSCAR RESERVAS”</label>. Neste formulário há duas formas de buscar os itens <label style="color: Blue; font-size: 15px;">“MOSTRAR ITENS”</label> e <label style="color: Blue; font-size: 15px;">“MOSTRAR ITENS S/ MOTORISTA”</label>. Quando estes dados são enviados da agenda eles virão sem o motorista, então será necessário clicar em <label style="color: Blue; font-size: 15px;">“MOSTRAR ITENS S/ MOTORISTA”</label> escolher linha por linha e fazer a edição.
+O botão <label style="color: Blue; font-size: 15px;">“INSERIR ROTINA”</label> permite que sejam lançados os atendimentos de rotina previamente gravados no formulário de rotinas. Se os dados estiverem devidamente preenchidos poderão ser enviados para o movimento clicando no botão <label style="color: Blue; font-size: 15px;">“ENVIAR MOVIMENTO”</label> que estando tudo certo enviará todas as linhas não enviadas até aquele momento. Na lista <label style="color: Blue; font-size: 15px;">“Reservas”</label> o nome do motorista estará em <label style="color: Blue; font-size: 15px;">azul</label> e clicando em algum nome poderá ver as vezes em que o nome dele está inserido nas reservas daquela data em diante, também uma vez lançando o motorista no formulário de reservas será incluído automaticamente na escala de viagem,  as que forem do tipo <label style="color: Blue; font-size: 15px;">viagem</label>, se devidamente inserida a sequência e quantidade de dias também, estará o período integral e a quantidade de diárias. No formulário <label style="color: Blue; font-size: 15px;">“EDITAR ITEM”</label> entrará as linhas que escolher editar ou poderá inserir um novo item. 
+Após ser enviado para o movimento as cores das letras, exceto motorista, mudam para <label style="color: DarkMagenta; font-size: 15px;">vinho</label> e os itens que foram enviados não poderão mais ser editados ou deletados.
+Na parte de cima da página logo abaixo de <label style="color: Blue; font-size: 15px;">“Voltar ao Índex”</label> está <label style="color: Blue; font-size: 15px;">“Mostrar movimento”</label> onde poderá será visto o movimento completo do dia, incluindo se houve a inicialização ou não.
+Nesta página na Tabela <label style="color: Blue; font-size: 15px;">“Reservas”</label> na coluna <label style="color: Blue; font-size: 15px;">“Motorista”</label> que foi citada acima como a única que ao ser enviada para movimentação não ficava na cor <label style="color: DarkMagenta; font-size: 15px;">vinho</label>, na verdade ela está sempre na cor <label style="color: Blue; font-size: 15px;">azul</label> e clicando em cima do nome você poderá ver as vezes em que o motorista está inserido em reservas daquele dia em diante.
+Obs: se você fizer alteração na reserva de qualquer viagem a mesma será alterada automaticamente na escala incluindo exclusão.
+</b>
+
+</fieldset>
+<fieldset>
+<b>
+<label style="color: Red;font-size: 15px;">Tabela de escala de viagens</label>
+
+Esta página é para mostrar a escala de viagens, pode ser acessada por todos usuários cadastrados no sistema.
+</b>
+</fieldset>
+<fieldset>
+<b>
+<label style="color: Red;font-size: 15px;">Formulário de movimentos diários</label>
+
+Na parte superior da página no canto esquerdo está o link para <label style="color: Blue; font-size: 15px;">“Voltar ao Índex”</label> mais abaixo o <label style="color: Blue; font-size: 15px;">“Formulário de inserção e edição”</label> que é onde poderá editar qualquer cadastro  ou inserir um novo cadastro, para isso basta clicar em <label style="color: Blue; font-size: 15px;">“LIMPAR/NOVO”</label> e depois  preencher todos os campos e clicar em <label style="color: Blue; font-size: 15px;">“SALVAR”</label>, mais abaixo está a tabela de <label style="color: Blue; font-size: 15px;">“Lista de movimentos diários”</label> que é onde aparecerão todos os cadastros salvos em ordem alfabética da coluna motorista, incluindo o que por ventura tenha acabado de inserir. Nesta tabela as duas últimas colunas são <label style="color: Blue; font-size: 15px;">“Editar”</label> e <label style="color: Red; font-size: 15px;">“Excluir”</label> onde clicando em <label style="color: Blue; font-size: 15px;">“Editar”</label>  os dados da linha será enviada para o <label style="color: Blue; font-size: 15px;">“Formulário de inserção e edição”</label> e poderá fazer alterações que achar pertinente já a última coluna clicando em <label style="color: Red; font-size: 15px;">“Excluir”</label> apagará a linha imediatamente.
+</b>
+</fieldset>
+<fieldset>
+<b>
+<label style="color: Red;font-size: 15px;">Tabela Movimento “Lista Movimentos”</label>
+
+Esta tabela poderá ser acessada por <label style="color: Blue; font-size: 15px;">Admin, Secretários e motoristas</label>, e lista movimentos gerais a partir da data atual – 12 horas.
+</b>
+</fieldset>
+<fieldset>
+<b>
+<label style="color: Red;font-size: 15px;">Inicia movimento”</label>
+<b><label style="font-size: 15px"> Nesta página se inicia e encerra um movimento, caso haja lançamentos de veiculos para o usuário logado.</label></b>
+</b>
+</fieldset>
+<fieldset>
+<b>
+<label style="color: Red;font-size: 15px;">Formulário de relatório de movimentações</label>
+
+Ao entrar neste formulário ele estará em branco, apenas a mensagem de boas vindas, acima no canto esquerdo <label style="color: Blue; font-size: 15px;">“Voltar ao Índex”</label>, abaixo em <label style="color: Blue; font-size: 15px;">“Relatórios ”</label> o campo <label style="color: Blue; font-size: 15px;">“Data Inicial”</label> e <label style="color: Blue; font-size: 15px;">“Data Final”</label> onde deverá ser escolhida a data inicial e final de pesquisa, sempre nessa ordem onde a inicial deverá ser menor que a final. Após definir o período de pesquisa clique em <label style="color: Blue; font-size: 15px;">“PESQUISAR”</label> se houver dados o primeiro é acima onde aparecerá o período da pesquisa e o total geral, o segundo caso haja escolha de mais de um mês será o total mês a mês, o terceiro relatará o total pôr <label style="color: Blue; font-size: 15px;">unidades</label>, onde pode se observar que a sigla das unidades aparecem em <label style="color: Blue; font-size: 15px;">azul</label>, onde clicando em cima da sigla aparecerá uma tabela com a listagem dos atendimentos dessa <label style="color: Blue; font-size: 15px;">unidade</label>. Na página da tabela de relatório haverá em cima no canto esquerdo <label style="color: Blue; font-size: 15px;">“Voltar ao Índex”</label> e <label style="color: Blue; font-size: 15px;">“Voltar a página anterior”</label>, se clicar no <label style="color: Blue; font-size: 15px;">índex</label> será enviado a página do índex, se clicar em <label style="color: Blue; font-size: 15px;">voltar a página anterior</label>, ele retornará para ela mantendo os mesmos dados de período que estava pesquisando. Mais abaixo na quarta está a contagem por tipo <label style="color: Blue; font-size: 15px;">urbano ou viagem</label> mês a mês onde eles também estão em <label style="color: Blue; font-size: 15px;">azul</label> e clicando em cima do tipo será encaminhada para a página com uma tabela listando todos atendimento com o tipo escolhido no período, nessa página também se obedece ao critério anterior na parte de cima com <label style="color: Blue; font-size: 15px;">“Voltar ao índex”</label> e <label style="color: Blue; font-size: 15px;">“Voltar a página anterior”</label> onde clicando em voltar a página anterior ela manterá os mesmos dados pesquisados. O quinto campo abaixo na lista a quantidade por <label style="color: Blue; font-size: 15px;">espécie de veículo</label> mês a mês onde também as espécies estão em <label style="color: Blue; font-size: 15px;">azul</label> clicando no nome da espécie ela direcionará para uma página com a tabela listando todos os atendimentos com a espécie escolhida. O sexto campo conta os atendimentos pôr <label style="color: Blue; font-size: 15px;">veículo</label> mês a mês onde as <label style="color: Blue; font-size: 15px;">placas</label> estão em <label style="color: Blue; font-size: 15px;">azul</label> e clicando em cima de uma placa será encaminhada para uma página com a tabela listando todos atendimentos do veículo escolhido no período. O sexto campo conta os atendimentos pôr <label style="color: Blue; font-size: 15px;">evento</label> atendido mês a mês ficando o nome dos eventos também em <label style="color: Blue; font-size: 15px;">azul</label>, onde também clicando em cima será encaminhada para um pagina com uma tabela listando todos atendimentos para o fim escolhido no período. O sétimo lista a quantidade de atendimentos, e quilômetros rodados por <label style="color: Blue; font-size: 15px;">cargo</label> e clicando em cima do <label style="color: Blue; font-size: 15px;">“Cargo”</label> será  possível ver todos atendimentos realizados por pessoas daquele cargo no período escolhido.
+</b>
+</fieldset>
+<b>
+<fieldset>
+<label style="color: Red;font-size: 15px;">Formulário Inserir Movimentos</label>
+
+Este formulário é para ser usado especialmente para iniciar um veículo que tenha sido recebido em doação, ou veículos novos que o translado demandou uso grande de quilometragens; como ônibus por exemplo. Nestes casos deverá ser preenchido o formulário citando que é um início de uso  basta pegar a quilometragem atual e repetir em <label style="color: Blue; font-size: 15px;">Km saída</label> e <label style="color: Blue; font-size: 15px;">Km retorno</label>, com isso será gerado rodagem de 0 km.
+A exceção para uso é para inserir uma movimentação que por algum motivo não tenha sido gerada pelo meios adequados, então deverá ser preenchido este formulário com os dados da movimentação conforme solicita o formulário. Após preencher é só clicar no botão <label style="color: Blue; font-size: 15px;">“Salvar”</label>
+
+Se o fomulário conter dados e for clicado no botão <label style="color: Blue; font-size: 15px;">“Salvar”</label> será inserido como novo movimento, para preencher um novo use o botão <label style="color: Blue; font-size: 15px;">“NOVO”</label> que limpa o formulário. Após salvar com sucesso, qualquer movimento ele é mostrado na tela.
+</fieldset>
+<fieldset>
+<label style="color: Red;font-size: 15px;">Index</label> 
+O botão <label style="color: Blue; font-size: 15px;">Sair</label> é para efetuar o Logout ou simplesmente sair do aplicativo, durante o tempo em que estiver logado todas as ações estarão ligadas ao usuário logado.
+
+
+
+ 
+
+A <label style="color: Blue; font-size: 15px;">Ajuda</label> é o último dos botões no canto direito da página, caso precise é só clicar.
+</fieldset>
+</div>
+<div class="row"> 
+<a href="/index2" style="font-size: 18px;color: Blue;" >Voltar ao Index</a>
+</div>
+</body>
+</html>

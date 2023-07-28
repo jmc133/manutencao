@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   <!-- Adicionando JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>  
+<!-- Script para calendario -->     
+<script type="text/javascript" src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"></script>  
+<link href="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.css" rel="stylesheet"type="text/css"/>                           
+<meta charset="UTF-8">
+<title>Movimento Diário</title>
+
+<a href="/index2"><h5>Voltar ao Index</h5></a>
+<div align="center" >
+
+
+	<div class="input-field col s6" style="font-size: 14px; color: Blue">
+	  <b> <span th:text="${msg}"></span></b>
+	</div>	
+</div>
+<style type="text/css">
+table.striped>tbody>tr:nth-child(odd){background-color: rgba(158,154,154,0.5); }
+form input[type=submit]{ color:PowderBlue;}
+table{
+width: 96%;
+}
+table{ font-size: 12px}
+div{font-size: 9px;}
+table td, table th{
+border: 1px solid grey;
+}
+fieldset{
+	margin-left: 4%; margin-right: 4%;
+	}
+	form{
+	margin-left: 4%; margin-right: 4%}
+table th{
+background: #eee;
+ }
+</style>
+</head>
+<body>
+<div align="center">
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+      
+     > 
+<img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">
+<h5>Movimento diário</h5><br>
+</div>
+<form action="salvarmovdiario" method="post" th:object="${mov}" enctype="multipart/form-data" style="background-color: SteelBlue;"
+			class="col s15" id="FormEdicao">
+	  <fieldset style="background-color: LightBlue;">
+	   
+	  			<div class="row">
+	  			<b><legend style="font-size: 14px">Formulário para inserção ou edição</legend></b>
+				<div class="input-field col s1">
+					<label for="codigo" class="active">Id</label>
+					<input name="codigo" th:field="*{codigo}" id="codigo" readonly="readonly"class="validate" style="background-color:PowderBlue;"> 
+				</div>
+    			
+			 	<div class="input-field col s3">
+					<label for="requisicao" class="active" style="color: Black">Requisição</label>
+					<select class="browser-default" th:field="*{requisicao}" id="requisicao" name="requisicao" style="background-color:PowderBlue;" >
+					 <option th:each = "r : ${req}" th:value="${r.cod_req}" th:text="${r.requisicao}">
+					</select>
+				</div>
+				<div class="input-field col s2">
+					<label for="unidade" class="active" style="color: Black;">Unidade</label>
+					<select class="browser-default" th:field="*{unidade}" id="unidade" name="unidade" style="background-color:PowderBlue;" >
+					 <option th:each = "o : ${orgao}" th:value="${o.cd_orgao}" th:text="${o.sg_orgao}">
+					</select> 
+				</div>				
+				<div class="input-field col s2">
+					<label for="veiculo" class="active" style="color: Black">Veículo</label>
+					<select class="browser-default" th:field="*{veiculo}" id="veiculo" name="veiculo" style="background-color:PowderBlue;">
+					 <option th:each = "v : ${veic}" th:value="${v.patrimonio}" th:text="${v.placa_atual}">
+					</select> 
+				</div>	
+				<div class="input-field col s4">
+					<label for="destino" class="active" style="color: Black;">Destino</label>
+					<input name="destino" th:field="*{destino}" id="destino" class="validate" style="background-color:PowderBlue;"> 
+				</div>					
+				<div class="input-field col s3">
+					<label for="evento" class="active" style="color: Black">Evento</label>
+					<select class="browser-default" th:field="*{evento}" id="evento" name="evento" style="background-color:PowderBlue;">
+					 <option th:each = "e : ${evento}" th:value="${e.codigo}" th:text="${e.evento}">
+					</select> 
+				</div>	
+						
+				<div class="input-field col s2">
+					<label for="horario" class="active" style="color: Black">Horário</label>
+					 <input id="horario" name="horario" th:field="*{horario}"class="validate" type="time" style="background-color:PowderBlue;">
+				</div>
+				<div class="input-field col s5">
+					<label for="servico" class="active" style="color: Black">Serviço</label>
+					 <input id="servico" name="servico" th:field="*{servico}"class="validate" type="text" style="background-color:PowderBlue;" >
+				</div>
+				<div class="input-field col s3">
+					<label for="solicitante" class="active" style="color: Black">Solicitante</label>
+					 <input id="solicitante" name="solicitante" th:field="*{solicitante}"class="validate" type="text" style="background-color:PowderBlue;">
+				</div>									
+
+				<div class="input-field col s3">
+					<label for="ocupantes" class="active" style="color: Black">Ocupantes</label>
+					<input id="ocupantes" name="ocupantes" th:field="*{ocupantes}"class="validate" type="text" style="background-color:PowderBlue;" >
+				</div><br/>		
+		
+				<div class="input-field col s2">
+				  <label for="motorista" class="active" style="color: Black">Motorista</label><br>
+		          <select class="browser-default" th:field="*{motorista}" id="motorista" name="motorista" style="background-color:PowderBlue;">
+					 <option th:each = "p : ${pessoa}" th:value="${p.cd_pessoa_func}" th:text="${p.nm_pessoa_func}">
+					</select> 
+		        </div>  				
+
+		       <div class="input-field col s2">
+		        <input  class="waves-effect waves-light btn" type="submit" value="Salvar">	
+		        <td><a class="waves-effect waves-light btn" th:href="@{/movimentodiario}">Limpar/Novo</a></td>
+	           </div>
+  			    																																			
+	  </fieldset>
+	</form>
+	
+   <fieldset>
+    <legend>Lista de movimentos diários</legend>
+        <table class="striped">
+         <thead>
+         <tr>
+          <th>Codigo</th>
+          <th>Requisição</th>
+          <th>Unidade</th>
+          <th>Destino</th>
+          <th>Solicitante</th>
+          <th>Motorista</th>
+          <th>Editar</th>
+          <th>Deletar</th>
+
+         </tr>         
+         </thead>
+       <tr th:each= "l:${lista}">
+          <td th:text="${l.codigo}"></td>
+          <td th:text="${l.requisicao}"></td>
+          <td th:text="${l.sg_orgao}"></td>
+          <td th:text="${l.destino}"></td>
+          <td th:text="${l.solicitante}"></td>   
+          <td th:text="${l.pri_nome}"></td>
+          <td><a th:if="${l.codigo !=null}" th:href="@{/editarmovdiario/{codigo}(codigo=${l.codigo})}">Editar</a></td>
+          <td><a th:if="${l.codigo !=null}" th:href="@{/deletarmovdiario/{codigo}(codigo=${l.codigo})}" style="color:red;">Excluir</a></td>
+         </tr> 
+       
+        </table>            
+   </fieldset>		
+
+</body>
+</html>

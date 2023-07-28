@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<title>Cadastro de Usuario</title>
+<a href="/index2"><h5>Voltar ao Index</h5></a> 
+<style type="text/css">
+fieldset{
+	margin-left: 4%; margin-right: 4%;
+	}
+	form{
+	margin-left: 4%; margin-right: 4%}
+</style>
+</head>
+<body>
+<div align="center">
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+      
+     > 
+<img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">
+<h5>Cadastro de usuarios</h5><br>
+</div>
+<div th:each = "m : ${msg}" style="font-size: 15px; color: red;">
+ <span th:text="${m}"></span>
+</div>
+<div class="row">
+ <form action="salvarusuario" th:object="${pessoa}" class="col-13" method="post" enctype="multipart/form-data">
+  <fieldset>
+   <legend><h5>Escolha de pessoa para novo usuario</h5></legend>
+     <div class="input-field col s2">
+		<label for="cd_pessoa_func" class="active">Codigo</label> 
+		<input name="cd_pessoa_func" th:field="*{cd_pessoa_func}" id="cd_pessoa_func" class="validate" readonly="readonly" >
+	</div>	
+     <div class="input-field col s3">
+		<label for="pri_nome" class="active">Apelido</label> 
+		<input name="pri_nome" th:field="*{pri_nome}" id="pri_nome" class="validate" maxlength="14" readonly="readonly"  >
+	</div>	
+     <div class="input-field col s2">
+		<label for="senha" class="active">Senha</label> 
+		<input name="senha" th:field="*{senha}" id="senha" class="validate" type="password" maxlength="8" 
+		placeholder="senha no maximo 8 digitos">
+	</div>	
+	<div class="input-field col s3">
+	    <label for="role" class="active" style="color: Black">Regras</label>
+		<select class="browser-default" id="role" name="role" >
+		<option th:each = "r : ${role}" th:value="${r.id}" th:text="${r.nomeRole}">
+		</select>
+	</div>					
+   <input type="submit" value="Salvar" class="waves-effect waves-light btn">
+   </fieldset>
+   
+ </form>
+<br>
+<div th:each = "m : ${msg}" style="font-size: 15px; color: red;">
+ <span th:text="${m}"></span>
+</div>
+ <fieldset style="margin-left: 5%; margin-right: 5%;">
+ <legend>Campos de pesquisa</legend>
+	<div class="row">
+		<form action="pesquisausuario" method="post" class="col s12" id="pesquisausuario">
+			<div class="row">
+				<div class="input-field col s6">
+					<label for="nomepesquisa" class="active">Pesquisa por nome</label>
+					<input name="nomepesquisa" id="nomepesquisa" class="validate"
+					th=value="${nomepesquisa}">
+				</div>
+				
+					<input type="submit" value="Buscar" class="waves-effect waves-light btn">
+					
+				</div>
+			</div>
+		</form>
+	</div>
+	</fieldset>
+	<br/>
+<div th:each = "m : ${msg}" style="font-size: 15px; color: red;">
+ <span th:text="${m}"></span>
+</div>	
+<fieldset>
+<legend>Listagem</legend>
+  <table class="striped">
+   <thead>
+    <tr>
+     <th>Id</th>
+     <th>Apelido</th>
+     <th>Senha</th> 
+     <th>Cargo</th>
+     <th>Editar</th>
+     </tr>
+     </thead>
+     <tr th:each="pessoa:${pesquisapessoa}">
+     <td th:text="${pessoa.cd_pessoa_func}"></td>  
+     <td th:text="${pessoa.nm_pessoa_func}"></td> 
+     <td th:text="${pessoa.senha}"></td> 
+     <td th:text="${pessoa.cargo_f}"></td>      
+     <td><a th:if="${pessoa.cd_pessoa_func!=null}" th:href="@{/editarusuario/{cd_pessoa_func}(cd_pessoa_func=${pessoa.cd_pessoa_func})}">Editar</a></td>   
+     </tr>
+  </table> 
+ </fieldset> 	 
+</div>   
+
+</body>
+</html>

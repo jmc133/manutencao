@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<!-- Adicionando JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>  
+<!-- Script para calendario -->     
+<script type="text/javascript" src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"></script>  
+<link href="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.css" rel="stylesheet"type="text/css"/>       
+<title>Formulario de pessoas</title>
+<style type="text/css">
+div{font-size: 11px;}
+select {font-size: 10px;}
+</style>
+<style type="text/css">
+table.striped>tbody>tr:nth-child(odd){background-color: rgba(158,154,154,0.5); }
+form input[type=submit]{ color:blue;}
+table{
+width: 97%;
+}
+table td, table th{
+border: 1px solid grey; font-size:12px;
+}
+fieldset{
+	margin-left: 4%; margin-right: 4%;
+	}
+	form{
+	margin-left: 4%; margin-right: 4%}
+a{margin-left: 4%;}	
+table th{
+background: #eee;
+ }
+</style>
+
+<a  href="/index2"><h5>Voltar ao Index</h5></a> 
+<div align="center">
+
+
+</div>
+</head>
+<body>
+<div align="center">
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+      
+     > 
+<img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">
+<h5>Cadastro de pessoas</h5><br>
+</div>
+<div th:each = "m : ${msg}" style="font-size: 15px; color: red;margin-left: 5%;">
+ <span th:text="${m}"></span>
+</div>
+<fieldset>
+<div class="row">
+ <form action="salvarpessoa" th:object="${pessoa}" class="col-13" method="post" enctype="multipart/form-data">
+  
+   <legend><h5>Cadastro de Pessoas</h5></legend>
+     <div class="input-field col s1">
+		<label for="cd_pessoa_func" class="active">Codigo</label> 
+		<input name="cd_pessoa_func" th:field="*{cd_pessoa_func}" id="cd_pessoa_func" class="validate" readonly="readonly" >
+	</div>	
+     <div class="input-field col s5">
+		<label for="nm_pessoa_func" class="active">Nome</label> 
+		<input name="nm_pessoa_func" th:field="*{nm_pessoa_func}" id="nm_pessoa_func" oninput="maisculo(event)" class="validate" autofocus="autofocus" type="text" uppercase >
+	</div>	  
+     <div class="input-field col s2">
+		<label for="pri_nome" class="active">Apelido</label> 
+		<input name="pri_nome" th:field="*{pri_nome}" id="pri_nome" class="validate" maxlength="14" >
+	</div>		
+     <div class="input-field col s2">
+		<label for="cargo_f" class="active">Cargo</label> 
+		<input name="cargo_f" th:field="*{cargo_f}" id="cargo_f" class="validate"  >
+	</div>		
+     <div class="input-field col s1">
+		<label for="matricula_f" class="active">Matricula</label> 
+		<input name="matricula_f" th:field="*{matricula_f}" id="matricula_f" class="validate"  >
+	</div>		
+     <div class="input-field col s1">
+		<label for="banco" class="active">Banco</label> 
+		<input name="banco" th:field="*{banco}" id="banco" class="validate"  >
+	</div>		
+     <div class="input-field col s1">
+		<label for="agencia" class="active">Agencia</label> 
+		<input name="agencia" th:field="*{agencia}" id="agencia" class="validate"  >
+	</div>		
+     <div class="input-field col s2">
+		<label for="conta" class="active">Conta</label> 
+		<input name="conta" th:field="*{conta}" id="conta" class="validate"  >
+	</div>		
+     <div class="input-field col s2">
+		<label for="cpf" class="active">CPF</label> 
+		<input name="cpf" th:field="*{cpf}" id="cpf" class="validate" type="text" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" >
+	</div>		
+      <div class="input-field col s2">
+		<label for="identidade" class="active">Identidade</label> 
+		<input name="identidade" th:field="*{identidade}" id="identidade" class="validate"  >
+	</div> 	
+     <div class="input-field col s2">
+		<label for="cnh" class="active">CNH</label> 
+		<input name="cnh" th:field="*{cnh}" id="cnh" class="validate"  >
+	</div>		
+     <div class="input-field col s1">
+		<label for="categoria" class="active">Categoria</label> 
+		<input name="categoria" th:field="*{categoria}" id="categoria" oninput="maisculo(event)" class="validate"  >
+	</div>		
+     <div class="input-field col s2">
+		<label for="vencimento" class="active">Vencimento</label> <br>
+		<input name="vencimento" th:field="*{vencimento}" id="vencimento" class="validate" type="date"  >
+	</div>		
+
+     <div class="input-field col s2">
+		<label for="pis" class="active">PIS</label> 
+		<input name="pis" th:field="*{pis}" id="pis" class="validate"  >
+	</div>	
+     <div class="input-field col s1">
+		<label for="salario" class="active">Salario</label> 
+		<input name="salario" th:field="*{salario}" id="salario" class="validate" type="number" >
+	</div>		
+     <div class="input-field col s2">
+		<label for="ddd" class="active">DDD</label> <br>
+		<input name="ddd" th:field="*{ddd}" id="ddd" class="validate" type="number" maxlength="2" >
+	</div>		
+     <div class="input-field col s2">
+		<label for="telefone" class="active">Telefone</label> 
+		<input name="telefone" th:field="*{telefone}" id="telefone" class="validate" type="tel" maxlength="9" >
+	</div>	
+     <div class="input-field col s2">
+		<label for="ddd1" class="active">DDD Celular</label> 
+		<input name="ddd1" th:field="*{ddd1}" id="ddd1" class="validate" type="number" maxlength="2" >
+	</div>		
+     <div class="input-field col s2">
+		<label for="celular" class="active">Celular</label> 
+		<input name="celular" th:field="*{celular}" id="celular" class="validate" type="tel" maxlength="10"  >
+	</div>		
+     <div class="input-field col s2">
+		<label for="e_mail" class="active">EMAIL</label> 
+		<input name="e_mail" th:field="*{e_mail}" id="e_mail" class="validate" type="email" >
+	</div>
+	<div class="input-field col s2">
+	    <label for="lotacao" class="active" style="color: Black">Lotacao</label>
+		<select class="browser-default" th:field="*{lotacao}" id="lotacao" name="lotacao" >
+		<option th:each = "l : ${lotacao}" th:value="${l.CD_LOTACAO}" th:text="${l.NM_LOTACAO}">
+		</select>
+	</div>		
+	<div class="input-field col s2">
+	    <label for="ativo" class="active" style="color: Black">Ativo?</label>
+		<select class="browser-default" th:field="*{ativo}" id="ativo" name="ativo" >
+		<option value="S">Sim</option>
+		<option value="N">Nao</option>
+		</select>
+	</div>	
+     <div class="input-field col s2">
+		<label for="cep" class="active">CEP</label> 
+		<input name="cep" th:field="*{cep}" id="cep" class="validate" type="text" maxlength="8">
+	</div>		
+     <div class="input-field col s4">
+		<label for="endereco" class="active">Rua</label> <br>
+		<input name="endereco" th:field="*{endereco}" id="endereco" class="validate" type="text" >
+	</div>		
+     <div class="input-field col s2">
+		<label for="bairro" class="active">Bairro</label> <br>
+		<input name="bairro" th:field="*{bairro}" id="bairro" class="validate" type="text" >
+	</div>		
+     <div class="input-field col s2">
+		<label for="cidade" class="active">Cidade</label> <br>
+		<input name="cidade" th:field="*{cidade}" id="cidade" class="validate" oninput="maisculo(event)" type="text" >
+	</div>			
+     <div class="input-field col s2">
+		<label for="uf" class="active">UF</label> <br>
+		<input name="uf" th:field="*{uf}" id="uf" class="validate" oninput="maisculo(event)"  type="text" maxlength="3">
+	</div>	
+	<div class="input-field col s2">
+	    <label for="servidor_publico" class="active" style="color: Black">Servidor Publico?</label>
+		<select class="browser-default" th:field="*{servidor_publico}" id="servidor_publico" name="servidor_publico" >
+		<option value="S">Sim</option>
+		<option value="N">Nao</option>
+		</select>
+	</div>
+	 <div class="input-field col s2">
+		<input class="waves-effect waves-light btn" type="submit" value="Salvar">
+		<td><a class="waves-effect waves-light btn" th:href="@{/pessoas}">Limpar</a></td>		
+	 </div>
+  
+ </form>
+</div>
+  <div style="margin-left:5% ">
+  <a class="waves-effect waves-light btn" href="/listartodaspessoas">Listar todas pessoas</a>	
+  </div>
+</fieldset>
+<div  th:each = "m : ${msg}" style="font-size: 15px; color: red;margin-left: 5%;">
+ <span th:text="${m}"></span>
+</div>
+ <fieldset>
+ <legend>Campos de pesquisa</legend>
+	<div class="row">
+		<form action="pesquisarpessoa" method="post" class="col s12" id="pesquisarpessoa">
+			<div class="row">
+				<div class="input-field col s6">
+					<label for="nomepesquisa" class="active">Pesquisa por nome</label>
+					<input name="nomepesquisa" id="nomepesquisa" class="validate"
+					th=value="${nomepesquisa}">
+				</div>
+				
+					<input type="submit" value="Buscar" class="waves-effect waves-light btn">
+					
+				</div>
+			</div>
+		</form>
+	</div>
+	</fieldset>
+	<br/>
+<fieldset>
+<legend>Listagem</legend>
+  <table class="striped">
+   <thead>
+    <tr>
+     <th>Id</th>
+     <th>Nome</th>
+     <th>Apelido</th>
+     <th>Cargo</th>
+     <th>Editar</th>
+     </tr>
+     </thead>
+     <tr th:each="pessoa:${todaspessoas}">
+     <td th:text="${pessoa.cd_pessoa_func}"></td>  
+     <td th:text="${pessoa.nm_pessoa_func}"></td>    
+     <td th:text="${pessoa.pri_nome}"></td>   
+     <td th:text="${pessoa.cargo_f}"></td> 
+     <td><a th:if="${pessoa.cd_pessoa_func!=null}" th:href="@{/editarpessoa/{cd_pessoa_func}(cd_pessoa_func=${pessoa.cd_pessoa_func})}">Editar</a></td>   
+     </tr>
+  </table> 
+ </fieldset> 
+
+<script >
+function limpa_formulário_cep() {
+    // Limpa valores do formulário de cep.
+    $("#endereco").val("");
+    $("#bairro").val("");
+    $("#cidade").val("");
+    $("#uf").val("");
+
+}
+
+//Quando o campo cep perde o foco.
+$("#cep").blur(function() {
+
+    //Nova variável "cep" somente com dígitos.
+    var cep = $(this).val().replace(/\D/g, '');
+
+    //Verifica se campo cep possui valor informado.
+    if (cep != "") {
+
+        //Expressão regular para validar o CEP.
+        var validacep = /^[0-9]{8}$/;
+
+        //Valida o formato do CEP.
+        if(validacep.test(cep)) {
+
+            //Preenche os campos com "..." enquanto consulta webservice.
+            $("#endereco").val("...");
+            $("#bairro").val("...");
+            $("#cidade").val("...");
+            $("#uf").val("...");
+         
+
+            //Consulta o webservice viacep.com.br/
+            $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                if (!("erro" in dados)) {
+                    //Atualiza os campos com os valores da consulta.
+                    $("#endereco").val(dados.logradouro);
+                    $("#bairro").val(dados.bairro);
+                    $("#cidade").val(dados.localidade);
+                    $("#uf").val(dados.uf);
+                  
+                } //end if.
+                else {
+                    //CEP pesquisado não foi encontrado.
+                    limpa_formulário_cep();
+                    alert("CEP não encontrado.");
+                }
+            });
+        } //end if.
+        else {
+            //cep é inválido.
+            limpa_formulário_cep();
+            alert("Formato de CEP inválido.");
+        }
+    } //end if.
+    else {
+        //cep sem valor, limpa formulário.
+        limpa_formulário_cep();
+    }
+
+});
+
+</script>
+<script>
+function maisculo(e){
+	var ss = e.target.selectionStart;
+	var se = e.target.selectionEnd;
+	e.target.value = e.target.value.toUpperCase();
+	e.target.selectionStart = ss;
+	e.target.selectionEnd = se;
+}
+</script>
+
+</body>
+</html>

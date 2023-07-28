@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   <!-- Adicionando JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>  
+<!-- Script para calendario -->     
+<script type="text/javascript" src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"></script>  
+<link href="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.css" rel="stylesheet"type="text/css"/>               
+            
+<meta charset="UTF-8">
+<title>Formulario de movimento</title>
+
+<style type="text/css">
+table.striped>tbody>tr:nth-child(odd){background-color: rgba(158,154,154,0.5); }
+form input[type=submit]{ color:white;}
+table{
+width: 96%;
+}
+fieldset{margin-left: 20%;margin-right: 20% ;margin-top: 15%;margin-bottom: 15%;}
+table{ font-size: 12px}
+div{font-size: 20px;}
+table td, table th{
+border: 1px solid grey;
+}
+table th{
+background: #eee;
+ }
+</style>
+<a href="/index2" ><h5 style="margin-left: 10%">Voltar ao Index</h5></a> 
+</head>
+<body>
+<div align="center">
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+      
+     > 
+<img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">
+
+</div>
+<div align="center">
+<h5>Inicializador e finalizador de movimentação</h5><br>
+</div>
+</div>
+<div align="center" style="font-size: 22px; color: red" >
+<span th:text="${condutor}"></span>
+</div>
+
+<fieldset>
+<div class="row">
+      <div th:each = "m : ${msg}" style="font-size: 18px; color: SaddleBrown;">
+       <span th:text="${m}"></span>
+      </div>
+      <form action="iniciafinaliza" method="post" class="col s12" id="formmov" th:object="${saida}">
+      	    <div class="input-field col s3" th:if="${identificador==0}">
+				<label th:if="*{id!=null}"  for="id" class="active">Identificador</label><br>
+			    <input th:if="*{id!=null}" id="id" name="id" th:field="*{id}" class="validate" type="number" readonly="readonly">
+			</div> 
+			<div class="input-field col s3" th:if="${identificador==0}">
+				<label for="km_r" class="active">Km retorno</label><br>
+			    <input id="km_r" name="km_r" class="validate" type="number">
+			</div>      
+  	        <div class="input-field col s5">		     
+			<input th:if="${identificador==1}"  class="waves-effect waves-light btn" type="submit" value="Iniciar">	
+			<input th:if="${identificador==0}"  class="waves-effect waves-light btn" type="submit" value="Fechar">		     			
+	        </div>
+	 </form>
+</div>
+</fieldset>
+<div style="margin-left: 10%">
+<td ><a class="waves-effect waves-light btn" th:href="@{/iniciamovimento}">Atualiza</a></td>
+</div>
+</body>
+</html> 

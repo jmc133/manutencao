@@ -41,8 +41,6 @@ public class OrcarController {
 	pessoa_juridica pj = new pessoa_juridica();
 	Usuario u = new Usuario();
 	@Autowired
-	private VeiculosRepository veiculosRepository;
-	@Autowired
 	private OrdemServicoRepository ordemServicoRepository;
 	@Autowired 
 	private UsuarioRepository usuarioRepository;

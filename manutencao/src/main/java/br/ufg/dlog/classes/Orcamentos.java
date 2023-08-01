@@ -31,6 +31,7 @@ public class Orcamentos implements Serializable {
 	private String orcador;
 	@Column(length = 1)
 	private String orc_atribuido;
+	private Long fk_atribuidor;
 	
 	
 	
@@ -39,6 +40,12 @@ public class Orcamentos implements Serializable {
 	
 	
 	
+	public Long getFk_atribuidor() {
+		return fk_atribuidor;
+	}
+	public void setFk_atribuidor(Long fk_atribuidor) {
+		this.fk_atribuidor = fk_atribuidor;
+	}
 	public String getOrc_atribuido() {
 		return orc_atribuido;
 	}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+<meta charset="UTF-8" />
+<title>Recebimento de veículos da UFG</title>
+<script type="css">
+.slidecontainer {
+	  width: 100%; /* Width of the outside container */
+	}
+</script>
+</head>
+<body>
+<div style="margin-left: 10%; color: blue;" >
+<a href="/index2"><h6>Voltar ao Index</h6></a>
+</div>
+<div align="center">
+<img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
+     alt="DLOG_UFG_PRETO.svg"
+     width="180"
+     height="70"
+      
+     > 
+<img src="https://files.cercomp.ufg.br/weby/up/1/o/Marca_UFG_cor_completa_horizontal.png"
+     alt="logoUFGDlog.jpg"
+     width="180"
+     height="100">
+</div>   
+<div align="center">
+<b>Formulário de recebimento de veículos da UFG</b>
+</div>  
+<fieldset style="background-color: #363636">
+<form action="/receberveiculoos" class="col s12" method="post">
+<fieldset style="margin-left: 2%; margin-right: 2%; border-radius: 10px; background-color: #FFF8DC;">
+  <div class="row">
+    <div class="input-field col s1">
+	  <label for="id_ordem" class="active">Id</label> 
+	  <input name="id_ordem" id="id_ordem" class="validate" type="number" required="required">
+    </div>
+    <div class="input-field col s3">
+    <a  href="receberveiculoos">
+       <input type="submit"value="Pesquisar" style="font-size: 20px; border-radius: 9px; background-color:SteelBlue;width:200px; color: #F5F5F5"/>
+    </a>
+    </div>
+  </div>  
+</fieldset>
+</form>
+     <div class="row" th:each = "m : ${msg}" style="font-size: 18px; color:#00FFFF;" align="center">
+          <b><span th:text="${m}"></span></b>
+     </div>
+<form action="/salvarentrada" class="col s12" method="post" th:object="${receber}">
+<fieldset style="margin-left: 2%; margin-right: 2%; border-radius: 10px;background-color: #FFF8DC">
+  <div class="row">
+   <div class="input-field col s2">
+    <label for="dataentrada" class="active">Data Entrada</label>
+    <input name="dataentrada" id="dataentrada" th:field="*{dataentrada}" class="validate" type="date" readonly="readonly" />
+   </div>
+   <div class="input-field col s2">
+    <label for="dataentrega" class="active">Data Entrega</label>
+    <input name="dataentrega" id="dataentrega" th:field="*{dataentrega}" class="validate" type="date" readonly="readonly" />
+   </div>
+   <div class="input-field col s2">
+    <label for="fkordemservico" class="active">Nº OS</label>
+    <input name="fkordemservico" id="fkordemservico" th:field="*{fkordemservico}" class="validate" type="number" readonly="readonly"/>
+   </div>
+   <div class="input-field col s2">
+    <label for="kmentrada" class="active">Km entrada</label>
+    <input name="kmentrada" id="kmentrada" th:field="*{kmentrada}" class="validate" type="number" />
+   </div>
+   <div class="input-field col s2">
+    <label for="kmentrega" class="active">Data entrega</label>
+    <input name="kmentrega" id="kmentrega" th:field="*{kmentrega}" class="validate" type="number" />
+   </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s2" >
+	  <label for="veiculo" class="active">Placa e tipo do veículo</label>
+	  <select class="browser-default" th:field="*{veiculo}" id="veiculo" name="veiculo" readonly="readonly">
+		<option th:each = "v : ${veiculos}" th:value="${v.patrimonio}" th:text="${v.placa_atual+' - '+v.tipo}" >
+	  </select> 
+	</div>
+	<div class="input-field col s2" >
+    	<div class="slidecontainer">
+    	<label for="posicaotanquerecebido" class="active">Tanque entrada</label>
+        <input type="range" min="1" th:field="*{posicaotanquerecebido}" max="100" value="50" class="slider" name="posicaotanquerecebido" id="posicaotanquerecebido" style="height: 16px;">
+        </div>
+	</div>
+	<div class="input-field col s2" >
+    	<div class="slidecontainer">
+    	<label for="posicaotanqueentregue" class="active">Tanque entrada</label>
+        <input type="range" min="1" th:field="*{posicaotanqueentregue}" max="100" value="50" class="slider" name="posicaotanqueentregue" id="posicaotanqueentregue" style="height: 16px;">
+        </div>
+	</div>
+	<div class="input-field col s3">
+    <label for="responsavelreceber" class="active">Responsável</label>
+    <input name="responsavelreceber" id="responsavelreceber" th:field="*{kmentrega}" class="validate" type="text" />
+   </div>
+
+
+  <div>
+    <input onclick="habilita()" type="checkbox" id="verificar" name="verificar"  />
+    <label for="verificar">Li o termo de responsabilidade e concordo</label>
+    <a href="/termooficina">Ler o termo</a>
+  </div>
+
+
+  </div>
+    <button onclick="desabilita()" class="button" id="btnsubmit" name="btnsubmit" type="submit" >Salvar</button>
+</fieldset>
+</form>
+</fieldset>
+<script type="text/javascript">
+//document.getElementById("btnsubmit").disabled = true;
+var verificar = document.getElementById("verificar");
+
+document.getElementById("btnsubmit").onclick = function desabilita() {
+    if (verificar.checked) {
+    	alert("Para salvar você precisa concordar com o termo de responsabilidade!");
+    	this.disabled = false;
+    	
+    } else {
+    	this.disabled = true;
+    }
+
+
+};
+function habilita()
+{ if(verificar.checked){
+	document.getElementById("btnsubmit").disabled = false;
+}else{
+	document.getElementById("btnsubmit").disabled = true;
+}
+	
+}
+</script>
+</body>
+</html>

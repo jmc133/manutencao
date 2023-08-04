@@ -77,10 +77,13 @@ public class OrcarController {
 	    mv.addObject("item", new DefeitosRelatados());
 	    mv.addObject("pj", pj);
 	    mv.addObject("orcamentos", new Orcamentos());
-	    mv.addObject("msg", "Selecionar ordem de serviço "+ue.getNome());
+	    mv.addObject("msg", "Bem vindo! Selecione uma ordem de serviço "+ue.getNome());
 	    mv.addObject("editar", null);
 	    mv.addObject("orcados", null);
 	    mv.addObject("qtd",0);
+	    mv.addObject("novitem", 0);
+	    mv.addObject("idordem", null);
+	    mv.addObject("item", new DefeitosRelatados());
 	return mv;
     	
 	}
@@ -104,10 +107,13 @@ public class OrcarController {
 	    mv.addObject("item", new DefeitosRelatados());
 	    mv.addObject("pj", pj);
 	    mv.addObject("orcamentos", new Orcamentos());
-	    mv.addObject("msg", "Selecionar ordem de serviço "+ue.getNome());
+	    mv.addObject("msg", "← Ordem de serviço selecionada, agora escolha um item "+ue.getNome());
 	    mv.addObject("editar", null);
 	    mv.addObject("orcados", null);
 	    mv.addObject("qtd",0);
+	    mv.addObject("novitem", 0);
+	    mv.addObject("idordem", idOrdem);
+	   
 	return mv;
 }
 	@RequestMapping("/editaritensordem/{id_defeitos}")
@@ -125,19 +131,26 @@ public class OrcarController {
 	    mv.addObject("item", defeitosRelatadosRepository.defeitoRelatado(id_defeitos));
 	    mv.addObject("pj", pj);
 	    mv.addObject("orcamentos", new Orcamentos());
-	    mv.addObject("msg", "Escolhendo item para orçar "+ue.getNome());
+	    mv.addObject("msg", "Item escolhido para orçar, agora insira o valor unitário "+ue.getNome());
 	    mv.addObject("editar", "1");
 	    mv.addObject("qtd",dr.getQtdRelatado());
 	    mv.addObject("orcados", fantOrcamentoRepository.orcamentosPorFornecedor(idOrdem, pj.getCd_pessoa_jur())) ;
+	    mv.addObject("novitem", 0);
+	    mv.addObject("idordem", idOrdem);
+	   
 	  
 	return mv;
 }
 	@RequestMapping("/salvarorcamento")
-	public ModelAndView SalvarOrcamento(@RequestParam("valor_unitario")Double valor_unitario,@RequestParam("valor_total")Double valor_total) {
+	public ModelAndView SalvarOrcamento(@RequestParam("valor_unitario")Double valor_unitario) {
     	ModelAndView mv = new ModelAndView("orcar.html");
+    	DefeitosRelatados atribuido = new DefeitosRelatados();
+    	if(idDefeitos!=null) {
+    		atribuido = defeitosRelatadosRepository.defeitoRelatado(idDefeitos);
+    	}
     	
-    	
-    	if(valor_unitario!=null&&valor_unitario>0) {
+    	if (Objects.isNull(atribuido.getAtribuido())) {
+    	if(!Objects.isNull(valor_unitario)&&valor_unitario>0) {
     		Long id;
     		if (orcamentosRepository.selecionaMaxIdOrcamento()==null) {
     			id=(long) 1;
@@ -183,6 +196,9 @@ public class OrcarController {
     		mv.addObject("editar", null);
     		mv.addObject("qtd",dr.getQtdRelatado());
     		mv.addObject("orcados",fantOrcamentoRepository.orcamentosPorFornecedor(idOrdem, pj.getCd_pessoa_jur()));
+    		mv.addObject("novitem", 0);
+    		mv.addObject("idordem", idOrdem);
+    		
     		
     	}else {
     		mv.addObject("veiculos", fantasmaVeiculoRepository.buscaPlacaPtrimonio());
@@ -192,11 +208,19 @@ public class OrcarController {
 		    mv.addObject("item", defeitosRelatadosRepository.defeitoRelatado(idDefeitos));
 		    mv.addObject("pj", pj);
 		    mv.addObject("orcamentos", new Orcamentos());
-		    mv.addObject("msg", "Não foi encontrado o valor orçado "+ue.getNome());
+		    mv.addObject("msg", "Não foi encontrado o valor orçado ou foi inserido valor =0 "+ue.getNome());
 		    mv.addObject("editar", "1");
 		    mv.addObject("qtd",dr.getQtdRelatado());
 		    mv.addObject("orcados", fantOrcamentoRepository.orcamentosPorFornecedor(idOrdem, pj.getCd_pessoa_jur()));
+		    mv.addObject("novitem", 0);
+		    mv.addObject("idordem", idOrdem);
+		 
     		
+    	}
+    	}else {
+    		
+    	    mv.addObject("msg", "Este item já foi atribuido, não podendo mais ser orçado "+ue.getNome());
+    	    mv.addObject("orcamentos", new Orcamentos());
     	}
     	mv.addObject("veiculos", fantasmaVeiculoRepository.buscaPlacaPtrimonio());
 	    mv.addObject("ordem", ordemServicoRepository.findById(idOrdem));
@@ -206,8 +230,77 @@ public class OrcarController {
 	    mv.addObject("pj", pj);
 	    mv.addObject("qtd",0);
 	    mv.addObject("orcados", fantOrcamentoRepository.orcamentosPorFornecedor(idOrdem, pj.getCd_pessoa_jur()));
+	    mv.addObject("novitem", 0);
+	    mv.addObject("idordem", idOrdem);
+	   
 	    
 	return mv;
 }
+	@RequestMapping("/adicionaritens")
+	public ModelAndView AdicionarItens(@RequestParam("QtdRelatado")Float QtdRelatado,@RequestParam("descricao")String descricao) {
+		ModelAndView mv = new ModelAndView("orcar.html");
+		descricao= descricao.trim();
+		Long Iddescricao;
+		DefeitosRelatados dr = new DefeitosRelatados();
+		Boolean OsAbertas=false;
+		if(ordemServicoRepository.ordemServicoAbertas()!=null) {
+			OsAbertas=true;
+		}
+		if (defeitosRelatadosRepository.maxId()==null) {
+			 Iddescricao= (long) 1;
+		}else {
+			Iddescricao = defeitosRelatadosRepository.maxId()+1;
+		}
+		if(!Objects.isNull(descricao)&&QtdRelatado!=null&&!Objects.equals(descricao, "")) {
+			if(idOrdem!=null&& idOrdem!=0) {
+				dr.setIdDefeitos(Iddescricao);
+				dr.setFkOrdemServico(idOrdem);
+				dr.setQtdRelatado(QtdRelatado);  //(QtdRelatado));
+				dr.setDescricao(descricao);
+				defeitosRelatadosRepository.save(dr);
+				mv.addObject("msg", "Item inserido com sucesso "+ue.getNome());
+			}else {
+				mv.addObject("msg", "Não foi possível inserir não há ordem de serviço selecionada "+ue.getNome());
+			}
+		}else {
+			mv.addObject("msg", "Não foram preenchidos os campos necesários "+ue.getNome());
+		}
+		
+		mv.addObject("veiculos", fantasmaVeiculoRepository.buscaPlacaPtrimonio());
+	    mv.addObject("ordem", ordemServicoRepository.findById(idOrdem));
+	    mv.addObject("osaberta", ordemServicoRepository.ordemServicoAbertas());
+	    mv.addObject("itens", defeitosRelatadosRepository.itensRelatadosAtivos(idOrdem));
+	    mv.addObject("item", new DefeitosRelatados());
+	    mv.addObject("pj", pj);
+	    mv.addObject("orcamentos", new Orcamentos());
+	    
+	    mv.addObject("editar", null);
+	    mv.addObject("orcados", null);
+	    mv.addObject("qtd",0);
+	    mv.addObject("novitem", 1);
+	    mv.addObject("idordem", idOrdem);
+	    
+		
+		return mv;
+	}
+	@RequestMapping("/abriradicionaritens")
+	public ModelAndView AbrirAdicionarItens() {
+		ModelAndView mv = new ModelAndView("orcar.html");
+		mv.addObject("veiculos", fantasmaVeiculoRepository.buscaPlacaPtrimonio());
+	    mv.addObject("ordem", ordemServicoRepository.findById(idOrdem));
+	    mv.addObject("osaberta", ordemServicoRepository.ordemServicoAbertas());
+	    mv.addObject("itens", defeitosRelatadosRepository.itensRelatadosAtivos(idOrdem));
+	    mv.addObject("item", new DefeitosRelatados());
+	    mv.addObject("pj", pj);
+	    mv.addObject("orcamentos", new Orcamentos());
+	    mv.addObject("msg", "← Ordem de serviço selecionada, agora escolha um item "+ue.getNome());
+	    mv.addObject("editar", null);
+	    mv.addObject("orcados", null);
+	    mv.addObject("qtd",0);
+	    mv.addObject("novitem", 1);
+	    mv.addObject("idordem", idOrdem);
+		
+		return mv;
+	}
 
 }

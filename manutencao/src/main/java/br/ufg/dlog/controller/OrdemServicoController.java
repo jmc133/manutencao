@@ -99,13 +99,11 @@ public class OrdemServicoController {
 		OrdemServico ordemServico = new OrdemServico();
 		ModelAndView mv = new ModelAndView("ordemdeservico.html");
 		if(ordemServicoRepository.selecionaMaxIdOrdemServico()==null) {
-			ordemServico.setId_ordem((long) 1);	
-			System.out.println("Está null deve receber 1");
+			ordemServico.setId_ordem((long) 1);				
 			IdServico = (long) 1;
 		}else {
 			ordemServico.setId_ordem(ordemServicoRepository.selecionaMaxIdOrdemServico()+1);
-			IdServico = ordemServicoRepository.selecionaMaxIdOrdemServico()+1;
-			System.out.println("*** Não Está null deve receber "+IdServico);
+			IdServico = ordemServicoRepository.selecionaMaxIdOrdemServico()+1;			
 		}
 		ordemServico.setCriador_os(usuarioId);
 		ordemServico.setVeiculo(veiculo);
@@ -146,7 +144,7 @@ public class OrdemServicoController {
 		}
 		
 		if(!Objects.isNull(descricao)&&QtdRelatado!=null&&descricao!=null) {
-			System.out.println("Vim até aqui *****");
+			
 			if(IdServico!=null&& IdServico!=0) {
 				dr.setIdDefeitos(Iddescricao);
 				dr.setFkOrdemServico(IdServico);
@@ -161,7 +159,7 @@ public class OrdemServicoController {
 				}else {
 				mv.addObject("os",new OrdemServico());
 				}*/
-				System.out.println("Valor do Id servico " +IdServico);
+				
 				mv.addObject("osid", ordemServicoRepository.verOrdemPorId(IdServico));
 				mv.addObject("veiculos",veiculosRepository.findVeiculosAtivos());								
 				mv.addObject("itens", defeitosRelatadosRepository.itensRelatadosAtivos(IdServico));
@@ -192,10 +190,10 @@ public class OrdemServicoController {
 	public ModelAndView PesquisarOs(@RequestParam("id_ordem") Long id_ordem) {
 		ModelAndView mv = new ModelAndView("ordemdeservico.html");
 		
-		System.out.println("Entrada da String de pesquisa é: "+id_ordem);
+		
 		if(id_ordem!=null ) {
 		IdServico = (id_ordem);
-		System.out.println("Entrada da String de pesquisa de dentro é: "+id_ordem);
+		
 		mv.addObject("msg", "Pesquisa realizada com sucesso!");				
 		mv.addObject("os",ordemServicoRepository.findAll());
 		mv.addObject("osid", ordemServicoRepository.verOrdemPorId(id_ordem));

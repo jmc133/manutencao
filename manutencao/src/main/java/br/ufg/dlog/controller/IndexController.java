@@ -142,7 +142,7 @@ public class IndexController {
 	}
 	@RequestMapping("/ospesquisa/{os}")
 	public ModelAndView OsPesquisa(@PathVariable("os") Long os) {
-		System.out.println(" Vim ao ospesquisa ******");
+		
 		ModelAndView mv = new ModelAndView("ordemdeservico.html");
 		if (os!=null) {
 			mv.addObject("msg", "Pesquisa realizada com sucesso!");				
@@ -152,7 +152,7 @@ public class IndexController {
 			mv.addObject("itens", defeitosRelatadosRepository.itensRelatados(os));
 			mv.addObject("idos", os);
 			mv.addObject("item", defeitosRelatadosRepository.findById(os));
-			System.out.println(" Vim ao ospesquisa dentro do if  ******");
+			
 		}else {
 			mv.addObject("msg", "Não encontrado resultado para pesquisa!");				
 			mv.addObject("os",ordemServicoRepository.findAll());
@@ -186,6 +186,20 @@ public class IndexController {
 			mv.addObject("idos", null);
 			mv.addObject("item", new DefeitosRelatados());
 		}
+		return mv;
+		
+	}
+	@RequestMapping("/termooficina")
+	public ModelAndView TermoResponsabilidadeOficina() {
+		ModelAndView mv = new ModelAndView("termoresponsabilidadeoficina.html");
+		
+		return mv;
+		
+	}
+	@RequestMapping("/termocondutor")
+	public ModelAndView TermoResponsabilidadeCondutor() {
+		ModelAndView mv = new ModelAndView("termocondutor.html");
+		
 		return mv;
 		
 	}

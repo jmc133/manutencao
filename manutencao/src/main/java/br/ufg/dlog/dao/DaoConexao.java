@@ -12,9 +12,7 @@ public class DaoConexao {
 				try {
 					Class.forName("org.postgresql.Driver");
 					conexao = DriverManager.getConnection("jdbc:postgresql://200.137.217.168:5432/"+bancoDeDados,
-							usuario, senha);
-					System.out.println("*-*-* Ver Conexao: "+conexao);
-					
+							usuario, senha);										
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

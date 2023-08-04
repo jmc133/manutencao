@@ -1,5 +1,6 @@
 package br.ufg.dlog.controller;
 
+import java.util.Date;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,7 @@ public class OrcamentosController {
 			mv.addObject("servicoorcados", new FantVisualizarOrcamentos());
 			mv.addObject("totalizador",new FantTotalizadorOrcamentos());
 			mv.addObject("total_atribuido", new FantOrcAtribuido());
+			mv.addObject("numordem",null);
 			mv.addObject("atribuicao",0);
 		}else {
 			mv.addObject("idorcados", null);
@@ -67,6 +69,7 @@ public class OrcamentosController {
 			mv.addObject("totalizador",new FantTotalizadorOrcamentos());
 			mv.addObject("total_atribuido", new FantOrcAtribuido());
 			mv.addObject("atribuicao",0);
+			mv.addObject("numordem",null);
 		}
 		
 		
@@ -83,6 +86,7 @@ public class OrcamentosController {
 			mv.addObject("servicoorcados", fantVisualizarOrcamentosRepository.visualizarOrcamentos(id_ordem));
 			mv.addObject("totalizador",fantTotalizadorOrcamentosRepository.totalizadorOrcamentos(id_ordem));
 			mv.addObject("total_atribuido", fantOrcAtribuidoRepository.listaTotalAtribuido(ordemServico));
+			mv.addObject("numordem",ordemServico);
 		}else {
 			ordemServico=(long) 0;
 			mv.addObject("idorcados", null);
@@ -90,6 +94,7 @@ public class OrcamentosController {
 			mv.addObject("totalizador",new FantTotalizadorOrcamentos());
 			mv.addObject("total_atribuido", new FantOrcAtribuido());
 			mv.addObject("atribuicao",0);
+			mv.addObject("numordem",null);
 		}
 		
 		
@@ -109,7 +114,7 @@ public class OrcamentosController {
 			
 			Orcamentos orcGrava = new Orcamentos();
 			
-			System.out.println("Id: "+orc.getId_orcamento()+" fk_ordem: "+orc.getFk_ordem_servico()+" fk_defeitos: "+orc.getFk_defeitos_relatados()+" oçamento atribuido: "+orc.getOrc_atribuido());
+			
 			
 			if(!Objects.equals(orc.getOrc_atribuido(),"S") ) {
 					
@@ -134,7 +139,8 @@ public class OrcamentosController {
 			orcGrava.setValor_total(orc.getValor_total());
 			orcGrava.setValor_unitario(orc.getValor_unitario());
 			orcGrava.setOrc_atribuido("S");
-			orcGrava.setFk_atribuidor(u.getId());
+			orcGrava.setFk_atribuidor(u.getId());			
+			orcGrava.setData_atribuicao(new Date());
 			
 			
 			Eo.atribuirNao(orc.getFk_defeitos_relatados());
@@ -145,7 +151,7 @@ public class OrcamentosController {
 			orcamentosReposoitory.save(orcGrava);
 			}else {
 				
-				System.out.println("Id: "+orc.getId_orcamento()+" fk_ordem: "+orc.getFk_ordem_servico()+" fk_defeitos: "+orc.getFk_defeitos_relatados()+" oçamento atribuido: "+orc.getOrc_atribuido());
+				
 				DefeitosRelatados drGrava = new DefeitosRelatados();
 				DefeitosRelatados drRecebe = new DefeitosRelatados();
 				drRecebe = defeitosRelatadosRepository.defeitoRelatado(orc.getFk_defeitos_relatados());
@@ -167,6 +173,8 @@ public class OrcamentosController {
 				orcGrava.setValor_total(orc.getValor_total());
 				orcGrava.setValor_unitario(orc.getValor_unitario());
 				orcGrava.setOrc_atribuido("N");
+				orcGrava.setFk_atribuidor(u.getId());			
+				orcGrava.setData_atribuicao(new Date());
 				
 				Eo.atribuirNao(orc.getFk_defeitos_relatados());
 				defeitosRelatadosRepository.save(drGrava);
@@ -177,6 +185,7 @@ public class OrcamentosController {
 			mv.addObject("servicoorcados", fantVisualizarOrcamentosRepository.visualizarOrcamentos(ordemServico));
 			mv.addObject("totalizador",fantTotalizadorOrcamentosRepository.totalizadorOrcamentos(ordemServico));
 			mv.addObject("total_atribuido", fantOrcAtribuidoRepository.listaTotalAtribuido(ordemServico));
+			mv.addObject("numordem",ordemServico);
 		
 		}else {
 			mv.addObject("idorcados", null);
@@ -184,6 +193,7 @@ public class OrcamentosController {
 			mv.addObject("totalizador",new FantTotalizadorOrcamentos());
 			mv.addObject("total_atribuido", new FantOrcAtribuido());
 			mv.addObject("atribuicao",0);
+			mv.addObject("numordem",null);
 		}
 		
 		

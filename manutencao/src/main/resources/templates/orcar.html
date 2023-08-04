@@ -5,9 +5,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <meta charset="UTF-8" />
-<title>Insert title here</title>
+<title>Formulário para inserir orçamentos</title>
 </head>
 <body>
+<div style="margin-left: 10%; color: blue;" >
+<a href="/index2"><h6>Voltar ao Index</h6></a>
+</div>
 <div align="center">
   <img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
      alt="DLOG_UFG_PRETO.svg"
@@ -19,12 +22,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
      alt="logoUFGDlog.jpg"
      width="180"
      height="100"> </a> 
-     <h2>Formulário para orçar serviços e peças</h2>  
+     <h5>Formulário para orçar serviços e peças</h5>  
  </div>
+ <fieldset style="margin-bottom: 3%;margin-left:1%; margin-right:1%; background-color: #363636;">
  <div class = "container" >
    <div class = "row" > 
         <div class = "input-field col s4" >
-          <fieldset style="background-color: #FFFACD;margin-left: 4%; margin-right: 5%">
+          <fieldset style="background-color: #FFFACD;margin-left: 1%; margin-right: 1%">
           <b><legend>Click no Nº e escolha uma OS orçar</legend></b>
            <table id="titem" class="striped">
            <thead>
@@ -41,17 +45,17 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         </div>
         <div class = "input-field col s8" >
         <form action="/orcar" th:object="${ordem}">
-         <fieldset style="background-color: #F0FFF0; margin-left: 4%; margin-right: 5%">
-          <b><legend>Descrição do veiculo</legend></b>
+         <fieldset style="background-color: #FFFACD; margin-left: 1%; margin-right: 1%">
+          <b><legend>Descrição do veiculo e data de emissão da ordem de serviço</legend></b>
           <div class="row">
-		   <div class="input-field col s2">
+		   <div class="input-field col s1">
 		    <label for="id_ordem" class="active">Id</label> 
 		    <input name="id_ordem" th:field="*{id_ordem}" id="id_ordem" readonly="readonly"class="validate">
 		   </div>
-		   <div class="input-field col s3">
+		   <div class="input-field col s4" readonly="readonly">
 		    <label for="veiculo" class="active">Placa e tipo do veículo</label>
 		    <select class="browser-default" th:field="*{veiculo}" id="veiculo" name="veiculo" >
-		    <option th:each = "v : ${veiculos}" th:value="${v.patrimonio}" th:text="${v.placa_atual+' - '+v.tipo}">
+		    <option th:each = "v : ${veiculos}" th:value="${v.patrimonio}" th:text="${v.placa_atual+' - '+v.tipo}" readonly="readonly">
 		    </select> 
 		   </div>
 		   <div class="input-field col s3">
@@ -64,13 +68,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         </div>
    </div>
  </div>        
- 
-   
-   <div th:each = "m : ${msg}" style="font-size: 15px; color: red;" align="center">
-    <b><span th:text="${m}"></span></b>
-   </div>
- 
- 
+        
+  <div class="row">
+  <div class="input-field col s4">
  <fieldset style="background-color:#FFFACD;margin-left: 4%; margin-right: 5%">
     <b><legend>Serviços/Peças</legend></b>
         <table class="striped">
@@ -90,14 +90,23 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
           <td><a th:if="${i.IdDefeitos !=null}" th:href="@{/editaritensordem/{id_defeitos}(id_defeitos=${i.IdDefeitos})}">Orçar</a></td>
          <!--  <td> <a th:if="${fant.id !=null && fant.lancado==null}" th:href="@{/deletaragenda/{idagenda}(idagenda=${fant.id})}" style="color:red;">Excluir</a></td> -->
          </tr> 
-         Para orçar escolha o item e clique em editar          
-        </table>             
-   </fieldset> 
-   <form action="/salvarorcamento" th:object="${orcamentos}">
-    <fieldset style="background-color: #F0FFF0; margin-left: 4%; margin-right: 5%">
+         Para orçar escolha o item e clique em editar  
+         <tfoot>
+         <b> <td colspan="2" style="font-size: 18px;">Acrescentar serviços ou peças</td></b> 
+         </tfoot>       
+        </table> 
+        <a  href="/abriradicionaritens">
+             <input th:if="${idordem!=null}" type="button"value="Novo item" style="font-size: 20px; border-radius: 9px; background-color:SteelBlue;width:200px; color: #F5F5F5">
+        </a>            
+   </fieldset>
+   </div> 
+   <div class="input-field col s8">
+   <fieldset style="background-color: #FFFACD; margin-left: 4%; margin-right: 5%">
+   <form action="/salvarorcamento" th:object="${orcamentos}" class="col s12" method="post">
+    
      <b><legend>Inserção de Propostas</legend></b>
-       <div class="row">		 		 
-		 <div class="input-field col s3">
+       		 		 
+		 <div class="input-field col s4">
 		  <label for="fk_pessoa_juridica" class="active">Empresa</label>
 		  <select class="browser-default" th:field="*{fk_pessoa_juridica}" id="fk_pessoa_juridica" name="fk_pessoa_juridica" readonly="readonly">
 		   <option th:each = "p : ${pj}" th:value="${p.cd_pessoa_jur}" th:text="${p.nm_fantasia}">
@@ -115,25 +124,23 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		 </div>
 		<div class="input-field col s2">
 		<div>
-		   <h6 style="color: Blue;">Insira aqui o seu valor ofertado e click em Orçar</h6>
+		   <h6 style="color: Blue;">Insira o valor unitário e click em Orçar → </h6>
 		   <label for="valor_unitario" class="active">Valor Unitário</label> 
 		</div>  
-		  <input onchange="multiplyBy()" name="valor_unitario" th:field="*{valor_unitario}" id="valor_unitario" class="validate" type="number">
-		 </div>
-		 <div class="input-field col s1">
-		  <label for="valor_total" class="active">Valor Total</label> 
-		  <input name="valor_total" th:field="*{valor_total}"  id="valor_total" readonly="readonly" class="validate" type="number">
-		 </div> 
+		  <input onchange="multiplyBy()" name="valor_unitario" th:field="*{valor_unitario}" id="valor_unitario" class="validate" type="number" autofocus="autofocus" required="required">
+		 </div>		 
 		 <div class="input-field col s2" th:if="${editar!=null}">
-		  <button type="submit">Orçar</button>
-		 </div>
-		 		 		 
- 	   </div>	
-   </fieldset> 
+		  <button type="submit" style="width: 140px; background-color: #1C1C1C;color: White;height: 30px;">Orçar</button>
+		 </div>		 	 		 
+ 	   	    
   </form>
-  <div th:each = "m : ${msg}" style="font-size: 15px; color: red;" align="center">
-    <b><span th:text="${m}"></span></b>
+         	
+  </fieldset>
+         <div class="row" th:each = "m : ${msg}" style="font-size: 18px; color:#00FFFF;" align="center">
+          <b><span th:text="${m}"></span></b>
+         </div>
    </div>
+  </div>
   <fieldset style="background-color: #FFFACD;margin-left: 4%; margin-right: 5%">
    <b> <legend>Serviços/Peças orçados</legend></b>
         <table class="striped">
@@ -158,7 +165,27 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
          </tr>           
         </table>             
    </fieldset>
-   
+    <fieldset th:if="${novitem==1}" style="background-color: #FFFFF0;">
+     <form action="/adicionaritens" th:object="${item}">
+         <b> <legend style="color: Blue;">Inserir quantidade e descrição de serviços e peças</legend></b>
+     	<div class="row">
+		 <div class="input-field col s1">
+		  <label for="IdDefeitos" class="active">Id</label> 
+		  <input name="IdDefeitos" th:field="*{IdDefeitos}" id="IdDefeitos" readonly="readonly"class="validate" >
+		 </div>
+		 <div class="input-field col s2">
+		  <label for="QtdRelatado" class="active">Quantidade</label> 
+		  <input name="QtdRelatado" th:field="*{QtdRelatado}" id="QtdRelatado" class="validate" required="required" >
+		 </div>
+		 <div class="input-field col s5">
+		  <label for="descricao" class="active">Descrição</label> 
+		  <input name="descricao" th:field="*{descricao}" id="descricao" class="validate" required="required">
+		 </div >		
+		 <input class="waves-effect waves-light btn" type="submit" value="Incluir descrição">
+		</div>
+     </form>
+    </fieldset> 
+  </fieldset> 
    <script>
     function multiplyBy()
     {

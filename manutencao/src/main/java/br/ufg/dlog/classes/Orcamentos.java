@@ -32,6 +32,9 @@ public class Orcamentos implements Serializable {
 	@Column(length = 1)
 	private String orc_atribuido;
 	private Long fk_atribuidor;
+	@Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	private Date data_atribuicao;
 	
 	
 	
@@ -40,6 +43,12 @@ public class Orcamentos implements Serializable {
 	
 	
 	
+	public Date getData_atribuicao() {
+		return data_atribuicao;
+	}
+	public void setData_atribuicao(Date data_atribuicao) {
+		this.data_atribuicao = data_atribuicao;
+	}
 	public Long getFk_atribuidor() {
 		return fk_atribuidor;
 	}

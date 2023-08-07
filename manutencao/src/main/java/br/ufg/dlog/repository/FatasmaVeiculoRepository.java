@@ -19,4 +19,9 @@ public interface FatasmaVeiculoRepository extends JpaRepository<FatasmaVeiculo, 
 			+ "where situacao like'%1%' and t_veiculos.tipo=t_tipo.cod_tipo and t_veiculos.impedimento=0\n"
 			+ "order by t_veiculos.placa_atual", nativeQuery=true)
 	List<FatasmaVeiculo> buscaPlacaPtrimonio();
+	
+	@Query(value = "SELECT patrimonio, placa_atual, t_tipo.tipo	FROM public.t_veiculos, t_tipo\n"
+			+ "			where situacao like'%1%' and t_veiculos.tipo=t_tipo.cod_tipo and t_veiculos.impedimento=0 and t_veiculos.patrimonio=?\n"
+			+ "			order by t_veiculos.placa_atual", nativeQuery = true)
+	FatasmaVeiculo buscaVeiculoPorPatrimonio(String pat);
 }

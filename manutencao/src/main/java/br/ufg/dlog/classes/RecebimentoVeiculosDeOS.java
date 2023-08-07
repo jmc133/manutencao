@@ -37,7 +37,7 @@ public class RecebimentoVeiculosDeOS implements Serializable{
 	private Long kmentrada;
 	private Long kmentrega;
 	@Column(length = 1)
-	private String confirmaleitura;
+	private Boolean confirmaleitura;
 	private String veiculo;
 	
 	public Long getIdrecebimentos() {
@@ -112,10 +112,11 @@ public class RecebimentoVeiculosDeOS implements Serializable{
 	public void setKmentrega(Long kmentrega) {
 		this.kmentrega = kmentrega;
 	}
-	public String getConfirmaleitura() {
+
+	public Boolean getConfirmaleitura() {
 		return confirmaleitura;
 	}
-	public void setConfirmaleitura(String confirmaleitura) {
+	public void setConfirmaleitura(Boolean confirmaleitura) {
 		this.confirmaleitura = confirmaleitura;
 	}
 	public String getVeiculo() {

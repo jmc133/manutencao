@@ -4,17 +4,24 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+<script type="text/javascript" src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"></script>  
+<link href="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.css" rel="stylesheet"type="text/css"/> 
 <meta charset="UTF-8" />
 <title>Recebimento de veículos da UFG</title>
 <script type="css">
-.slidecontainer {
-	  width: 100%; /* Width of the outside container */
-	}
+.linha{
+display: flex;
+flex-flow: row wrap;
+}
+.coluna-33 {
+    width: 33%;
+}
+
 </script>
 </head>
 <body>
-<div style="margin-left: 10%; color: blue;" >
-<a href="/index2"><h6>Voltar ao Index</h6></a>
+<div style="margin-left: 10%; color:#0000FF;" >
+<a href="/index2" style="color: #0000FF"><h4>Voltar ao Index</h4></a>
 </div>
 <div align="center">
 <img src="https://files.cercomp.ufg.br/weby/up/1302/o/DLOG_UFG_PRETO.svg?1613059566"
@@ -36,44 +43,42 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <fieldset style="margin-left: 2%; margin-right: 2%; border-radius: 10px; background-color: #FFF8DC;">
   <div class="row">
     <div class="input-field col s1">
-	  <label for="id_ordem" class="active">Id</label> 
-	  <input name="id_ordem" id="id_ordem" class="validate" type="number" required="required">
-    </div>
-    <div class="input-field col s3">
-    <a  href="receberveiculoos">
+	  <label for="id_ordem" class="active">Id OS</label> 
+	  <input name="id_ordem" id="id_ordem" class="validate" type="number" required="required" autofocus="autofocus">
+	   
        <input type="submit"value="Pesquisar" style="font-size: 20px; border-radius: 9px; background-color:SteelBlue;width:200px; color: #F5F5F5"/>
-    </a>
+    
     </div>
+ 
   </div>  
 </fieldset>
 </form>
      <div class="row" th:each = "m : ${msg}" style="font-size: 18px; color:#00FFFF;" align="center">
           <b><span th:text="${m}"></span></b>
      </div>
-<form action="/salvarentrada" class="col s12" method="post" th:object="${receber}">
+<form action="/salvarentrada" method="post" th:object="${receber}">
+<div class="container">
+
 <fieldset style="margin-left: 2%; margin-right: 2%; border-radius: 10px;background-color: #FFF8DC">
-  <div class="row">
-   <div class="input-field col s2">
-    <label for="dataentrada" class="active">Data Entrada</label>
-    <input name="dataentrada" id="dataentrada" th:field="*{dataentrada}" class="validate" type="date" readonly="readonly" />
+  <div class="linha">
+   <div class="coluna-33">
+    <label for="idrecebimentos" class="active">Id</label>
+    <input name="idrecebimentos" id="idrecebimentos" th:field="*{idrecebimentos}" class="validate" type="number" readonly="readonly" />
    </div>
-   <div class="input-field col s2">
-    <label for="dataentrega" class="active">Data Entrega</label>
-    <input name="dataentrega" id="dataentrega" th:field="*{dataentrega}" class="validate" type="date" readonly="readonly" />
-   </div>
-   <div class="input-field col s2">
+  
+   <div class="coluna-33">
     <label for="fkordemservico" class="active">Nº OS</label>
     <input name="fkordemservico" id="fkordemservico" th:field="*{fkordemservico}" class="validate" type="number" readonly="readonly"/>
    </div>
-   <div class="input-field col s2">
+   <div class="col-2">
     <label for="kmentrada" class="active">Km entrada</label>
-    <input name="kmentrada" id="kmentrada" th:field="*{kmentrada}" class="validate" type="number" />
+    <input name="kmentrada" id="kmentrada" th:field="*{kmentrada}" class="validate" type="number" required="required" />
    </div>
-   <div class="input-field col s2">
-    <label for="kmentrega" class="active">Data entrega</label>
+   <div class="col-2">
+    <label for="kmentrega" class="active">Km entrega</label>
     <input name="kmentrega" id="kmentrega" th:field="*{kmentrega}" class="validate" type="number" />
    </div>
-  </div>
+  
   <div class="row">
     <div class="input-field col s2" >
 	  <label for="veiculo" class="active">Placa e tipo do veículo</label>
@@ -81,34 +86,60 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<option th:each = "v : ${veiculos}" th:value="${v.patrimonio}" th:text="${v.placa_atual+' - '+v.tipo}" >
 	  </select> 
 	</div>
+	
+	<div class="input-field col s2" >
+	<label for="posicaotanquerecebido" class="active">Tanque entrada</label>
+	 <input type="range" name="posicaotanquerecebido" step="10" list="a-values" th:field="*{posicaotanquerecebido}" value="0" style="height: 25px; width: 100px; background:#ADD8E6; color: black;" id="posicaotanquerecebido" >
+       <datalist id="a-values">
+        <option value="0" label="Vermelho">
+        <option value="10" label="10%">
+        <option value="20" label="20%">
+        <option value="30" label="30%">
+        <option value="40" label="40%">
+        <option value="50" label="meio">
+        <option value="60" label="60%">
+        <option value="70" label="70%">
+        <option value="80" label="80%">
+        <option value="90" label="90%">        
+        <option value="100" label="cheio">
+       </datalist>
+     </div>  
 	<div class="input-field col s2" >
     	<div class="slidecontainer">
-    	<label for="posicaotanquerecebido" class="active">Tanque entrada</label>
-        <input type="range" min="1" th:field="*{posicaotanquerecebido}" max="100" value="50" class="slider" name="posicaotanquerecebido" id="posicaotanquerecebido" style="height: 16px;">
-        </div>
-	</div>
-	<div class="input-field col s2" >
-    	<div class="slidecontainer">
-    	<label for="posicaotanqueentregue" class="active">Tanque entrada</label>
-        <input type="range" min="1" th:field="*{posicaotanqueentregue}" max="100" value="50" class="slider" name="posicaotanqueentregue" id="posicaotanqueentregue" style="height: 16px;">
+    	<label for="posicaotanqueentregue" class="active">Tanque entrega</label>
+        <input type="range" min="0" th:field="*{posicaotanqueentregue}" max="100" list="a-values"step="10" value="0" class="slider" name="posicaotanqueentregue" id="posicaotanqueentregue" style="height: 16px;width: 100px">
+        <datalist id="a-values=0">
+        <option value="0" label="Vermelho">
+        <option value="10" label="10%">
+        <option value="20" label="20%">
+        <option value="30" label="30%">
+        <option value="40" label="40%">
+        <option value="50" label="meio">
+        <option value="60" label="60%">
+        <option value="70" label="70%">
+        <option value="80" label="80%">
+        <option value="90" label="90%">        
+        <option value="100" label="cheio">
+       </datalist>
         </div>
 	</div>
 	<div class="input-field col s3">
     <label for="responsavelreceber" class="active">Responsável</label>
-    <input name="responsavelreceber" id="responsavelreceber" th:field="*{kmentrega}" class="validate" type="text" />
+    <input name="responsavelreceber" id="responsavelreceber" th:field="*{responsavelreceber}" step="10" class="slider" type="text" />
    </div>
 
 
   <div>
     <input onclick="habilita()" type="checkbox" id="verificar" name="verificar"  />
     <label for="verificar">Li o termo de responsabilidade e concordo</label>
-    <a href="/termooficina">Ler o termo</a>
+  
   </div>
 
 
   </div>
-    <button onclick="desabilita()" class="button" id="btnsubmit" name="btnsubmit" type="submit" >Salvar</button>
+    <button class="button" id="btnsubmit" name="btnsubmit" type="submit" >Salvar</button>
 </fieldset>
+</div>
 </form>
 </fieldset>
 <script type="text/javascript">
@@ -135,5 +166,17 @@ function habilita()
 	
 }
 </script>
+<fieldset >
+ <legend>Termo de responsabilidade da oficina</legend>
+	Tendo em vista a autorização que me foi concedida para conduzir veículo de propiedade ou sob a responsabilidade da
+Universidade Federal de Goiás, declaro que estou ciente das disposições determinadas pelas leis de trânsito brasileiras
+e que o veículo só será conduzido por pessoa devidamente habilitada para o tipo de veículo, seja de passageiro ou carga. Declaro também
+que estou ciente da responsabilidade cívil, penal e administrativa pelo uso, guarda e conservação do veículo que me está
+sendo entregue, responsabilizando-me por qualquer ato de imprudência, imperícia ou negligência e por qualquer dano ao
+veículo, arcarei com resposabilidade por eventuais multas, contabilizando em CNH de condutor da oficina a respectiva 
+pontuação que venha gerar e efetuando o pagamento do(s) valor(es) devido(s) e qualquer outra(s) penalidade(s) que advirem. 
+Todas as peças que forem substituidas durante o reparo, solicitamos que sejam devolvidas junto com o veículo, quando da 
+entrega do mesmo.	
+</fieldset>
 </body>
 </html>

@@ -16,10 +16,15 @@ flex-flow: row wrap;
 .coluna-33 {
     width: 33%;
 }
-
+.container {
+  column-count: 4;
+}
+.blink {
+  animation: blink 1s infinite;
+}
 </script>
 </head>
-<body>
+<body onload="pisca();">
 <div style="margin-left: 10%; color:#0000FF;" >
 <a href="/index2" style="color: #0000FF"><h4>Voltar ao Index</h4></a>
 </div>
@@ -53,8 +58,8 @@ flex-flow: row wrap;
   </div>  
 </fieldset>
 </form>
-     <div class="row" th:each = "m : ${msg}" style="font-size: 18px; color:#00FFFF;" align="center">
-          <b><span th:text="${m}"></span></b>
+     <div class="row" th:each = "m : ${msg}" style="font-size: 18px; color:#00FFFF;" align="center">         
+          <b><span id="anuncio" class="blink" th:text="${m}"></span></b>   
      </div>
 <form action="/salvarentrada" method="post" th:object="${receber}">
 <div class="container">
@@ -70,15 +75,15 @@ flex-flow: row wrap;
     <label for="fkordemservico" class="active">Nº OS</label>
     <input name="fkordemservico" id="fkordemservico" th:field="*{fkordemservico}" class="validate" type="number" readonly="readonly"/>
    </div>
-   <div class="col-2">
+   <div class="coluna-33">
     <label for="kmentrada" class="active">Km entrada</label>
     <input name="kmentrada" id="kmentrada" th:field="*{kmentrada}" class="validate" type="number" required="required" />
    </div>
    <div class="col-2">
     <label for="kmentrega" class="active">Km entrega</label>
-    <input name="kmentrega" id="kmentrega" th:field="*{kmentrega}" class="validate" type="number" />
+    <input onblur="valida_form()"  name="kmentrega" id="kmentrega" th:field="*{kmentrega}" class="validate" type="number" />
    </div>
-  
+  </div>
   <div class="row">
     <div class="input-field col s2" >
 	  <label for="veiculo" class="active">Placa e tipo do veículo</label>
@@ -89,7 +94,7 @@ flex-flow: row wrap;
 	
 	<div class="input-field col s2" >
 	<label for="posicaotanquerecebido" class="active">Tanque entrada</label>
-	 <input type="range" name="posicaotanquerecebido" step="10" list="a-values" th:field="*{posicaotanquerecebido}" value="0" style="height: 25px; width: 100px; background:#ADD8E6; color: black;" id="posicaotanquerecebido" >
+	 <input type="range" name="posicaotanquerecebido" step="10" list="a-values" th:field="*{posicaotanquerecebido}" value="0" style="height: 25px; width: 100px; background:#00FF00; color: DarkRed;" id="posicaotanquerecebido" >
        <datalist id="a-values">
         <option value="0" label="Vermelho">
         <option value="10" label="10%">
@@ -107,9 +112,9 @@ flex-flow: row wrap;
 	<div class="input-field col s2" >
     	<div class="slidecontainer">
     	<label for="posicaotanqueentregue" class="active">Tanque entrega</label>
-        <input type="range" min="0" th:field="*{posicaotanqueentregue}" max="100" list="a-values"step="10" value="0" class="slider" name="posicaotanqueentregue" id="posicaotanqueentregue" style="height: 16px;width: 100px">
+        <input type="range" min="0" th:field="*{posicaotanqueentregue}" max="100" list="a-values"step="10" value="0" class="slider" name="posicaotanqueentregue" id="posicaotanqueentregue" style="background-color:#00FF00; height: 25px;width: 100px;color: DarkRed;">
         <datalist id="a-values=0">
-        <option value="0" label="Vermelho">
+        <option value="0" label="Red">
         <option value="10" label="10%">
         <option value="20" label="20%">
         <option value="30" label="30%">
@@ -124,8 +129,12 @@ flex-flow: row wrap;
         </div>
 	</div>
 	<div class="input-field col s3">
-    <label for="responsavelreceber" class="active">Responsável</label>
-    <input name="responsavelreceber" id="responsavelreceber" th:field="*{responsavelreceber}" step="10" class="slider" type="text" />
+    <label for="responsavelreceber" class="active">Responsável por receber</label>
+    <input name="responsavelreceber" id="responsavelreceber" th:field="*{responsavelreceber}" step="10" class="slider" type="text" required="required"/>
+   </div>
+   <div class="input-field col s3">
+    <label for="responsavelliberar" class="active">Responsável por entregar</label>
+    <input name="responsavelliberar" id="responsavelliberar" th:field="*{responsavelliberar}" step="10" class="slider" type="text" />
    </div>
 
 
@@ -137,7 +146,7 @@ flex-flow: row wrap;
 
 
   </div>
-    <button class="button" id="btnsubmit" name="btnsubmit" type="submit" >Salvar</button>
+    <button  class="button" id="btnsubmit" name="btnsubmit" type="submit" >Salvar</button>
 </fieldset>
 </div>
 </form>
@@ -148,7 +157,7 @@ var verificar = document.getElementById("verificar");
 
 document.getElementById("btnsubmit").onclick = function desabilita() {
     if (verificar.checked) {
-    	alert("Para salvar você precisa concordar com o termo de responsabilidade!");
+    	
     	this.disabled = false;
     	
     } else {
@@ -165,6 +174,26 @@ function habilita()
 }
 	
 }
+function pisca() {
+	  var f = document.getElementById('anuncio');
+	  setInterval(function() {
+	    f.style.visibility = (f.style.visibility == 'hidden' ? '' : 'hidden');
+	  }, 2000);
+	}
+
+function valida_form(){
+	if(document.getElementById("kmentrega").value == ""){	
+		document.getElementById("kmentrega").value=0;
+	    document.getElementById("kmentrega").focus();	
+	return false
+	//alert('Por favor, preencha o km de entrega');
+	
+	}else if(document.getElementById("kmentrega").value <=0 ){
+		document.getElementById("kmentrega").value=1;
+		document.getElementById("kmentrega").focus();	
+		return false
+	}
+	}
 </script>
 <fieldset >
  <legend>Termo de responsabilidade da oficina</legend>

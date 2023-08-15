@@ -11,7 +11,11 @@ public interface RecebimentoVeiculosOSRepository extends JpaRepository<Recebimen
 	
 	@Query(value = "select max(idrecebimentos)id from recebimentoveiculosos", nativeQuery = true)
 	Long verIdmaximo();
+	
 	@Query(value = "select * from recebimentoveiculosos where idrecebimentos=?1 ", nativeQuery = true)
 	RecebimentoVeiculosDeOS selecionaPorId(Long id);
+	
+	@Query(value = "select * from recebimentoveiculosos where fkordemservico=?1 and fkpessoajuridica=?2", nativeQuery = true)
+	RecebimentoVeiculosDeOS selecionaPorOSePJ(Long os, Long pj);
 
 }

@@ -25,5 +25,8 @@ public interface DefeitosRelatadosRepository extends JpaRepository<DefeitosRelat
 			+ "			and ordem_servico.posicao_para_orcamento='S'\r\n"
 			+ "			and ordem_servico.id_ordem=?1", nativeQuery = true)
 	List<DefeitosRelatados> itensRelatadosAtivos(Long fkOrdem);
+	
+	@Query(value = "select * from defeitos_relatados where fk_ordem_servico=?1", nativeQuery = true)
+	List<DefeitosRelatados> verificarDefeitosPorOrdemServicos(Long idOrdem);
 
 }
